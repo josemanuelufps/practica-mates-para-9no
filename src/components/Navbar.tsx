@@ -15,21 +15,21 @@ export const Navbar: React.FC<NavbarProps> = ({
   setActiveTab,
 }) => {
   return (
-    <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white/90 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/90 transition-colors">
+    <header className="sticky top-0 z-50 border-b border-cream-200 bg-cream-50/90 backdrop-blur-md dark:border-moss-800 dark:bg-moss-950/90 transition-colors">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         {/* Brand / Logo */}
         <button
           onClick={() => setActiveTab('landing')}
           className="flex items-center gap-2.5 text-left group"
         >
-          <div className="w-8 h-8 rounded-lg bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 flex items-center justify-center font-bold text-sm shadow-sm">
+          <div className="w-8 h-8 rounded-lg bg-forest-600 text-white dark:bg-forest-400 dark:text-forest-900 flex items-center justify-center font-bold text-sm shadow-xs transition-transform group-hover:scale-105">
             9°
           </div>
           <div>
-            <span className="font-semibold text-sm sm:text-base tracking-tight text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors">
+            <span className="font-semibold text-sm sm:text-base tracking-tight text-forest-900 dark:text-[#ECF3EF] group-hover:text-forest-600 dark:group-hover:text-forest-300 transition-colors">
               Apoyo Académico 9°
             </span>
-            <span className="hidden sm:inline-block ml-2 text-xs px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700">
+            <span className="hidden sm:inline-block ml-2 text-xs px-2 py-0.5 rounded-full bg-forest-50 dark:bg-moss-850 text-forest-700 dark:text-forest-300 border border-forest-100 dark:border-moss-800">
               Guía de Repaso
             </span>
           </div>
@@ -41,8 +41,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => setActiveTab('landing')}
             className={`px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-colors flex items-center gap-1.5 ${
               activeTab === 'landing'
-                ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900'
-                : 'text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                ? 'bg-forest-600 text-white dark:bg-forest-400 dark:text-forest-900 shadow-xs'
+                : 'text-stone-600 hover:text-forest-900 dark:text-[#92A49B] dark:hover:text-[#ECF3EF] hover:bg-cream-100 dark:hover:bg-moss-900'
             }`}
           >
             <BookOpen className="w-3.5 h-3.5" />
@@ -53,13 +53,13 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => setActiveTab('sesion-1')}
             className={`px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-colors flex items-center gap-1.5 ${
               activeTab === 'sesion-1'
-                ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900'
-                : 'text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                ? 'bg-terracotta-600 text-white dark:bg-terracotta-400 dark:text-stone-900 shadow-xs'
+                : 'text-stone-600 hover:text-terracotta-700 dark:text-[#92A49B] dark:hover:text-terracotta-300 hover:bg-cream-100 dark:hover:bg-moss-900'
             }`}
           >
-            <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+            <Sparkles className="w-3.5 h-3.5 text-terracotta-500 dark:text-terracotta-400" />
             <span className="font-medium">Sesión Hoy (Inglés)</span>
-            <span className="hidden md:inline text-[10px] uppercase font-bold px-1.5 py-0.2 bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 rounded">
+            <span className="hidden md:inline text-[10px] uppercase font-bold px-1.5 py-0.2 bg-terracotta-100 dark:bg-terracotta-900/60 text-terracotta-800 dark:text-terracotta-200 rounded">
               10 Nov
             </span>
           </button>
@@ -68,24 +68,24 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => setActiveTab('sesion-2')}
             className={`hidden sm:flex px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-colors items-center gap-1.5 ${
               activeTab === 'sesion-2'
-                ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900'
-                : 'text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                ? 'bg-forest-600 text-white dark:bg-forest-400 dark:text-forest-900 shadow-xs'
+                : 'text-stone-600 hover:text-forest-900 dark:text-[#92A49B] dark:hover:text-[#ECF3EF] hover:bg-cream-100 dark:hover:bg-moss-900'
             }`}
           >
             <Calendar className="w-3.5 h-3.5" />
             <span>Sesión 2</span>
           </button>
 
-          <div className="h-4 w-px bg-zinc-200 dark:bg-zinc-800 mx-1" />
+          <div className="h-4 w-px bg-cream-200 dark:bg-moss-800 mx-1" />
 
           {/* Theme switcher */}
           <button
             onClick={() => setDarkMode(!darkMode)}
             aria-label="Alternar modo oscuro"
-            className="p-2 rounded-md text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+            className="p-2 rounded-md text-stone-600 hover:text-forest-900 dark:text-[#92A49B] dark:hover:text-[#ECF3EF] hover:bg-cream-100 dark:hover:bg-moss-900 transition-colors"
             title={darkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
           >
-            {darkMode ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-zinc-700" />}
+            {darkMode ? <Sun className="w-4 h-4 text-terracotta-300" /> : <Moon className="w-4 h-4 text-forest-700" />}
           </button>
         </div>
       </div>

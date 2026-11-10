@@ -8,4 +8,25 @@
   html {
     scroll-behavior: smooth;
   }
+
+  body {
+    background-color: #FBFBFA;
+    color: #1E2421;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  .dark body {
+    background-color: #121614;
+    color: #ECF3EF;
+  }
+
+  ::selection {
+    background-color: #C7DFD2;
+    color: #091A13;
+  }
+
+  .dark ::selection {
+    background-color: #2D6A4F;
+    color: #F2F7F4;
+  }
 }
