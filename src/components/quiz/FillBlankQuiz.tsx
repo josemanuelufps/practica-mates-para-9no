@@ -62,7 +62,7 @@ export const FillBlankQuiz: React.FC<FillBlankQuizProps> = ({
   };
 
   return (
-    <div className="border border-cream-200 dark:border-moss-800 rounded-xl p-5 sm:p-6 bg-white dark:bg-moss-900 shadow-subtle dark:shadow-subtle-dark">
+    <div className="border border-cream-200 dark:border-moss-800 rounded-xl p-5 sm:p-6 bg-white dark:bg-moss-900 shadow-subtle dark:shadow-subtle-dark transition-shadow">
       <div className="mb-5">
         <h3 className="text-base sm:text-lg font-bold text-forest-900 dark:text-[#ECF3EF] tracking-tight">
           {title}
@@ -85,11 +85,11 @@ export const FillBlankQuiz: React.FC<FillBlankQuizProps> = ({
           return (
             <div
               key={item.id}
-              className={`p-4 rounded-xl border transition-colors ${
+              className={`p-4 rounded-xl border transition-all duration-200 ${
                 isEvaluated
                   ? isCorrect
                     ? 'border-forest-300 bg-forest-50/70 dark:border-forest-700/80 dark:bg-forest-900/30'
-                    : 'border-rose-200 bg-rose-50/60 dark:border-rose-900/60 dark:bg-rose-950/30'
+                    : 'border-rose-200 bg-rose-50/60 dark:border-rose-900/60 dark:bg-rose-950/30 animate-shake-soft'
                   : 'border-cream-200 dark:border-moss-800 bg-cream-50/50 dark:bg-moss-950/30'
               }`}
             >
@@ -99,7 +99,7 @@ export const FillBlankQuiz: React.FC<FillBlankQuizProps> = ({
                 </span>
                 <span>{item.sentenceBefore}</span>
 
-                {/* Input field with mobile-friendly touch height (h-10 / 40px) */}
+                {/* Input field with mobile-friendly touch height and smooth feedback */}
                 <span className="inline-flex items-center gap-1.5 relative">
                   <input
                     type="text"
@@ -111,16 +111,16 @@ export const FillBlankQuiz: React.FC<FillBlankQuizProps> = ({
                       }
                     }}
                     placeholder={`[${item.verbHint}]`}
-                    className={`h-10 w-40 sm:w-48 px-3 text-sm rounded-lg border font-medium focus:outline-none transition-all ${
+                    className={`h-10 w-40 sm:w-48 px-3 text-sm rounded-lg border font-medium focus:outline-none transition-all duration-150 ${
                       isEvaluated
                         ? isCorrect
-                          ? 'border-forest-500 bg-forest-50 dark:bg-forest-950/60 text-forest-900 dark:text-forest-100 ring-1 ring-forest-400'
-                          : 'border-rose-400 bg-rose-50 dark:bg-rose-950/60 text-rose-900 dark:text-rose-100 ring-1 ring-rose-400'
+                          ? 'border-forest-500 bg-forest-50 dark:bg-forest-950/60 text-forest-900 dark:text-forest-100 ring-2 ring-forest-400/30'
+                          : 'border-rose-400 bg-rose-50 dark:bg-rose-950/60 text-rose-900 dark:text-rose-100 ring-2 ring-rose-400/30'
                         : 'border-cream-300 dark:border-moss-700 bg-white dark:bg-moss-950 text-stone-900 dark:text-[#ECF3EF] focus:border-forest-500 focus:ring-2 focus:ring-forest-400/20 shadow-2xs'
                     }`}
                   />
                   {isEvaluated && (
-                    <span className="absolute right-2.5 top-3 pointer-events-none">
+                    <span className="absolute right-2.5 top-3 pointer-events-none animate-pop-in">
                       {isCorrect ? (
                         <Check className="w-4 h-4 text-forest-600 dark:text-forest-400" />
                       ) : (
@@ -138,14 +138,14 @@ export const FillBlankQuiz: React.FC<FillBlankQuizProps> = ({
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => handleCheck(item.id, item.acceptedAnswers)}
-                    className="min-h-[36px] px-4 py-2 rounded-lg bg-forest-600 hover:bg-forest-500 text-white dark:bg-forest-400 dark:hover:bg-forest-300 dark:text-moss-950 font-semibold transition-all shadow-xs active:scale-98"
+                    className="min-h-[36px] px-4 py-2 rounded-lg bg-forest-600 hover:bg-forest-500 text-white dark:bg-forest-400 dark:hover:bg-forest-300 dark:text-moss-950 font-semibold transition-all shadow-xs active:scale-95"
                   >
                     Comprobar
                   </button>
                   {isEvaluated && (
                     <button
                       onClick={() => handleReset(item.id)}
-                      className="min-h-[36px] px-3 py-1.5 text-stone-500 hover:text-stone-800 dark:hover:text-[#ECF3EF] transition-colors flex items-center gap-1.5 rounded-lg hover:bg-cream-100 dark:hover:bg-moss-800"
+                      className="min-h-[36px] px-3 py-1.5 text-stone-500 hover:text-stone-800 dark:hover:text-[#ECF3EF] transition-all flex items-center gap-1.5 rounded-lg hover:bg-cream-100 dark:hover:bg-moss-800 active:scale-95"
                     >
                       <RotateCcw className="w-3.5 h-3.5" />
                       Reiniciar
@@ -167,9 +167,9 @@ export const FillBlankQuiz: React.FC<FillBlankQuizProps> = ({
                 </button>
               </div>
 
-              {/* Solution & Explanation Card */}
+              {/* Solution & Explanation Card with slide-fade */}
               {showExplanation[item.id] && (
-                <div className="mt-3.5 p-3.5 rounded-lg bg-cream-100/90 dark:bg-moss-850 border border-cream-200 dark:border-moss-700 text-xs sm:text-sm space-y-2">
+                <div className="mt-3.5 p-3.5 rounded-lg bg-cream-100/90 dark:bg-moss-850 border border-cream-200 dark:border-moss-700 text-xs sm:text-sm space-y-2 animate-slide-fade">
                   <div className="flex items-baseline gap-2">
                     <span className="font-semibold text-forest-900 dark:text-[#ECF3EF]">
                       Respuesta correcta:

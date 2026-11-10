@@ -73,22 +73,26 @@ export const MultipleChoiceQuiz: React.FC<MultipleChoiceQuizProps> = ({
                 )}
               </div>
 
-              {/* Options with min 48px touch height */}
+              {/* Options with active tactile feel */}
               <div className="grid grid-cols-1 gap-2.5">
                 {item.options.map((opt, optIdx) => {
                   let optStyle =
-                    'border-cream-300 dark:border-moss-750 bg-white dark:bg-moss-900 text-stone-800 dark:text-[#ECF3EF] hover:border-forest-400 dark:hover:border-forest-600 shadow-2xs';
+                    'border-cream-300 dark:border-moss-750 bg-white dark:bg-moss-900 text-stone-800 dark:text-[#ECF3EF] hover:border-forest-400 dark:hover:border-forest-600 shadow-2xs active:scale-[0.99]';
+
+                  let animationClass = '';
 
                   if (hasAnswered) {
                     if (optIdx === item.correctIndex) {
                       optStyle =
-                        'border-forest-500 bg-forest-50/90 dark:bg-forest-950/60 text-forest-900 dark:text-forest-100 font-medium ring-1 ring-forest-500';
+                        'border-forest-500 bg-forest-50/90 dark:bg-forest-950/60 text-forest-900 dark:text-forest-100 font-medium ring-2 ring-forest-500/40';
+                      animationClass = 'animate-pop-in';
                     } else if (optIdx === userChoice && !isCorrect) {
                       optStyle =
-                        'border-rose-400 bg-rose-50/90 dark:bg-rose-950/60 text-rose-900 dark:text-rose-100 ring-1 ring-rose-400';
+                        'border-rose-400 bg-rose-50/90 dark:bg-rose-950/60 text-rose-900 dark:text-rose-100 ring-2 ring-rose-400/40';
+                      animationClass = 'animate-shake-soft';
                     } else {
                       optStyle =
-                        'opacity-60 border-cream-200 dark:border-moss-800 bg-cream-100/40 dark:bg-moss-950/20 text-stone-400 dark:text-stone-500';
+                        'opacity-50 border-cream-200 dark:border-moss-800 bg-cream-100/40 dark:bg-moss-950/20 text-stone-400 dark:text-stone-500';
                     }
                   }
 
@@ -97,23 +101,23 @@ export const MultipleChoiceQuiz: React.FC<MultipleChoiceQuizProps> = ({
                       key={optIdx}
                       onClick={() => handleSelect(item.id, optIdx)}
                       disabled={hasAnswered}
-                      className={`text-left text-xs sm:text-sm min-h-[48px] px-4 py-3 rounded-xl border transition-all flex items-center justify-between gap-3 ${optStyle}`}
+                      className={`text-left text-xs sm:text-sm min-h-[48px] px-4 py-3 rounded-xl border transition-all flex items-center justify-between gap-3 ${optStyle} ${animationClass}`}
                     >
                       <span className="leading-relaxed">{opt}</span>
                       {hasAnswered && optIdx === item.correctIndex && (
-                        <Check className="w-4 h-4 text-forest-600 dark:text-forest-400 shrink-0" />
+                        <Check className="w-4 h-4 text-forest-600 dark:text-forest-400 shrink-0 animate-pop-in" />
                       )}
                       {hasAnswered && optIdx === userChoice && !isCorrect && (
-                        <X className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0" />
+                        <X className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0 animate-pop-in" />
                       )}
                     </button>
                   );
                 })}
               </div>
 
-              {/* Feedback and rationale banner */}
+              {/* Feedback and rationale banner with smooth slide-fade */}
               {hasAnswered && showExplanation[item.id] && (
-                <div className="mt-4 pt-4 border-t border-cream-200 dark:border-moss-800 text-xs sm:text-sm flex flex-col gap-2.5">
+                <div className="mt-4 pt-4 border-t border-cream-200 dark:border-moss-800 text-xs sm:text-sm flex flex-col gap-2.5 animate-slide-fade">
                   <div
                     className={`p-3.5 rounded-xl border flex items-start gap-3 ${
                       isCorrect
@@ -133,7 +137,7 @@ export const MultipleChoiceQuiz: React.FC<MultipleChoiceQuizProps> = ({
                   <div className="flex justify-end">
                     <button
                       onClick={() => handleReset(item.id)}
-                      className="min-h-[36px] px-3 py-1.5 text-stone-500 hover:text-stone-800 dark:hover:text-[#ECF3EF] flex items-center gap-1.5 font-medium transition-colors rounded-lg hover:bg-cream-100 dark:hover:bg-moss-800"
+                      className="min-h-[36px] px-3 py-1.5 text-stone-500 hover:text-stone-800 dark:hover:text-[#ECF3EF] flex items-center gap-1.5 font-medium transition-all rounded-lg hover:bg-cream-100 dark:hover:bg-moss-800 active:scale-95"
                     >
                       <RotateCcw className="w-3.5 h-3.5" />
                       Reintentar pregunta

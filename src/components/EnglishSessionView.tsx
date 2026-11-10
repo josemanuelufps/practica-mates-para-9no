@@ -113,11 +113,9 @@ export const EnglishSessionView: React.FC<EnglishSessionViewProps> = ({
         </div>
       </div>
 
-      {/* ========================================================= */}
-      {/* SUB-TAB 1: PAST PERFECT                                   */}
-      {/* ========================================================= */}
+      {/* SUB-TAB 1: PAST PERFECT */}
       {activeSubTab === 'past-perfect' && (
-        <div className="space-y-8">
+        <div key="past-perfect" className="space-y-8 animate-slide-fade">
           {/* Visual Timeline Diagram */}
           <div className="border border-cream-200 dark:border-moss-800 rounded-2xl p-5 sm:p-6 bg-white dark:bg-moss-900 shadow-subtle dark:shadow-subtle-dark">
             <h2 className="text-sm font-bold text-forest-900 dark:text-[#ECF3EF] mb-3.5">
@@ -203,11 +201,9 @@ export const EnglishSessionView: React.FC<EnglishSessionViewProps> = ({
         </div>
       )}
 
-      {/* ========================================================= */}
-      {/* SUB-TAB 2: CONDITIONALS (ZERO & FIRST)                    */}
-      {/* ========================================================= */}
+      {/* SUB-TAB 2: CONDITIONALS */}
       {activeSubTab === 'conditionals' && (
-        <div className="space-y-8">
+        <div key="conditionals" className="space-y-8 animate-slide-fade">
           {/* Comparison table */}
           <div className="border border-cream-200 dark:border-moss-800 rounded-2xl p-5 sm:p-6 bg-white dark:bg-moss-900 shadow-subtle dark:shadow-subtle-dark">
             <h2 className="text-sm font-bold text-forest-900 dark:text-[#ECF3EF] mb-3.5">
@@ -288,11 +284,9 @@ export const EnglishSessionView: React.FC<EnglishSessionViewProps> = ({
         </div>
       )}
 
-      {/* ========================================================= */}
-      {/* SUB-TAB 3: DRAG AND DROP SLOTS                            */}
-      {/* ========================================================= */}
+      {/* SUB-TAB 3: DRAG AND DROP */}
       {activeSubTab === 'drag-drop' && (
-        <div className="space-y-8">
+        <div key="drag-drop" className="space-y-8 animate-slide-fade">
           <div className="p-5 sm:p-6 rounded-2xl border border-cream-200 dark:border-moss-800 bg-white dark:bg-moss-900 shadow-subtle dark:shadow-subtle-dark">
             <h2 className="text-base sm:text-lg font-bold text-forest-900 dark:text-[#ECF3EF] mb-1.5">
               Práctica de Arrastrar Palabras a Espacios (Word Bank)
@@ -308,11 +302,9 @@ export const EnglishSessionView: React.FC<EnglishSessionViewProps> = ({
         </div>
       )}
 
-      {/* ========================================================= */}
-      {/* SUB-TAB 4: SECOND & THIRD CONDITIONAL (SESIÓN 2)          */}
-      {/* ========================================================= */}
+      {/* SUB-TAB 4: SECOND & THIRD */}
       {activeSubTab === 'second-third' && (
-        <div className="space-y-8">
+        <div key="second-third" className="space-y-8 animate-slide-fade">
           {/* Guide banner for Session 2 */}
           <div className="p-5 sm:p-6 rounded-2xl border border-cream-200 dark:border-moss-800 bg-white dark:bg-moss-900 shadow-subtle dark:shadow-subtle-dark">
             <div className="flex items-center gap-2 mb-2.5">
