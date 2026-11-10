@@ -7,17 +7,29 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "tnum";
   }
 
   body {
     background-color: #FBFBFA;
     color: #1E2421;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    letter-spacing: -0.011em;
   }
 
   .dark body {
     background-color: #121614;
     color: #ECF3EF;
+    letter-spacing: -0.006em; /* Slightly wider tracking in dark mode for better legibility */
+  }
+
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+    letter-spacing: -0.025em;
+  }
+
+  p {
+    text-wrap: pretty;
   }
 
   ::selection {

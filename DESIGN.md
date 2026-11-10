@@ -37,10 +37,17 @@ Inspirado en la serenidad de los cuadernos de notas de alta calidad y la calidez
 
 ## Typography & Hierarchy
 
-* **Fuente:** Sistema sans-serif humanista (`system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif`), optimizada para pantallas táctiles y fórmulas matemáticas.
-* **Títulos:** Pesos semibold (600) y bold (700), sin mayúsculas forzadas ni falsos "eyebrows" decorativos.
-* **Fórmulas:** Renderizado KaTeX integrado fluidamente en la línea de texto o en bloques aireados.
-* **Espaciado de lectura:** Medida de cuerpo contenida (65–75 caracteres) para que la lectura de reglas en inglés sea descansada.
+* **Primary Typeface:** `Plus Jakarta Sans` (humanista geométrico, excelente legibilidad en pantallas retina y móviles).
+* **Code / Grammar & Data Typeface:** `JetBrains Mono` (para verbos, estructuras temporales `had + V3` y marcadores gramaticales).
+* **Text Wrapping & Balance:**
+  * `text-wrap: balance` aplicado en todos los encabezados (H1, H2, H3) para evitar palabras huérfanas.
+  * `text-wrap: pretty` en los párrafos explicativos para garantizar un cierre armónico de líneas.
+* **Títulos y Escala:**
+  * H1: 2rem / 32px (sm: 2.25rem / 36px), peso 800 (extrabold), tracking `-0.025em`.
+  * H2: 1.25rem / 20px (sm: 1.5rem / 24px), peso 700 (bold), tracking `-0.02em`.
+  * H3: 1rem / 16px (sm: 1.125rem / 18px), peso 600 (semibold).
+* **Lectura y Medida:** Longitud de línea confinada (`max-w-2xl` / 65–75 caracteres) para reducir la fatiga en el repaso de condicionales.
+* **Compensación en Modo Oscuro:** Tracking ligeramente más abierto (`-0.006em`) para compensar el efecto de irradiación de luz en fondo oscuro.
 
 ## Componentes y Superficies
 

@@ -60,8 +60,8 @@ export const MultipleChoiceQuiz: React.FC<MultipleChoiceQuizProps> = ({
             >
               {/* Question header */}
               <div className="flex items-start justify-between gap-2 mb-3">
-                <div className="text-sm font-medium text-forest-900 dark:text-[#ECF3EF] leading-snug">
-                  <span className="font-semibold text-stone-400 dark:text-stone-500 mr-2">
+                <div className="text-sm sm:text-base font-semibold text-forest-900 dark:text-[#ECF3EF] leading-snug">
+                  <span className="font-semibold text-stone-400 dark:text-stone-500 mr-2 font-mono">
                     {idx + 1}.
                   </span>
                   {item.question}

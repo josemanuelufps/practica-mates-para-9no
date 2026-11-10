@@ -133,7 +133,7 @@ export const WordBankSlotQuiz: React.FC<WordBankSlotQuizProps> = ({ exercise }) 
           return (
             <div
               key={row.slotId}
-              className="p-3.5 rounded-lg border border-cream-200 dark:border-moss-800 bg-cream-50/40 dark:bg-moss-950/30 text-xs sm:text-sm text-stone-800 dark:text-[#ECF3EF] flex flex-wrap items-center gap-1.5 leading-relaxed"
+              className="p-3.5 rounded-lg border border-cream-200 dark:border-moss-800 bg-cream-50/40 dark:bg-moss-950/30 text-sm sm:text-base text-stone-800 dark:text-[#ECF3EF] flex flex-wrap items-center gap-2 leading-relaxed"
             >
               <span>{row.beforeSlot}</span>
 

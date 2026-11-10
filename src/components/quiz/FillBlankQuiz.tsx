@@ -93,8 +93,8 @@ export const FillBlankQuiz: React.FC<FillBlankQuizProps> = ({
                   : 'border-cream-200 dark:border-moss-800 bg-cream-50/60 dark:bg-moss-950/30'
               }`}
             >
-              <div className="flex flex-wrap items-center gap-2 text-sm text-stone-800 dark:text-[#ECF3EF] leading-relaxed">
-                <span className="font-semibold text-stone-400 dark:text-stone-500 text-xs">
+              <div className="flex flex-wrap items-center gap-2 text-sm sm:text-base text-stone-800 dark:text-[#ECF3EF] leading-relaxed">
+                <span className="font-semibold text-stone-400 dark:text-stone-500 text-xs sm:text-sm font-mono">
                   {idx + 1}.
                 </span>
                 <span>{item.sentenceBefore}</span>
