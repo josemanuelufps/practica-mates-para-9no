@@ -28,19 +28,19 @@ export const EnglishSessionView: React.FC<EnglishSessionViewProps> = ({
   );
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Top breadcrumb & back button */}
       <div className="flex items-center justify-between">
         <button
           onClick={onBackToLanding}
-          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-stone-600 hover:text-forest-900 dark:text-[#92A49B] dark:hover:text-[#ECF3EF] transition-colors"
+          className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-stone-600 hover:text-forest-900 dark:text-[#92A49B] dark:hover:text-[#ECF3EF] transition-colors py-1.5 px-2 -ml-2 rounded-lg hover:bg-cream-100 dark:hover:bg-moss-900"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Volver al Temario & Sesiones</span>
         </button>
 
         <div className="flex items-center gap-2">
-          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-terracotta-50 dark:bg-terracotta-900/40 text-terracotta-700 dark:text-terracotta-300 border border-terracotta-200 dark:border-terracotta-800 flex items-center gap-1">
+          <span className="text-xs font-semibold px-3 py-1 rounded-full bg-terracotta-50 dark:bg-terracotta-900/40 text-terracotta-700 dark:text-terracotta-300 border border-terracotta-200 dark:border-terracotta-800 flex items-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5 text-terracotta-500" />
             {sessionDay === 1 ? 'Sesión 1 (10 de Noviembre)' : 'Sesión 2 (11 de Noviembre)'}
           </span>
@@ -48,61 +48,61 @@ export const EnglishSessionView: React.FC<EnglishSessionViewProps> = ({
       </div>
 
       {/* Hero header */}
-      <div className="border border-cream-200 dark:border-moss-800 rounded-xl p-5 sm:p-6 bg-white dark:bg-moss-900 shadow-subtle dark:shadow-subtle-dark">
+      <div className="border border-cream-200 dark:border-moss-800 rounded-2xl p-6 sm:p-7 bg-white dark:bg-moss-900 shadow-subtle dark:shadow-subtle-dark">
         <div className="max-w-3xl">
-          <h1 className="text-xl sm:text-2xl font-bold text-forest-900 dark:text-[#ECF3EF] tracking-tight">
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-forest-900 dark:text-[#ECF3EF] tracking-tight">
             {sessionDay === 1
               ? 'Módulo de Inglés - Sesión 1: Past Perfect & Zero/First Conditional'
               : 'Módulo de Inglés - Sesión 2: Second & Third Conditional'}
           </h1>
-          <p className="text-xs sm:text-sm text-stone-600 dark:text-[#92A49B] mt-1.5 leading-relaxed">
+          <p className="text-xs sm:text-sm text-stone-600 dark:text-[#92A49B] mt-2 leading-relaxed">
             {sessionDay === 1
               ? 'Aprende a ubicar acciones anteriores en el pasado con el Past Perfect y domina las relaciones lógicas de causa-efecto con el Zero y First Conditional mediante explicaciones breves y ejercicios interactivos.'
               : 'Domina las situaciones hipotéticas del presente (Second Conditional) y los pasados imposibles o arrepentimientos (Third Conditional).'}
           </p>
         </div>
 
-        {/* Navigation sub-tabs */}
-        <div className="flex flex-wrap items-center gap-2 mt-5 pt-4 border-t border-cream-200 dark:border-moss-800">
+        {/* Navigation sub-tabs with generous touch area */}
+        <div className="flex flex-wrap items-center gap-2 mt-6 pt-5 border-t border-cream-200 dark:border-moss-800">
           <button
             onClick={() => setActiveSubTab('past-perfect')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5 ${
+            className={`min-h-[40px] px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
               activeSubTab === 'past-perfect'
                 ? 'bg-forest-600 text-white dark:bg-forest-400 dark:text-moss-950 shadow-xs'
                 : 'bg-cream-100 hover:bg-cream-200 text-stone-700 dark:bg-moss-850 dark:hover:bg-moss-800 dark:text-[#92A49B]'
             }`}
           >
-            <GitCommitHorizontal className="w-3.5 h-3.5" />
+            <GitCommitHorizontal className="w-4 h-4" />
             <span>1. Past Perfect</span>
           </button>
 
           <button
             onClick={() => setActiveSubTab('conditionals')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5 ${
+            className={`min-h-[40px] px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
               activeSubTab === 'conditionals'
                 ? 'bg-forest-600 text-white dark:bg-forest-400 dark:text-moss-950 shadow-xs'
                 : 'bg-cream-100 hover:bg-cream-200 text-stone-700 dark:bg-moss-850 dark:hover:bg-moss-800 dark:text-[#92A49B]'
             }`}
           >
-            <Split className="w-3.5 h-3.5" />
+            <Split className="w-4 h-4" />
             <span>2. Zero & First Conditional</span>
           </button>
 
           <button
             onClick={() => setActiveSubTab('drag-drop')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5 ${
+            className={`min-h-[40px] px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
               activeSubTab === 'drag-drop'
                 ? 'bg-forest-600 text-white dark:bg-forest-400 dark:text-moss-950 shadow-xs'
                 : 'bg-cream-100 hover:bg-cream-200 text-stone-700 dark:bg-moss-850 dark:hover:bg-moss-800 dark:text-[#92A49B]'
             }`}
           >
-            <BookmarkCheck className="w-3.5 h-3.5 text-terracotta-500" />
+            <BookmarkCheck className="w-4 h-4 text-terracotta-500" />
             <span>3. Arrastrar Palabras a Slots</span>
           </button>
 
           <button
             onClick={() => setActiveSubTab('second-third')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5 ${
+            className={`min-h-[40px] px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
               activeSubTab === 'second-third'
                 ? 'bg-forest-600 text-white dark:bg-forest-400 dark:text-moss-950 shadow-xs'
                 : 'bg-cream-100 hover:bg-cream-200 text-stone-700 dark:bg-moss-850 dark:hover:bg-moss-800 dark:text-[#92A49B]'
@@ -117,17 +117,17 @@ export const EnglishSessionView: React.FC<EnglishSessionViewProps> = ({
       {/* SUB-TAB 1: PAST PERFECT                                   */}
       {/* ========================================================= */}
       {activeSubTab === 'past-perfect' && (
-        <div className="space-y-6">
+        <div className="space-y-8">
           {/* Visual Timeline Diagram */}
-          <div className="border border-cream-200 dark:border-moss-800 rounded-xl p-5 bg-white dark:bg-moss-900 shadow-subtle dark:shadow-subtle-dark">
-            <h2 className="text-sm font-bold text-forest-900 dark:text-[#ECF3EF] mb-3">
+          <div className="border border-cream-200 dark:border-moss-800 rounded-2xl p-5 sm:p-6 bg-white dark:bg-moss-900 shadow-subtle dark:shadow-subtle-dark">
+            <h2 className="text-sm font-bold text-forest-900 dark:text-[#ECF3EF] mb-3.5">
               Línea de Tiempo del Past Perfect
             </h2>
 
-            <div className="p-4 rounded-lg bg-cream-50/70 dark:bg-moss-950/60 border border-cream-200 dark:border-moss-800">
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-center">
+            <div className="p-4 sm:p-5 rounded-xl bg-cream-50/70 dark:bg-moss-950/60 border border-cream-200 dark:border-moss-800">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-center">
                 {/* Step 1: Past Perfect */}
-                <div className="flex-1 p-3.5 rounded-lg border-2 border-forest-500 bg-forest-50/80 dark:bg-forest-950/40 text-forest-900 dark:text-[#ECF3EF]">
+                <div className="w-full sm:flex-1 p-4 rounded-xl border-2 border-forest-500 bg-forest-50/80 dark:bg-forest-950/40 text-forest-900 dark:text-[#ECF3EF]">
                   <span className="text-[10px] font-mono uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-forest-200 dark:bg-forest-800 text-forest-900 dark:text-forest-100">
                     Ocurrió Primero
                   </span>
@@ -135,15 +135,19 @@ export const EnglishSessionView: React.FC<EnglishSessionViewProps> = ({
                   <div className="font-mono text-xs mt-1 text-forest-700 dark:text-forest-300 font-semibold">
                     had + [Past Participle]
                   </div>
-                  <div className="text-[11px] text-stone-600 dark:text-[#92A49B] mt-1 italic">
+                  <div className="text-[11px] text-stone-600 dark:text-[#92A49B] mt-1.5 italic">
                     "Sara had lost her keys..."
                   </div>
                 </div>
 
-                <div className="text-forest-400 dark:text-forest-600 font-bold hidden sm:block">➔</div>
+                {/* Arrow: down on mobile, right on desktop */}
+                <div className="text-forest-400 dark:text-forest-600 font-bold py-1 sm:py-0">
+                  <span className="sm:hidden">↓</span>
+                  <span className="hidden sm:inline">➔</span>
+                </div>
 
                 {/* Step 2: Past Simple */}
-                <div className="flex-1 p-3.5 rounded-lg border border-cream-300 dark:border-moss-700 bg-white dark:bg-moss-900 text-forest-900 dark:text-[#ECF3EF]">
+                <div className="w-full sm:flex-1 p-4 rounded-xl border border-cream-300 dark:border-moss-700 bg-white dark:bg-moss-900 text-forest-900 dark:text-[#ECF3EF]">
                   <span className="text-[10px] font-mono uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-cream-200 dark:bg-moss-800 text-stone-700 dark:text-[#92A49B]">
                     Ocurrió Después
                   </span>
@@ -151,30 +155,34 @@ export const EnglishSessionView: React.FC<EnglishSessionViewProps> = ({
                   <div className="font-mono text-xs mt-1 text-stone-700 dark:text-[#92A49B] font-semibold">
                     [Verbo en Pasado -ed / Irreg.]
                   </div>
-                  <div className="text-[11px] text-stone-600 dark:text-[#92A49B] mt-1 italic">
+                  <div className="text-[11px] text-stone-600 dark:text-[#92A49B] mt-1.5 italic">
                     "...before she arrived home."
                   </div>
                 </div>
 
-                <div className="text-forest-400 dark:text-forest-600 font-bold hidden sm:block">➔</div>
+                {/* Arrow */}
+                <div className="text-forest-400 dark:text-forest-600 font-bold py-1 sm:py-0">
+                  <span className="sm:hidden">↓</span>
+                  <span className="hidden sm:inline">➔</span>
+                </div>
 
                 {/* Step 3: Now */}
-                <div className="w-24 sm:w-28 p-3 rounded-lg border border-cream-200 dark:border-moss-800 bg-cream-100/60 dark:bg-moss-900/40 text-stone-500 dark:text-stone-400 text-xs font-semibold">
+                <div className="w-full sm:w-28 p-3.5 rounded-xl border border-cream-200 dark:border-moss-800 bg-cream-100/60 dark:bg-moss-900/40 text-stone-500 dark:text-stone-400 text-xs font-semibold">
                   <span>Presente</span>
                   <span className="block text-[11px] font-normal text-stone-400 mt-0.5">Ahora (Now)</span>
                 </div>
               </div>
 
               {/* Clues */}
-              <div className="mt-4 pt-3 border-t border-cream-200 dark:border-moss-800 flex flex-wrap gap-2 text-xs text-stone-600 dark:text-[#92A49B]">
+              <div className="mt-4 pt-3.5 border-t border-cream-200 dark:border-moss-800 flex flex-wrap items-center gap-2 text-xs text-stone-600 dark:text-[#92A49B]">
                 <span className="font-semibold text-forest-900 dark:text-[#ECF3EF]">
                   Palabras clave de enlace:
                 </span>
-                <span className="px-2 py-0.5 rounded bg-cream-100 dark:bg-moss-850 font-mono text-forest-700 dark:text-forest-300">before</span>
-                <span className="px-2 py-0.5 rounded bg-cream-100 dark:bg-moss-850 font-mono text-forest-700 dark:text-forest-300">after</span>
-                <span className="px-2 py-0.5 rounded bg-cream-100 dark:bg-moss-850 font-mono text-forest-700 dark:text-forest-300">by the time</span>
-                <span className="px-2 py-0.5 rounded bg-cream-100 dark:bg-moss-850 font-mono text-forest-700 dark:text-forest-300">already</span>
-                <span className="px-2 py-0.5 rounded bg-cream-100 dark:bg-moss-850 font-mono text-forest-700 dark:text-forest-300">because</span>
+                <span className="px-2.5 py-0.5 rounded-md bg-cream-100 dark:bg-moss-850 font-mono text-forest-700 dark:text-forest-300">before</span>
+                <span className="px-2.5 py-0.5 rounded-md bg-cream-100 dark:bg-moss-850 font-mono text-forest-700 dark:text-forest-300">after</span>
+                <span className="px-2.5 py-0.5 rounded-md bg-cream-100 dark:bg-moss-850 font-mono text-forest-700 dark:text-forest-300">by the time</span>
+                <span className="px-2.5 py-0.5 rounded-md bg-cream-100 dark:bg-moss-850 font-mono text-forest-700 dark:text-forest-300">already</span>
+                <span className="px-2.5 py-0.5 rounded-md bg-cream-100 dark:bg-moss-850 font-mono text-forest-700 dark:text-forest-300">because</span>
               </div>
             </div>
           </div>
@@ -199,56 +207,56 @@ export const EnglishSessionView: React.FC<EnglishSessionViewProps> = ({
       {/* SUB-TAB 2: CONDITIONALS (ZERO & FIRST)                    */}
       {/* ========================================================= */}
       {activeSubTab === 'conditionals' && (
-        <div className="space-y-6">
+        <div className="space-y-8">
           {/* Comparison table */}
-          <div className="border border-cream-200 dark:border-moss-800 rounded-xl p-5 bg-white dark:bg-moss-900 shadow-subtle dark:shadow-subtle-dark">
-            <h2 className="text-sm font-bold text-forest-900 dark:text-[#ECF3EF] mb-3">
+          <div className="border border-cream-200 dark:border-moss-800 rounded-2xl p-5 sm:p-6 bg-white dark:bg-moss-900 shadow-subtle dark:shadow-subtle-dark">
+            <h2 className="text-sm font-bold text-forest-900 dark:text-[#ECF3EF] mb-3.5">
               Cuadro Comparativo: Zero vs First Conditional
             </h2>
 
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto rounded-xl border border-cream-200 dark:border-moss-800">
               <table className="w-full text-left text-xs sm:text-sm border-collapse">
                 <thead>
-                  <tr className="border-b border-cream-200 dark:border-moss-800 text-stone-500 dark:text-[#92A49B]">
-                    <th className="py-2.5 px-3 font-semibold">Condicional</th>
-                    <th className="py-2.5 px-3 font-semibold">¿Para qué se usa?</th>
-                    <th className="py-2.5 px-3 font-semibold">Cláusula "If"</th>
-                    <th className="py-2.5 px-3 font-semibold">Cláusula Principal (Resultado)</th>
-                    <th className="py-2.5 px-3 font-semibold">Ejemplo</th>
+                  <tr className="bg-cream-100/70 dark:bg-moss-850 border-b border-cream-200 dark:border-moss-800 text-stone-600 dark:text-[#92A49B]">
+                    <th className="py-3 px-4 font-semibold">Condicional</th>
+                    <th className="py-3 px-4 font-semibold">¿Para qué se usa?</th>
+                    <th className="py-3 px-4 font-semibold">Cláusula "If"</th>
+                    <th className="py-3 px-4 font-semibold">Cláusula Principal (Resultado)</th>
+                    <th className="py-3 px-4 font-semibold">Ejemplo</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-cream-100 dark:divide-moss-800 text-stone-800 dark:text-[#ECF3EF]">
                   <tr className="bg-cream-50/40 dark:bg-moss-950/30">
-                    <td className="py-3 px-3 font-bold text-forest-900 dark:text-[#ECF3EF]">
+                    <td className="py-3.5 px-4 font-bold text-forest-900 dark:text-[#ECF3EF]">
                       Zero Conditional
                     </td>
-                    <td className="py-3 px-3 text-stone-600 dark:text-[#92A49B]">
+                    <td className="py-3.5 px-4 text-stone-600 dark:text-[#92A49B]">
                       Hechos científicos, leyes físicas y verdades generales 100% seguras.
                     </td>
-                    <td className="py-3 px-3 font-mono text-xs text-forest-600 dark:text-forest-400 font-semibold">
+                    <td className="py-3.5 px-4 font-mono text-xs text-forest-600 dark:text-forest-400 font-semibold">
                       If + Present Simple
                     </td>
-                    <td className="py-3 px-3 font-mono text-xs text-forest-600 dark:text-forest-400 font-semibold">
+                    <td className="py-3.5 px-4 font-mono text-xs text-forest-600 dark:text-forest-400 font-semibold">
                       Present Simple
                     </td>
-                    <td className="py-3 px-3 italic text-stone-600 dark:text-[#92A49B]">
+                    <td className="py-3.5 px-4 italic text-stone-600 dark:text-[#92A49B]">
                       If you heat water, it boils.
                     </td>
                   </tr>
-                  <tr className="bg-white/40 dark:bg-moss-900/30">
-                    <td className="py-3 px-3 font-bold text-terracotta-600 dark:text-terracotta-400">
+                  <tr className="bg-white dark:bg-moss-900">
+                    <td className="py-3.5 px-4 font-bold text-terracotta-600 dark:text-terracotta-400">
                       First Conditional
                     </td>
-                    <td className="py-3 px-3 text-stone-600 dark:text-[#92A49B]">
+                    <td className="py-3.5 px-4 text-stone-600 dark:text-[#92A49B]">
                       Situaciones reales o planes con consecuencia probable en el futuro.
                     </td>
-                    <td className="py-3 px-3 font-mono text-xs text-terracotta-600 dark:text-terracotta-400 font-semibold">
+                    <td className="py-3.5 px-4 font-mono text-xs text-terracotta-600 dark:text-terracotta-400 font-semibold">
                       If + Present Simple
                     </td>
-                    <td className="py-3 px-3 font-mono text-xs text-terracotta-600 dark:text-terracotta-400 font-semibold">
+                    <td className="py-3.5 px-4 font-mono text-xs text-terracotta-600 dark:text-terracotta-400 font-semibold">
                       will + Verbo base
                     </td>
-                    <td className="py-3 px-3 italic text-stone-600 dark:text-[#92A49B]">
+                    <td className="py-3.5 px-4 italic text-stone-600 dark:text-[#92A49B]">
                       If you study today, you will pass tomorrow.
                     </td>
                   </tr>
@@ -284,12 +292,12 @@ export const EnglishSessionView: React.FC<EnglishSessionViewProps> = ({
       {/* SUB-TAB 3: DRAG AND DROP SLOTS                            */}
       {/* ========================================================= */}
       {activeSubTab === 'drag-drop' && (
-        <div className="space-y-6">
-          <div className="p-5 rounded-xl border border-cream-200 dark:border-moss-800 bg-white dark:bg-moss-900 shadow-subtle dark:shadow-subtle-dark">
-            <h2 className="text-base font-bold text-forest-900 dark:text-[#ECF3EF] mb-1">
+        <div className="space-y-8">
+          <div className="p-5 sm:p-6 rounded-2xl border border-cream-200 dark:border-moss-800 bg-white dark:bg-moss-900 shadow-subtle dark:shadow-subtle-dark">
+            <h2 className="text-base sm:text-lg font-bold text-forest-900 dark:text-[#ECF3EF] mb-1.5">
               Práctica de Arrastrar Palabras a Espacios (Word Bank)
             </h2>
-            <p className="text-xs sm:text-sm text-stone-600 dark:text-[#92A49B]">
+            <p className="text-xs sm:text-sm text-stone-600 dark:text-[#92A49B] leading-relaxed">
               En estos ejercicios arrastras directamente los verbos o conectores a los slots dentro del párrafo.
               Si estás en un celular o tablet, también puedes simplemente tocar la palabra y luego tocar el slot vacío.
             </p>
@@ -304,38 +312,38 @@ export const EnglishSessionView: React.FC<EnglishSessionViewProps> = ({
       {/* SUB-TAB 4: SECOND & THIRD CONDITIONAL (SESIÓN 2)          */}
       {/* ========================================================= */}
       {activeSubTab === 'second-third' && (
-        <div className="space-y-6">
+        <div className="space-y-8">
           {/* Guide banner for Session 2 */}
-          <div className="p-5 rounded-xl border border-cream-200 dark:border-moss-800 bg-white dark:bg-moss-900 shadow-subtle dark:shadow-subtle-dark">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-terracotta-100 dark:bg-terracotta-900/40 text-terracotta-800 dark:text-terracotta-300">
+          <div className="p-5 sm:p-6 rounded-2xl border border-cream-200 dark:border-moss-800 bg-white dark:bg-moss-900 shadow-subtle dark:shadow-subtle-dark">
+            <div className="flex items-center gap-2 mb-2.5">
+              <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-terracotta-100 dark:bg-terracotta-900/40 text-terracotta-800 dark:text-terracotta-300">
                 Material para Mañana (11 de Noviembre)
               </span>
             </div>
-            <h2 className="text-lg font-bold text-forest-900 dark:text-[#ECF3EF] mb-2">
+            <h2 className="text-lg sm:text-xl font-bold text-forest-900 dark:text-[#ECF3EF] mb-2">
               Second vs Third Conditional: Hipotéticos e Imposibles
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs sm:text-sm mt-3">
-              <div className="p-3.5 rounded-lg border border-cream-200 dark:border-moss-800 bg-cream-50/60 dark:bg-moss-950/40">
-                <div className="font-bold text-forest-900 dark:text-[#ECF3EF] mb-1">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm mt-4">
+              <div className="p-4 rounded-xl border border-cream-200 dark:border-moss-800 bg-cream-50/60 dark:bg-moss-950/40">
+                <div className="font-bold text-forest-900 dark:text-[#ECF3EF] mb-1 text-sm">
                   Second Conditional (Imaginario en Presente)
                 </div>
-                <div className="font-mono text-xs text-forest-600 dark:text-forest-400 mb-1 font-semibold">
+                <div className="font-mono text-xs text-forest-600 dark:text-forest-400 mb-1.5 font-semibold">
                   If + Past Simple, would + Verbo base
                 </div>
-                <p className="text-stone-600 dark:text-[#92A49B] text-xs">
+                <p className="text-stone-600 dark:text-[#92A49B] text-xs leading-relaxed">
                   "If I had wings, I would fly." (No tengo alas ahora, es solo una fantasía).
                 </p>
               </div>
 
-              <div className="p-3.5 rounded-lg border border-cream-200 dark:border-moss-800 bg-cream-50/60 dark:bg-moss-950/40">
-                <div className="font-bold text-terracotta-600 dark:text-terracotta-400 mb-1">
+              <div className="p-4 rounded-xl border border-cream-200 dark:border-moss-800 bg-cream-50/60 dark:bg-moss-950/40">
+                <div className="font-bold text-terracotta-600 dark:text-terracotta-400 mb-1 text-sm">
                   Third Conditional (Pasado Imposible / Lamento)
                 </div>
-                <div className="font-mono text-xs text-terracotta-600 dark:text-terracotta-400 mb-1 font-semibold">
+                <div className="font-mono text-xs text-terracotta-600 dark:text-terracotta-400 mb-1.5 font-semibold">
                   If + Past Perfect (had + V3), would have + V3
                 </div>
-                <p className="text-stone-600 dark:text-[#92A49B] text-xs">
+                <p className="text-stone-600 dark:text-[#92A49B] text-xs leading-relaxed">
                   "If I had studied, I would have passed." (Ya ocurrió el examen en el pasado, no se puede cambiar).
                 </p>
               </div>

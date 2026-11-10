@@ -35,19 +35,19 @@ export const MultipleChoiceQuiz: React.FC<MultipleChoiceQuizProps> = ({
   };
 
   return (
-    <div className="border border-cream-200 dark:border-moss-800 rounded-xl p-5 bg-white dark:bg-moss-900 shadow-subtle dark:shadow-subtle-dark">
-      <div className="mb-4">
-        <h3 className="text-base sm:text-lg font-semibold text-forest-900 dark:text-[#ECF3EF] tracking-tight">
+    <div className="border border-cream-200 dark:border-moss-800 rounded-xl p-5 sm:p-6 bg-white dark:bg-moss-900 shadow-subtle dark:shadow-subtle-dark">
+      <div className="mb-5">
+        <h3 className="text-base sm:text-lg font-bold text-forest-900 dark:text-[#ECF3EF] tracking-tight">
           {title}
         </h3>
         {subtitle && (
-          <p className="text-xs sm:text-sm text-stone-600 dark:text-[#92A49B] mt-0.5">
+          <p className="text-xs sm:text-sm text-stone-600 dark:text-[#92A49B] mt-1 leading-relaxed">
             {subtitle}
           </p>
         )}
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-6">
         {items.map((item, idx) => {
           const userChoice = selected[item.id];
           const hasAnswered = userChoice !== undefined;
@@ -56,10 +56,10 @@ export const MultipleChoiceQuiz: React.FC<MultipleChoiceQuizProps> = ({
           return (
             <div
               key={item.id}
-              className="p-4 rounded-lg border border-cream-200 dark:border-moss-800 bg-cream-50/50 dark:bg-moss-950/40"
+              className="p-4 sm:p-5 rounded-xl border border-cream-200 dark:border-moss-800 bg-cream-50/50 dark:bg-moss-950/40"
             >
               {/* Question header */}
-              <div className="flex items-start justify-between gap-2 mb-3">
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2.5 mb-4">
                 <div className="text-sm sm:text-base font-semibold text-forest-900 dark:text-[#ECF3EF] leading-snug">
                   <span className="font-semibold text-stone-400 dark:text-stone-500 mr-2 font-mono">
                     {idx + 1}.
@@ -67,17 +67,17 @@ export const MultipleChoiceQuiz: React.FC<MultipleChoiceQuizProps> = ({
                   {item.question}
                 </div>
                 {item.category && (
-                  <span className="shrink-0 text-[11px] font-mono uppercase px-2 py-0.5 rounded bg-forest-50 dark:bg-moss-850 text-forest-700 dark:text-forest-300 border border-forest-100 dark:border-moss-800">
+                  <span className="self-start sm:self-auto shrink-0 text-[11px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-forest-50 dark:bg-moss-850 text-forest-700 dark:text-forest-300 border border-forest-100 dark:border-moss-800">
                     {item.category.split(' - ')[0]}
                   </span>
                 )}
               </div>
 
-              {/* Options */}
-              <div className="grid grid-cols-1 gap-2">
+              {/* Options with min 48px touch height */}
+              <div className="grid grid-cols-1 gap-2.5">
                 {item.options.map((opt, optIdx) => {
                   let optStyle =
-                    'border-cream-300 dark:border-moss-750 bg-white dark:bg-moss-900 text-stone-800 dark:text-[#ECF3EF] hover:border-forest-400 dark:hover:border-forest-600';
+                    'border-cream-300 dark:border-moss-750 bg-white dark:bg-moss-900 text-stone-800 dark:text-[#ECF3EF] hover:border-forest-400 dark:hover:border-forest-600 shadow-2xs';
 
                   if (hasAnswered) {
                     if (optIdx === item.correctIndex) {
@@ -97,9 +97,9 @@ export const MultipleChoiceQuiz: React.FC<MultipleChoiceQuizProps> = ({
                       key={optIdx}
                       onClick={() => handleSelect(item.id, optIdx)}
                       disabled={hasAnswered}
-                      className={`text-left text-xs sm:text-sm px-3.5 py-2.5 rounded-lg border transition-all flex items-center justify-between gap-3 ${optStyle}`}
+                      className={`text-left text-xs sm:text-sm min-h-[48px] px-4 py-3 rounded-xl border transition-all flex items-center justify-between gap-3 ${optStyle}`}
                     >
-                      <span>{opt}</span>
+                      <span className="leading-relaxed">{opt}</span>
                       {hasAnswered && optIdx === item.correctIndex && (
                         <Check className="w-4 h-4 text-forest-600 dark:text-forest-400 shrink-0" />
                       )}
@@ -113,9 +113,9 @@ export const MultipleChoiceQuiz: React.FC<MultipleChoiceQuizProps> = ({
 
               {/* Feedback and rationale banner */}
               {hasAnswered && showExplanation[item.id] && (
-                <div className="mt-3.5 pt-3 border-t border-cream-200 dark:border-moss-800 text-xs flex flex-col gap-2">
+                <div className="mt-4 pt-4 border-t border-cream-200 dark:border-moss-800 text-xs sm:text-sm flex flex-col gap-2.5">
                   <div
-                    className={`p-3 rounded-lg border flex items-start gap-2.5 ${
+                    className={`p-3.5 rounded-xl border flex items-start gap-3 ${
                       isCorrect
                         ? 'bg-forest-50/90 dark:bg-forest-950/40 border-forest-200 dark:border-forest-800 text-forest-900 dark:text-forest-200'
                         : 'bg-rose-50/90 dark:bg-rose-950/40 border-rose-200 dark:border-rose-900 text-rose-900 dark:text-rose-200'
@@ -123,7 +123,7 @@ export const MultipleChoiceQuiz: React.FC<MultipleChoiceQuizProps> = ({
                   >
                     <Lightbulb className="w-4 h-4 shrink-0 mt-0.5 text-terracotta-500 dark:text-terracotta-400" />
                     <div className="space-y-1">
-                      <p className="font-semibold">
+                      <p className="font-semibold text-xs sm:text-sm">
                         {isCorrect ? '¡Excelente respuesta!' : 'Respuesta a corregir:'}
                       </p>
                       <p className="leading-relaxed opacity-90">{item.explanation}</p>
@@ -133,9 +133,9 @@ export const MultipleChoiceQuiz: React.FC<MultipleChoiceQuizProps> = ({
                   <div className="flex justify-end">
                     <button
                       onClick={() => handleReset(item.id)}
-                      className="px-2.5 py-1 text-stone-500 hover:text-stone-800 dark:hover:text-[#ECF3EF] flex items-center gap-1 font-medium transition-colors"
+                      className="min-h-[36px] px-3 py-1.5 text-stone-500 hover:text-stone-800 dark:hover:text-[#ECF3EF] flex items-center gap-1.5 font-medium transition-colors rounded-lg hover:bg-cream-100 dark:hover:bg-moss-800"
                     >
-                      <RotateCcw className="w-3 h-3" />
+                      <RotateCcw className="w-3.5 h-3.5" />
                       Reintentar pregunta
                     </button>
                   </div>

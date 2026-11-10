@@ -53,20 +53,20 @@ export function App() {
       {/* Main Content Area */}
       <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {activeTab === 'landing' && (
-          <div className="space-y-10">
+          <div className="space-y-12 sm:space-y-16">
             {/* Hero Banner */}
-            <section className="relative overflow-hidden rounded-2xl border border-cream-200 dark:border-moss-800 bg-white dark:bg-moss-900 p-6 sm:p-8 shadow-subtle dark:shadow-subtle-dark">
+            <section className="relative overflow-hidden rounded-2xl border border-cream-200 dark:border-moss-800 bg-white dark:bg-moss-900 p-6 sm:p-8 lg:p-10 shadow-subtle dark:shadow-subtle-dark">
               <div className="max-w-2xl">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-forest-50 dark:bg-moss-850 text-forest-700 dark:text-forest-300 border border-forest-100 dark:border-moss-800 mb-4">
                   <BookOpen className="w-3.5 h-3.5" />
                   <span>Guía & Práctica Libre de 9° Grado</span>
                 </div>
 
-                <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-forest-900 dark:text-[#ECF3EF]">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-forest-900 dark:text-[#ECF3EF]">
                   Repaso y Acompañamiento Académico
                 </h1>
 
-                <p className="mt-2.5 text-sm sm:text-base text-stone-600 dark:text-[#92A49B] leading-relaxed">
+                <p className="mt-3 text-sm sm:text-base text-stone-600 dark:text-[#92A49B] leading-relaxed">
                   Espacio de práctica interactiva diseñado para afianzar los conceptos fundamentales de{' '}
                   <strong className="text-forest-900 dark:text-[#ECF3EF] font-semibold">
                     Álgebra, Geoestadística e Inglés
@@ -75,10 +75,10 @@ export function App() {
                 </p>
 
                 {/* Priority CTA for Today's Session */}
-                <div className="mt-6 flex flex-wrap items-center gap-3">
+                <div className="mt-8 flex flex-wrap items-center gap-3.5">
                   <button
                     onClick={() => setActiveTab('sesion-1')}
-                    className="px-4 py-2.5 rounded-xl bg-forest-600 hover:bg-forest-500 text-white dark:bg-forest-400 dark:hover:bg-forest-300 dark:text-moss-950 font-semibold text-xs sm:text-sm flex items-center gap-2 shadow-xs transition-all"
+                    className="min-h-[44px] px-5 py-2.5 rounded-xl bg-forest-600 hover:bg-forest-500 text-white dark:bg-forest-400 dark:hover:bg-forest-300 dark:text-moss-950 font-semibold text-xs sm:text-sm flex items-center gap-2 shadow-xs transition-all active:scale-98"
                   >
                     <Sparkles className="w-4 h-4 text-terracotta-300 dark:text-terracotta-700" />
                     <span>Empezar Sesión de Hoy (10 Nov)</span>
@@ -87,7 +87,7 @@ export function App() {
 
                   <a
                     href="#temarios-section"
-                    className="px-4 py-2.5 rounded-xl border border-cream-200 dark:border-moss-800 hover:bg-cream-100 dark:hover:bg-moss-850 text-stone-700 dark:text-[#92A49B] font-medium text-xs sm:text-sm transition-colors flex items-center gap-1.5"
+                    className="min-h-[44px] px-5 py-2.5 rounded-xl border border-cream-200 dark:border-moss-800 hover:bg-cream-100 dark:hover:bg-moss-850 text-stone-700 dark:text-[#92A49B] font-semibold text-xs sm:text-sm transition-colors flex items-center gap-2"
                   >
                     <Layers className="w-4 h-4 text-forest-600 dark:text-forest-400" />
                     <span>Ver Temario Completo</span>
@@ -102,7 +102,7 @@ export function App() {
             </section>
 
             {/* Section 2: Full Syllabus */}
-            <section id="temarios-section" className="space-y-4 pt-4 border-t border-cream-200 dark:border-moss-800">
+            <section id="temarios-section" className="space-y-4 pt-6 border-t border-cream-200 dark:border-moss-800">
               <div>
                 <h2 className="text-lg sm:text-xl font-bold text-forest-900 dark:text-[#ECF3EF]">
                   Temario Detallado de Estudio
