@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Check, X, RotateCcw, Lightbulb, MoveHorizontal } from 'lucide-react';
 import { DragSlotExercise } from '../../types';
 
+import { fireMasteryCelebration } from '../../utils/confetti';
+
 interface WordBankSlotQuizProps {
   exercise: DragSlotExercise;
 }
@@ -55,9 +57,25 @@ export const WordBankSlotQuiz: React.FC<WordBankSlotQuizProps> = ({ exercise }) 
     }
   };
 
+  const totalSlots = Object.keys(exercise.correctAnswers).length;
+  const filledSlots = Object.keys(placedWords).length;
+  const correctCount = Object.entries(exercise.correctAnswers).filter(
+    ([slotId, correctWord]) => placedWords[slotId] === correctWord
+  ).length;
+  const allCorrect = isEvaluated && correctCount === totalSlots;
+
   const handleCheck = () => {
     setIsEvaluated(true);
     setShowSolution(true);
+
+    const willBeAllCorrect =
+      Object.entries(exercise.correctAnswers).filter(
+        ([slotId, correctWord]) => placedWords[slotId] === correctWord
+      ).length === totalSlots;
+
+    if (willBeAllCorrect) {
+      fireMasteryCelebration();
+    }
   };
 
   const handleReset = () => {
@@ -66,13 +84,6 @@ export const WordBankSlotQuiz: React.FC<WordBankSlotQuizProps> = ({ exercise }) 
     setIsEvaluated(false);
     setShowSolution(false);
   };
-
-  const totalSlots = Object.keys(exercise.correctAnswers).length;
-  const filledSlots = Object.keys(placedWords).length;
-  const correctCount = Object.entries(exercise.correctAnswers).filter(
-    ([slotId, correctWord]) => placedWords[slotId] === correctWord
-  ).length;
-  const allCorrect = isEvaluated && correctCount === totalSlots;
 
   return (
     <div className="border border-cream-200 dark:border-moss-800 rounded-xl p-5 sm:p-6 bg-white dark:bg-moss-900 shadow-subtle dark:shadow-subtle-dark">

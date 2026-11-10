@@ -12,7 +12,7 @@ import {
 import { FillBlankQuiz } from './quiz/FillBlankQuiz';
 import { MultipleChoiceQuiz } from './quiz/MultipleChoiceQuiz';
 import { WordBankSlotQuiz } from './quiz/WordBankSlotQuiz';
-import { Sparkles, ArrowLeft, BookmarkCheck, GitCommitHorizontal, Split } from 'lucide-react';
+import { Sparkles, ArrowLeft, BookmarkCheck, GitCommitHorizontal, Split, Copy, Check } from 'lucide-react';
 
 interface EnglishSessionViewProps {
   sessionDay?: 1 | 2;
@@ -26,6 +26,15 @@ export const EnglishSessionView: React.FC<EnglishSessionViewProps> = ({
   const [activeSubTab, setActiveSubTab] = useState<'past-perfect' | 'conditionals' | 'drag-drop' | 'second-third'>(
     sessionDay === 1 ? 'past-perfect' : 'second-third'
   );
+  const [copiedKey, setCopiedKey] = useState<string | null>(null);
+
+  const copyRule = (key: string, ruleText: string) => {
+    if (navigator?.clipboard) {
+      navigator.clipboard.writeText(ruleText);
+      setCopiedKey(key);
+      setTimeout(() => setCopiedKey(null), 2200);
+    }
+  };
 
   return (
     <div className="space-y-8">
@@ -171,16 +180,35 @@ export const EnglishSessionView: React.FC<EnglishSessionViewProps> = ({
                 </div>
               </div>
 
-              {/* Clues */}
-              <div className="mt-4 pt-3.5 border-t border-cream-200 dark:border-moss-800 flex flex-wrap items-center gap-2 text-xs text-stone-600 dark:text-[#92A49B]">
-                <span className="font-semibold text-forest-900 dark:text-[#ECF3EF]">
-                  Palabras clave de enlace:
-                </span>
-                <span className="px-2.5 py-0.5 rounded-md bg-cream-100 dark:bg-moss-850 font-mono text-forest-700 dark:text-forest-300">before</span>
-                <span className="px-2.5 py-0.5 rounded-md bg-cream-100 dark:bg-moss-850 font-mono text-forest-700 dark:text-forest-300">after</span>
-                <span className="px-2.5 py-0.5 rounded-md bg-cream-100 dark:bg-moss-850 font-mono text-forest-700 dark:text-forest-300">by the time</span>
-                <span className="px-2.5 py-0.5 rounded-md bg-cream-100 dark:bg-moss-850 font-mono text-forest-700 dark:text-forest-300">already</span>
-                <span className="px-2.5 py-0.5 rounded-md bg-cream-100 dark:bg-moss-850 font-mono text-forest-700 dark:text-forest-300">because</span>
+              {/* Clues & Copy cheat-sheet */}
+              <div className="mt-4 pt-3.5 border-t border-cream-200 dark:border-moss-800 flex flex-wrap items-center justify-between gap-3 text-xs text-stone-600 dark:text-[#92A49B]">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="font-semibold text-forest-900 dark:text-[#ECF3EF]">
+                    Palabras clave de enlace:
+                  </span>
+                  <span className="px-2.5 py-0.5 rounded-md bg-cream-100 dark:bg-moss-850 font-mono text-forest-700 dark:text-forest-300">before</span>
+                  <span className="px-2.5 py-0.5 rounded-md bg-cream-100 dark:bg-moss-850 font-mono text-forest-700 dark:text-forest-300">after</span>
+                  <span className="px-2.5 py-0.5 rounded-md bg-cream-100 dark:bg-moss-850 font-mono text-forest-700 dark:text-forest-300">by the time</span>
+                  <span className="px-2.5 py-0.5 rounded-md bg-cream-100 dark:bg-moss-850 font-mono text-forest-700 dark:text-forest-300">already</span>
+                  <span className="px-2.5 py-0.5 rounded-md bg-cream-100 dark:bg-moss-850 font-mono text-forest-700 dark:text-forest-300">because</span>
+                </div>
+
+                <button
+                  onClick={() => copyRule('past-perfect', 'Past Perfect: had + [Past Participle]. Se usa para la acción que ocurrió ANTES de otra en el pasado.')}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-cream-300 dark:border-moss-700 bg-white dark:bg-moss-900 hover:bg-cream-50 dark:hover:bg-moss-850 text-forest-900 dark:text-[#ECF3EF] font-medium transition-all shadow-2xs active:scale-95"
+                >
+                  {copiedKey === 'past-perfect' ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-forest-600 dark:text-forest-400 animate-pop-in" />
+                      <span className="text-forest-700 dark:text-forest-300 font-semibold">¡Regla copiada!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5 text-stone-500" />
+                      <span>Copiar regla nemotécnica</span>
+                    </>
+                  )}
+                </button>
               </div>
             </div>
           </div>
@@ -258,6 +286,30 @@ export const EnglishSessionView: React.FC<EnglishSessionViewProps> = ({
                   </tr>
                 </tbody>
               </table>
+            </div>
+
+            <div className="mt-4 flex justify-end">
+              <button
+                onClick={() =>
+                  copyRule(
+                    'conditionals-summary',
+                    'Zero Conditional: If + Present, Present (Leyes científicas y hechos seguros)\nFirst Conditional: If + Present, will + Verb (Planes y consecuencias reales futuras)'
+                  )
+                }
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-cream-300 dark:border-moss-700 bg-white dark:bg-moss-900 hover:bg-cream-50 dark:hover:bg-moss-850 text-forest-900 dark:text-[#ECF3EF] text-xs font-medium transition-all shadow-2xs active:scale-95"
+              >
+                {copiedKey === 'conditionals-summary' ? (
+                  <>
+                    <Check className="w-3.5 h-3.5 text-forest-600 dark:text-forest-400 animate-pop-in" />
+                    <span className="text-forest-700 dark:text-forest-300 font-semibold">¡Resumen copiado!</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-3.5 h-3.5 text-stone-500" />
+                    <span>Copiar resumen Zero vs First</span>
+                  </>
+                )}
+              </button>
             </div>
           </div>
 

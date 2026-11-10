@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Check, X, HelpCircle, RotateCcw } from 'lucide-react';
 import { FillBlankItem } from '../../types';
+import { fireMasteryCelebration } from '../../utils/confetti';
 
 interface FillBlankQuizProps {
   title: string;
@@ -38,8 +39,22 @@ export const FillBlankQuiz: React.FC<FillBlankQuizProps> = ({
   const handleCheck = (id: string, accepted: string[]) => {
     const userVal = normalize(answers[id] || '');
     const isCorrect = accepted.some((acc) => normalize(acc) === userVal);
-    setChecked((prev) => ({ ...prev, [id]: true }));
+    const newChecked = { ...checked, [id]: true };
+    setChecked(newChecked);
     setShowExplanation((prev) => ({ ...prev, [id]: true }));
+
+    // Check if all items are now answered correctly
+    const allAnswered = items.every((it) => it.id === id || newChecked[it.id]);
+    if (allAnswered) {
+      const allCorrect = items.every((it) => {
+        const val = normalize(answers[it.id] || (it.id === id ? answers[id] : ''));
+        return it.acceptedAnswers.some((acc) => normalize(acc) === val);
+      });
+      if (allCorrect) {
+        fireMasteryCelebration();
+      }
+    }
+
     return isCorrect;
   };
 
@@ -172,14 +187,16 @@ export const FillBlankQuiz: React.FC<FillBlankQuizProps> = ({
                 <div className="mt-3.5 p-3.5 rounded-lg bg-cream-100/90 dark:bg-moss-850 border border-cream-200 dark:border-moss-700 text-xs sm:text-sm space-y-2 animate-slide-fade">
                   <div className="flex items-baseline gap-2">
                     <span className="font-semibold text-forest-900 dark:text-[#ECF3EF]">
-                      Respuesta correcta:
+                      {isCorrect ? 'Respuesta correcta:' : 'Solución recomendada:'}
                     </span>
                     <span className="font-mono px-2.5 py-0.5 rounded-md bg-forest-100 dark:bg-forest-900/80 text-forest-800 dark:text-forest-200 font-bold">
                       {item.acceptedAnswers.join(' / ')}
                     </span>
                   </div>
                   <div className="text-stone-700 dark:text-[#92A49B] leading-relaxed">
-                    <span className="font-semibold text-forest-900 dark:text-[#ECF3EF]">Justificación: </span>
+                    <span className="font-semibold text-forest-900 dark:text-[#ECF3EF]">
+                      {isCorrect ? '¿Por qué es correcto? ' : 'Pista para recordar: '}
+                    </span>
                     {item.explanation}
                   </div>
                 </div>
