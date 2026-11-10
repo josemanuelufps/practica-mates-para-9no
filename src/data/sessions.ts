@@ -1,0 +1,55 @@
+import { SessionInfo } from '../types';
+
+export const sessionsList: SessionInfo[] = [
+  {
+    id: 'sesion-1',
+    number: 1,
+    date: '10 de Noviembre',
+    title: 'Sesión 1: Inglés (Past Perfect, Zero & First Conditional)',
+    status: 'active',
+    focus: 'ingles',
+    duration: '2h - 2h 30m',
+    summary: 'Enfoque total en dominar las acciones anteriores a otra en el pasado (Past Perfect) y las reglas de causa-efecto reales y universales (Zero & First Conditional) con ejercicios prácticos.',
+    keyTopics: [
+      'Past Perfect: Estructura had + V3 y marcadores temporales (before, after, by the time)',
+      'Fill in the blanks & Complete the sentences con Past Perfect',
+      'Zero Conditional: Hechos científicos y verdades cotidianas (If + Present, Present)',
+      'First Conditional: Situaciones reales y planes con consecuencia futura (If + Present, will + Verb)',
+      'Discriminación de uso: ¿Zero o First Conditional? con justificaciones',
+    ],
+  },
+  {
+    id: 'sesion-2',
+    number: 2,
+    date: '11 de Noviembre',
+    title: 'Sesión 2: Inglés (Second & Third Conditional) + Introducción a Álgebra',
+    status: 'upcoming',
+    focus: 'mixto',
+    duration: '2h 30m',
+    summary: 'Cierre de condicionales en inglés (hipótesis irreales en presente y pasado) e inicio del bloque algebraico: números reales, radicales y factorización clave.',
+    keyTopics: [
+      'Second Conditional: Situaciones hipotéticas o imaginarias en el presente (If + Past Simple, would + Verb)',
+      'Third Conditional: Situaciones imposibles del pasado y arrepentimientos (If + Past Perfect, would have + V3)',
+      'Discriminación de uso: ¿Second o Third Conditional?',
+      'Álgebra: Operaciones con radicales y racionalización',
+      'Factorización esencial para 9no grado',
+    ],
+  },
+  {
+    id: 'sesion-3',
+    number: 3,
+    date: 'Por Definir',
+    title: 'Sesión 3: Álgebra (Funciones, Sistemas) y Geoestadística',
+    status: 'planned',
+    focus: 'algebra',
+    duration: '2h 30m - 3h',
+    summary: 'Geometría analítica (la recta), métodos de resolución de sistemas 2x2 (Igualación, Reducción, Sustitución, Cramer), medidas de dispersión, percentiles y cuerpos redondos.',
+    keyTopics: [
+      'Funciones: Inyectiva, sobreyectiva, biyectiva; función lineal, afín y cuadrática',
+      'La recta: Pendiente, distancia entre dos puntos y ecuación',
+      'Sistemas 2x2: Métodos de igualación, reducción, sustitución y regla de Cramer',
+      'Geoestadística: Percentiles, varianza y desviación estándar',
+      'Cuerpos redondos: Fórmulas de área y volumen de cilindro, cono y esfera',
+    ],
+  },
+];
