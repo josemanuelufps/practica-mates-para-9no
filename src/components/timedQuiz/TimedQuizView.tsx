@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { timedQuizPool } from '../../data/timedQuizPool';
 import { TimedQuestion, TimedQuizAttemptResult, TimedTopicCategory } from '../../types/timedQuiz';
 import { fireMasteryCelebration } from '../../utils/confetti';
 import {
@@ -24,9 +23,17 @@ const TOTAL_QUESTIONS_PER_ROUND = 10;
 const TIME_LIMIT_PER_SLIDE = 20; // 20 seconds
 const FEEDBACK_DELAY_SECONDS = 5; // 5 seconds review
 
+// In-memory module cache so the 200 questions are only fetched once per browser session
+let cachedQuizPool: TimedQuestion[] | null = null;
+
 export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding }) => {
   // Game states: 'intro' | 'active' | 'feedback' | 'summary'
   const [gameState, setGameState] = useState<'intro' | 'active' | 'feedback' | 'summary'>('intro');
+
+  // Question bank loaded dynamically from public/data/timedQuizBank.json
+  const [quizPool, setQuizPool] = useState<TimedQuestion[]>(cachedQuizPool || []);
+  const [isLoadingBank, setIsLoadingBank] = useState<boolean>(!cachedQuizPool);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   const [activeDeck, setActiveDeck] = useState<TimedQuestion[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -54,9 +61,43 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
   const slideTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const feedbackTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Shuffle and pick 10 random questions
+  // Fetch JSON question bank on mount if not already cached
+  const fetchQuestionBank = async () => {
+    if (cachedQuizPool && cachedQuizPool.length > 0) {
+      setQuizPool(cachedQuizPool);
+      setIsLoadingBank(false);
+      return;
+    }
+
+    try {
+      setIsLoadingBank(true);
+      setLoadError(null);
+      const url = `${import.meta.env.BASE_URL}data/timedQuizBank.json`;
+      const res = await fetch(url);
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+      }
+      const data: TimedQuestion[] = await res.json();
+      cachedQuizPool = data;
+      setQuizPool(data);
+    } catch (err) {
+      console.error('Error cargando el banco de slides JSON:', err);
+      setLoadError('No se pudo descargar el banco de slides. Por favor, revisa tu conexión y reintenta.');
+    } finally {
+      setIsLoadingBank(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!cachedQuizPool || cachedQuizPool.length === 0) {
+      fetchQuestionBank();
+    }
+  }, []);
+
+  // Shuffle and pick 10 random questions from loaded pool
   const startNewQuiz = () => {
-    const shuffled = [...timedQuizPool].sort(() => 0.5 - Math.random());
+    if (quizPool.length === 0) return;
+    const shuffled = [...quizPool].sort(() => 0.5 - Math.random());
     const selectedTen = shuffled.slice(0, TOTAL_QUESTIONS_PER_ROUND);
 
     setActiveDeck(selectedTen);
@@ -351,6 +392,68 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
     'third-conditional': 'Third Conditional',
     'second-vs-third': 'Second vs Third',
   };
+
+  // =========================================================================
+  // RENDER: LOADING & ERROR STATES FOR DYNAMIC QUESTION BANK
+  // =========================================================================
+  if (isLoadingBank) {
+    return (
+      <div className="space-y-8 animate-slide-fade max-w-3xl mx-auto">
+        <button
+          onClick={onBackToLanding}
+          className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-slate-600 hover:text-navy-600 dark:text-slate-400 dark:hover:text-ice-300 transition-colors py-1.5 px-2 -ml-2 rounded-lg hover:bg-ice-200 dark:hover:bg-navy-800"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          <span>Volver al Inicio</span>
+        </button>
+
+        <div className="border border-slate-200 dark:border-navy-700 rounded-2xl p-9 bg-white dark:bg-navy-800 shadow-subtle dark:shadow-subtle-dark text-center space-y-4">
+          <div className="inline-flex items-center justify-center p-3 rounded-2xl bg-crimson-50 dark:bg-crimson-900/40 text-crimson-600 dark:text-crimson-400 animate-spin">
+            <RotateCcw className="w-6 h-6" />
+          </div>
+          <h2 className="text-xl font-bold text-navy-600 dark:text-ice-300">
+            Cargando banco de preguntas...
+          </h2>
+          <p className="text-xs text-slate-500 dark:text-slate-400 max-w-prose mx-auto">
+            Descargando las 200 slides interactivas desde el archivo de datos JSON independiente (timedQuizBank.json).
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (loadError) {
+    return (
+      <div className="space-y-8 animate-slide-fade max-w-3xl mx-auto">
+        <button
+          onClick={onBackToLanding}
+          className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-slate-600 hover:text-navy-600 dark:text-slate-400 dark:hover:text-ice-300 transition-colors py-1.5 px-2 -ml-2 rounded-lg hover:bg-ice-200 dark:hover:bg-navy-800"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          <span>Volver al Inicio</span>
+        </button>
+
+        <div className="border border-crimson-200 dark:border-crimson-900/60 rounded-2xl p-8 bg-white dark:bg-navy-800 shadow-subtle dark:shadow-subtle-dark text-center space-y-4">
+          <div className="inline-flex items-center justify-center p-3 rounded-2xl bg-crimson-50 dark:bg-crimson-900/40 text-crimson-600 dark:text-crimson-400">
+            <XCircle className="w-8 h-8" />
+          </div>
+          <h2 className="text-xl font-bold text-navy-600 dark:text-ice-300">
+            Error al cargar el banco de preguntas
+          </h2>
+          <p className="text-xs text-slate-600 dark:text-slate-400 max-w-prose mx-auto">
+            {loadError}
+          </p>
+          <button
+            onClick={fetchQuestionBank}
+            className="min-h-[44px] px-5 py-2.5 rounded-xl bg-crimson-600 text-white font-bold text-xs hover:bg-crimson-500 transition-all inline-flex items-center gap-2"
+          >
+            <RotateCcw className="w-4 h-4" />
+            <span>Reintentar descarga</span>
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   // =========================================================================
   // RENDER: INTRO VIEW
