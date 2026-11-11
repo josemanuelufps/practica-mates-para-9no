@@ -1,11 +1,11 @@
 import React from 'react';
-import { Moon, Sun, BookOpen, Calendar, Sparkles } from 'lucide-react';
+import { Moon, Sun, BookOpen, Calendar, Sparkles, Zap } from 'lucide-react';
 
 interface NavbarProps {
   darkMode: boolean;
   setDarkMode: (val: boolean) => void;
-  activeTab: 'landing' | 'sesion-1' | 'sesion-2';
-  setActiveTab: (tab: 'landing' | 'sesion-1' | 'sesion-2') => void;
+  activeTab: 'landing' | 'sesion-1' | 'sesion-2' | 'quices-contrarreloj';
+  setActiveTab: (tab: 'landing' | 'sesion-1' | 'sesion-2' | 'quices-contrarreloj') => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -26,6 +26,11 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const handleNavSession2 = () => {
     setActiveTab('sesion-2');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleNavTimedQuiz = () => {
+    setActiveTab('quices-contrarreloj');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -77,6 +82,21 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className="font-semibold">Sesión Hoy</span>
             <span className="hidden md:inline text-[10px] uppercase font-bold px-1.5 py-0.5 bg-crimson-100 dark:bg-crimson-900/60 text-crimson-700 dark:text-crimson-200 rounded">
               10 Nov
+            </span>
+          </button>
+
+          <button
+            onClick={handleNavTimedQuiz}
+            className={`min-h-[38px] px-2.5 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-colors flex items-center gap-1.5 ${
+              activeTab === 'quices-contrarreloj'
+                ? 'bg-navy-600 text-white dark:bg-navy-700 dark:text-ice-300 shadow-xs'
+                : 'text-slate-600 hover:text-navy-600 dark:text-slate-400 dark:hover:text-ice-300 hover:bg-ice-200 dark:hover:bg-navy-800'
+            }`}
+          >
+            <Zap className="w-3.5 h-3.5 text-crimson-500 dark:text-crimson-400" />
+            <span className="font-semibold">Contrarreloj</span>
+            <span className="text-[10px] uppercase font-bold px-1.5 py-0.5 bg-crimson-100 dark:bg-crimson-900/60 text-crimson-700 dark:text-crimson-200 rounded">
+              20s
             </span>
           </button>
 

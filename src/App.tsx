@@ -3,7 +3,8 @@ import { Navbar } from './components/Navbar';
 import { SessionList } from './components/SessionList';
 import { TopicList } from './components/TopicList';
 import { EnglishSessionView } from './components/EnglishSessionView';
-import { Sparkles, ArrowRight, BookOpen, Layers, CheckCircle2 } from 'lucide-react';
+import { TimedQuizView } from './components/timedQuiz/TimedQuizView';
+import { Sparkles, ArrowRight, BookOpen, Layers, CheckCircle2, Zap } from 'lucide-react';
 
 export function App() {
   const [darkMode, setDarkMode] = useState<boolean>(() => {
@@ -12,7 +13,7 @@ export function App() {
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
 
-  const [activeTab, setActiveTab] = useState<'landing' | 'sesion-1' | 'sesion-2'>('landing');
+  const [activeTab, setActiveTab] = useState<'landing' | 'sesion-1' | 'sesion-2' | 'quices-contrarreloj'>('landing');
 
   // Ensure fresh page load always starts at top and cleans up any lingering hash
   useEffect(() => {
@@ -95,6 +96,20 @@ export function App() {
                       <Sparkles className="w-4 h-4 text-crimson-200" />
                       <span>Empezar Sesión de Hoy (10 Nov)</span>
                       <ArrowRight className="w-4 h-4" />
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setActiveTab('quices-contrarreloj');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
+                      className="min-h-[44px] px-5 py-2.5 rounded-xl bg-navy-600 hover:bg-navy-700 text-white dark:bg-navy-700 dark:hover:bg-navy-600 dark:text-ice-300 font-semibold text-xs sm:text-sm flex items-center gap-2 shadow-xs transition-all active:scale-98"
+                    >
+                      <Zap className="w-4 h-4 text-crimson-400" />
+                      <span>Quices Contrarreloj (20s)</span>
+                      <span className="text-[10px] uppercase font-bold px-1.5 py-0.5 bg-crimson-600 text-white rounded">
+                        Nuevo
+                      </span>
                     </button>
 
                     <button
@@ -197,6 +212,16 @@ export function App() {
         {activeTab === 'sesion-2' && (
           <EnglishSessionView
             sessionDay={2}
+            onBackToLanding={() => {
+              setActiveTab('landing');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          />
+        )}
+
+        {/* Dedicated Timed Quiz View */}
+        {activeTab === 'quices-contrarreloj' && (
+          <TimedQuizView
             onBackToLanding={() => {
               setActiveTab('landing');
               window.scrollTo({ top: 0, behavior: 'smooth' });
