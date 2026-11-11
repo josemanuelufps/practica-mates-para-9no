@@ -11,15 +11,15 @@
   }
 
   body {
-    background-color: #FBFBFA;
-    color: #1E2421;
+    background-color: #EDF2F4;
+    color: #2B2D42;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     letter-spacing: -0.011em;
   }
 
   .dark body {
-    background-color: #121614;
-    color: #ECF3EF;
+    background-color: #0E0F17;
+    color: #EDF2F4;
     letter-spacing: -0.006em;
   }
 
@@ -33,21 +33,21 @@
   }
 
   ::selection {
-    background-color: #C7DFD2;
-    color: #091A13;
+    background-color: #F9CCD2;
+    color: #8C021A;
   }
 
   .dark ::selection {
-    background-color: #2D6A4F;
-    color: #F2F7F4;
+    background-color: #8C021A;
+    color: #EDF2F4;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
-    animation-duration: 0.01ms !important;
+    animation-duration: 1ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    transition-duration: 1ms !important;
     scroll-behavior: auto !important;
   }
 }

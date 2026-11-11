@@ -26,8 +26,8 @@ export const TopicList: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Subject filter tabs */}
-      <div className="flex flex-wrap items-center gap-2 border-b border-cream-200 dark:border-moss-800 pb-3">
-        <span className="text-xs font-semibold uppercase tracking-wider text-stone-500 dark:text-[#92A49B] mr-2">
+      <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 dark:border-navy-700 pb-3">
+        <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mr-2">
           Filtrar Temario:
         </span>
         {[
@@ -39,10 +39,10 @@ export const TopicList: React.FC = () => {
           <button
             key={tab.id}
             onClick={() => setSelectedSubject(tab.id as any)}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+            className={`min-h-[36px] px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
               selectedSubject === tab.id
-                ? 'bg-forest-600 text-white dark:bg-forest-400 dark:text-moss-950 shadow-xs'
-                : 'bg-cream-100 hover:bg-cream-200 text-stone-700 dark:bg-moss-850 dark:hover:bg-moss-800 dark:text-[#92A49B]'
+                ? 'bg-navy-600 text-white dark:bg-crimson-600 dark:text-white shadow-xs'
+                : 'bg-ice-200 hover:bg-ice-400 text-slate-700 dark:bg-navy-800 dark:hover:bg-navy-700 dark:text-slate-300'
             }`}
           >
             {tab.label}
@@ -55,23 +55,23 @@ export const TopicList: React.FC = () => {
         {filteredGroups.map((group) => (
           <div
             key={group.id}
-            className="border border-cream-200 dark:border-moss-800 rounded-xl p-5 bg-white dark:bg-moss-900 shadow-subtle dark:shadow-subtle-dark"
+            className="border border-slate-200 dark:border-navy-700 rounded-xl p-5 bg-white dark:bg-navy-800 shadow-subtle dark:shadow-subtle-dark"
           >
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-cream-100 dark:border-moss-800">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-100 dark:border-navy-700">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-lg bg-forest-50 dark:bg-moss-850 text-forest-700 dark:text-forest-300">
+                <div className="p-2 rounded-lg bg-navy-50 dark:bg-navy-900 text-navy-600 dark:text-crimson-400">
                   <BookOpen className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-base sm:text-lg text-forest-900 dark:text-[#ECF3EF]">
+                  <h3 className="font-bold text-base sm:text-lg text-navy-600 dark:text-ice-300">
                     {group.title}
                   </h3>
-                  <p className="text-xs text-stone-600 dark:text-[#92A49B]">
+                  <p className="text-xs text-slate-600 dark:text-slate-400">
                     {group.description}
                   </p>
                 </div>
               </div>
-              <span className="self-start sm:self-auto text-[11px] font-medium px-2.5 py-1 rounded-full bg-forest-50 dark:bg-moss-850 text-forest-700 dark:text-forest-300 border border-forest-100 dark:border-moss-800">
+              <span className="self-start sm:self-auto text-[11px] font-medium px-2.5 py-1 rounded-full bg-navy-50 dark:bg-navy-900 text-navy-600 dark:text-slate-300 border border-slate-200 dark:border-navy-700">
                 {group.badge}
               </span>
             </div>
@@ -83,36 +83,37 @@ export const TopicList: React.FC = () => {
                 return (
                   <div
                     key={cat.category}
-                    className="border border-cream-200 dark:border-moss-800 rounded-lg overflow-hidden bg-cream-50/50 dark:bg-moss-950/40"
+                    className="border border-slate-200 dark:border-navy-700 rounded-lg overflow-hidden bg-ice-100/60 dark:bg-navy-900/40"
                   >
                     <button
                       onClick={() => toggleCategory(cat.category)}
-                      className="w-full px-4 py-2.5 flex items-center justify-between text-left hover:bg-cream-100/60 dark:hover:bg-moss-850/60 transition-colors"
+                      aria-expanded={isOpen}
+                      className="w-full px-4 py-2.5 flex items-center justify-between text-left hover:bg-ice-200/60 dark:hover:bg-navy-800/60 transition-colors"
                     >
-                      <span className="font-semibold text-xs sm:text-sm text-forest-900 dark:text-[#ECF3EF]">
+                      <span className="font-semibold text-xs sm:text-sm text-navy-600 dark:text-ice-300">
                         {cat.category}
                       </span>
                       <div className="flex items-center gap-2">
-                        <span className="text-[11px] text-stone-500 font-mono">
+                        <span className="text-[11px] text-slate-500 font-mono">
                           {cat.items.length} temas
                         </span>
                         {isOpen ? (
-                          <ChevronDown className="w-4 h-4 text-stone-400" />
+                          <ChevronDown className="w-4 h-4 text-slate-400" />
                         ) : (
-                          <ChevronRight className="w-4 h-4 text-stone-400" />
+                          <ChevronRight className="w-4 h-4 text-slate-400" />
                         )}
                       </div>
                     </button>
 
                     {isOpen && (
-                      <div className="px-4 py-3 border-t border-cream-200 dark:border-moss-800 bg-white/70 dark:bg-moss-900/60 space-y-2">
-                        <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs sm:text-sm text-stone-700 dark:text-[#92A49B]">
+                      <div className="px-4 py-3 border-t border-slate-200 dark:border-navy-700 bg-white/70 dark:bg-navy-800/60 space-y-2">
+                        <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
                           {cat.items.map((item, i) => (
                             <li
                               key={i}
-                              className="flex items-start gap-2 p-1.5 rounded hover:bg-cream-50 dark:hover:bg-moss-850/40"
+                              className="flex items-start gap-2 p-1.5 rounded hover:bg-ice-50 dark:hover:bg-navy-700/40"
                             >
-                              <CheckCircle2 className="w-3.5 h-3.5 text-forest-500 dark:text-forest-400 mt-0.5 shrink-0" />
+                              <CheckCircle2 className="w-3.5 h-3.5 text-crimson-500 dark:text-crimson-400 mt-0.5 shrink-0" />
                               <span className="leading-relaxed">{item}</span>
                             </li>
                           ))}
@@ -120,34 +121,34 @@ export const TopicList: React.FC = () => {
 
                         {/* Special math formula previews for Cuerpos Redondos & Álgebra */}
                         {cat.category.includes('Cuerpos Redondos') && (
-                          <div className="mt-3 pt-2 border-t border-cream-200 dark:border-moss-800 grid grid-cols-1 sm:grid-cols-3 gap-2 text-center text-xs">
-                            <div className="p-2.5 rounded-lg bg-cream-100/80 dark:bg-moss-850 border border-cream-200 dark:border-moss-800">
-                              <span className="font-semibold block text-forest-900 dark:text-[#ECF3EF]">Cilindro</span>
+                          <div className="mt-3 pt-2 border-t border-slate-200 dark:border-navy-700 grid grid-cols-1 sm:grid-cols-3 gap-2 text-center text-xs">
+                            <div className="p-2.5 rounded-lg bg-ice-200 dark:bg-navy-900 border border-slate-200 dark:border-navy-700">
+                              <span className="font-semibold block text-navy-600 dark:text-ice-300">Cilindro</span>
                               <KatexMath math="V = \pi r^2 h" block />
                             </div>
-                            <div className="p-2.5 rounded-lg bg-cream-100/80 dark:bg-moss-850 border border-cream-200 dark:border-moss-800">
-                              <span className="font-semibold block text-forest-900 dark:text-[#ECF3EF]">Cono</span>
+                            <div className="p-2.5 rounded-lg bg-ice-200 dark:bg-navy-900 border border-slate-200 dark:border-navy-700">
+                              <span className="font-semibold block text-navy-600 dark:text-ice-300">Cono</span>
                               <KatexMath math="V = \frac{1}{3}\pi r^2 h" block />
                             </div>
-                            <div className="p-2.5 rounded-lg bg-cream-100/80 dark:bg-moss-850 border border-cream-200 dark:border-moss-800">
-                              <span className="font-semibold block text-forest-900 dark:text-[#ECF3EF]">Esfera</span>
+                            <div className="p-2.5 rounded-lg bg-ice-200 dark:bg-navy-900 border border-slate-200 dark:border-navy-700">
+                              <span className="font-semibold block text-navy-600 dark:text-ice-300">Esfera</span>
                               <KatexMath math="V = \frac{4}{3}\pi r^3" block />
                             </div>
                           </div>
                         )}
 
                         {cat.category.includes('Teoría de Funciones') && (
-                          <div className="mt-3 pt-2 border-t border-cream-200 dark:border-moss-800 grid grid-cols-1 sm:grid-cols-3 gap-2 text-center text-xs">
-                            <div className="p-2.5 rounded-lg bg-cream-100/80 dark:bg-moss-850 border border-cream-200 dark:border-moss-800">
-                              <span className="font-semibold block text-forest-900 dark:text-[#ECF3EF]">Ecuación Recta</span>
+                          <div className="mt-3 pt-2 border-t border-slate-200 dark:border-navy-700 grid grid-cols-1 sm:grid-cols-3 gap-2 text-center text-xs">
+                            <div className="p-2.5 rounded-lg bg-ice-200 dark:bg-navy-900 border border-slate-200 dark:border-navy-700">
+                              <span className="font-semibold block text-navy-600 dark:text-ice-300">Ecuación Recta</span>
                               <KatexMath math="y = mx + b" block />
                             </div>
-                            <div className="p-2.5 rounded-lg bg-cream-100/80 dark:bg-moss-850 border border-cream-200 dark:border-moss-800">
-                              <span className="font-semibold block text-forest-900 dark:text-[#ECF3EF]">Pendiente</span>
+                            <div className="p-2.5 rounded-lg bg-ice-200 dark:bg-navy-900 border border-slate-200 dark:border-navy-700">
+                              <span className="font-semibold block text-navy-600 dark:text-ice-300">Pendiente</span>
                               <KatexMath math="m = \frac{y_2 - y_1}{x_2 - x_1}" block />
                             </div>
-                            <div className="p-2.5 rounded-lg bg-cream-100/80 dark:bg-moss-850 border border-cream-200 dark:border-moss-800">
-                              <span className="font-semibold block text-forest-900 dark:text-[#ECF3EF]">Distancia</span>
+                            <div className="p-2.5 rounded-lg bg-ice-200 dark:bg-navy-900 border border-slate-200 dark:border-navy-700">
+                              <span className="font-semibold block text-navy-600 dark:text-ice-300">Distancia</span>
                               <KatexMath math="d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}" block />
                             </div>
                           </div>

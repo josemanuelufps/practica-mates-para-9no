@@ -29,8 +29,8 @@ export function fireMasteryCelebration() {
   const width = (canvas.width = window.innerWidth);
   const height = (canvas.height = window.innerHeight);
 
-  // Brand palette: Forest green, Jade, Terracotta, Cream paper
-  const colors = ['#1B4332', '#2D6A4F', '#52B788', '#C85A32', '#E07A5F', '#DDD9CB'];
+  // Brand palette: Slate navy (#2B2D42), Slate grey (#8D99AE), Vivid crimson (#EF233C), Deep crimson (#D90429)
+  const colors = ['#2B2D42', '#8D99AE', '#EF233C', '#D90429', '#EDF2F4', '#3D415C'];
 
   interface Particle {
     x: number;

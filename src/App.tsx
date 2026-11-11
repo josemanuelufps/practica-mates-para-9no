@@ -41,7 +41,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-cream-50 dark:bg-moss-950 text-forest-900 dark:text-[#ECF3EF] transition-colors">
+    <div className="min-h-screen flex flex-col bg-ice-300 dark:bg-navy-950 text-navy-600 dark:text-ice-300 transition-colors">
       {/* Sticky Top Navbar */}
       <Navbar
         darkMode={darkMode}
@@ -55,20 +55,20 @@ export function App() {
         {activeTab === 'landing' && (
           <div className="space-y-12 sm:space-y-16">
             {/* Hero Banner */}
-            <section className="relative overflow-hidden rounded-2xl border border-cream-200 dark:border-moss-800 bg-white dark:bg-moss-900 p-6 sm:p-8 lg:p-10 shadow-subtle dark:shadow-subtle-dark">
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 dark:border-navy-700 bg-white dark:bg-navy-800 p-6 sm:p-8 lg:p-10 shadow-subtle dark:shadow-subtle-dark">
               <div className="max-w-2xl">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-forest-50 dark:bg-moss-850 text-forest-700 dark:text-forest-300 border border-forest-100 dark:border-moss-800 mb-4">
-                  <BookOpen className="w-3.5 h-3.5" />
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-navy-50 dark:bg-navy-900 text-navy-600 dark:text-slate-300 border border-slate-200 dark:border-navy-700 mb-4">
+                  <BookOpen className="w-3.5 h-3.5 text-crimson-600 dark:text-crimson-400" />
                   <span>Guía & Práctica Libre de 9° Grado</span>
                 </div>
 
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-forest-900 dark:text-[#ECF3EF]">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-navy-600 dark:text-ice-300">
                   Repaso y Acompañamiento Académico
                 </h1>
 
-                <p className="mt-3 text-sm sm:text-base text-stone-600 dark:text-[#92A49B] leading-relaxed">
+                <p className="mt-3 text-sm sm:text-base text-slate-700 dark:text-slate-400 leading-relaxed">
                   Espacio de práctica interactiva diseñado para afianzar los conceptos fundamentales de{' '}
-                  <strong className="text-forest-900 dark:text-[#ECF3EF] font-semibold">
+                  <strong className="text-navy-600 dark:text-ice-300 font-semibold">
                     Álgebra, Geoestadística e Inglés
                   </strong>
                   . Ejercicios con retroalimentación inmediata, justificaciones paso a paso y banco de palabras táctil.
@@ -78,18 +78,18 @@ export function App() {
                 <div className="mt-8 flex flex-wrap items-center gap-3.5">
                   <button
                     onClick={() => setActiveTab('sesion-1')}
-                    className="min-h-[44px] px-5 py-2.5 rounded-xl bg-forest-600 hover:bg-forest-500 text-white dark:bg-forest-400 dark:hover:bg-forest-300 dark:text-moss-950 font-semibold text-xs sm:text-sm flex items-center gap-2 shadow-xs transition-all active:scale-98"
+                    className="min-h-[44px] px-5 py-2.5 rounded-xl bg-crimson-600 hover:bg-crimson-500 text-white dark:bg-crimson-500 dark:hover:bg-crimson-400 dark:text-white font-semibold text-xs sm:text-sm flex items-center gap-2 shadow-xs transition-all active:scale-98"
                   >
-                    <Sparkles className="w-4 h-4 text-terracotta-300 dark:text-terracotta-700" />
+                    <Sparkles className="w-4 h-4 text-crimson-200" />
                     <span>Empezar Sesión de Hoy (10 Nov)</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
 
                   <a
                     href="#temarios-section"
-                    className="min-h-[44px] px-5 py-2.5 rounded-xl border border-cream-200 dark:border-moss-800 hover:bg-cream-100 dark:hover:bg-moss-850 text-stone-700 dark:text-[#92A49B] font-semibold text-xs sm:text-sm transition-colors flex items-center gap-2"
+                    className="min-h-[44px] px-5 py-2.5 rounded-xl border border-slate-300 dark:border-navy-700 hover:bg-ice-200 dark:hover:bg-navy-700 text-slate-700 dark:text-slate-300 font-semibold text-xs sm:text-sm transition-colors flex items-center gap-2"
                   >
-                    <Layers className="w-4 h-4 text-forest-600 dark:text-forest-400" />
+                    <Layers className="w-4 h-4 text-navy-600 dark:text-slate-400" />
                     <span>Ver Temario Completo</span>
                   </a>
                 </div>
@@ -102,12 +102,12 @@ export function App() {
             </section>
 
             {/* Section 2: Full Syllabus */}
-            <section id="temarios-section" className="space-y-4 pt-6 border-t border-cream-200 dark:border-moss-800">
+            <section id="temarios-section" className="space-y-4 pt-6 border-t border-slate-200 dark:border-navy-700">
               <div>
-                <h2 className="text-lg sm:text-xl font-bold text-forest-900 dark:text-[#ECF3EF]">
+                <h2 className="text-lg sm:text-xl font-bold text-navy-600 dark:text-ice-300">
                   Temario Detallado de Estudio
                 </h2>
-                <p className="text-xs sm:text-sm text-stone-600 dark:text-[#92A49B] mt-0.5">
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-0.5">
                   Lista completa de los temas a cubrir durante las sesiones de refuerzo.
                 </p>
               </div>
@@ -134,14 +134,14 @@ export function App() {
       </main>
 
       {/* Minimal Footer */}
-      <footer className="border-t border-cream-200 dark:border-moss-800 bg-white dark:bg-moss-900 py-6 text-center text-xs text-stone-500 dark:text-[#92A49B] transition-colors">
+      <footer className="border-t border-slate-200 dark:border-navy-700 bg-white dark:bg-navy-800 py-6 text-center text-xs text-slate-600 dark:text-slate-400 transition-colors">
         <div className="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div>
             <span>Guía de Refuerzo Académico - 9° Grado</span>
             <span className="mx-2">•</span>
             <span>Recurso público y libre para el estudiante</span>
           </div>
-          <div className="font-mono text-[11px] text-stone-400 dark:text-stone-500">
+          <div className="font-mono text-[11px] text-slate-500 dark:text-slate-400">
             Desplegado en GitHub Pages
           </div>
         </div>

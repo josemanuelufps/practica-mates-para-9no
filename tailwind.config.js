@@ -12,45 +12,72 @@ export default {
         mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
       },
       colors: {
-        forest: {
-          50: '#F2F7F4',
-          100: '#E4EFE8',
-          200: '#C7DFD2',
-          300: '#94C3AB',
-          400: '#52B788',
-          500: '#2D6A4F',
-          600: '#1B4332',
-          700: '#143527',
-          800: '#0E261C',
-          900: '#091A13',
+        // Deep Slate Navy (#2B2D42 is the anchor)
+        navy: {
+          50: '#F4F5F7',
+          100: '#E4E6EB',
+          200: '#C7CAD4',
+          300: '#9DA2B3',
+          400: '#646B84',
+          500: '#3D415C',
+          600: '#2B2D42', // User Anchor 1
+          700: '#232537',
+          800: '#1C1D2C',
+          900: '#151622',
+          950: '#0E0F17',
         },
-        terracotta: {
-          50: '#FDF7F4',
-          100: '#FAEBE4',
-          200: '#F4D3C4',
-          300: '#EAB29A',
-          400: '#E07A5F',
-          500: '#D35F40',
-          600: '#C85A32',
-          700: '#9E4221',
-          800: '#752F15',
+        // Cool Slate Grey (#8D99AE is the anchor)
+        slate: {
+          50: '#F8F9FA',
+          100: '#F0F2F5',
+          200: '#E2E6EA',
+          300: '#C5CDD7',
+          400: '#A4AFBF',
+          500: '#8D99AE', // User Anchor 2
+          600: '#6C778B',
+          700: '#4F5868',
+          800: '#363C47',
+          900: '#20242B',
         },
-        cream: {
-          50: '#FBFBFA',
-          100: '#F5F4EE',
-          200: '#EAE8DE',
-          300: '#DDD9CB',
+        // Ice Canvas (#EDF2F4 is the anchor)
+        ice: {
+          50: '#FFFFFF',
+          100: '#FBFDFD',
+          200: '#F4F7F8',
+          300: '#EDF2F4', // User Anchor 3 (Canvas)
+          400: '#DFE5E8',
+          500: '#CFD7DB',
         },
-        moss: {
-          800: '#232C27',
-          850: '#1C231F',
-          900: '#171D1A',
-          950: '#121614',
+        // Crimson / Red (#EF233C and #D90429 are anchors)
+        crimson: {
+          50: '#FDF2F4',
+          100: '#FCE4E7',
+          200: '#F9CCD2',
+          300: '#F49DA7',
+          400: '#EF5E6F',
+          500: '#EF233C', // User Anchor 4 (Vivid Crimson)
+          600: '#D90429', // User Anchor 5 (Deep Crimson)
+          700: '#B50322',
+          800: '#8C021A',
+          900: '#660213',
+          950: '#3D000B',
+        },
+        // Success Green for verified correct quiz answers
+        success: {
+          50: '#F0FDF4',
+          100: '#DCFCE7',
+          200: '#BBF7D0',
+          500: '#22C55E',
+          600: '#16A34A',
+          700: '#15803D',
+          800: '#166534',
+          900: '#14532D',
+          950: '#052E16',
         },
       },
       boxShadow: {
-        'subtle': '0 2px 8px -1px rgba(27, 67, 50, 0.05), 0 1px 3px -1px rgba(0, 0, 0, 0.03)',
-        'subtle-dark': '0 2px 10px -1px rgba(0, 0, 0, 0.3), 0 1px 4px -1px rgba(0, 0, 0, 0.2)',
+        'subtle': '0 2px 8px -1px rgba(43, 45, 66, 0.06), 0 1px 3px -1px rgba(43, 45, 66, 0.03)',
+        'subtle-dark': '0 2px 10px -1px rgba(0, 0, 0, 0.45), 0 1px 4px -1px rgba(0, 0, 0, 0.3)',
       },
       keyframes: {
         'pop-in': {
