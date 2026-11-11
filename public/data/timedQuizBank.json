@@ -3,7 +3,7 @@
     "id": "pp-01",
     "topic": "past-perfect",
     "type": "multiple-choice",
-    "prompt": "Elige la opción que completa la oración en Past Perfect:",
+    "prompt": "Elige la opción que completa correctamente la oración:",
     "sentence": "When we arrived at the cinema, the movie ______ already ______.",
     "options": [
       "had / started",
@@ -18,7 +18,7 @@
     "id": "pp-02",
     "topic": "past-perfect",
     "type": "quick-slot",
-    "prompt": "Completa la estructura del Past Perfect:",
+    "prompt": "Selecciona la forma verbal que completa el espacio:",
     "sentenceBefore": "She could not open the door because she",
     "sentenceAfter": "her keys.",
     "options": [
@@ -52,7 +52,7 @@
     "id": "pp-05",
     "topic": "past-perfect",
     "type": "multiple-choice",
-    "prompt": "Selecciona la forma correcta para completar el espacio:",
+    "prompt": "Selecciona la opción correcta para completar la oración:",
     "sentence": "By the time Mom called, Daniel ______ his homework.",
     "options": [
       "had finished",
@@ -69,8 +69,8 @@
     "type": "binary-classify",
     "prompt": "¿Qué acción ocurrió PRIMERO en el tiempo?",
     "phrase": "The train had left when we reached the station.",
-    "categoryA": "El tren partió (Train left)",
-    "categoryB": "Llegamos a la estación (Reached)",
+    "categoryA": "El tren partió",
+    "categoryB": "Llegamos a la estación",
     "correctCategory": "A",
     "explanation": "La acción en Past Perfect (had left) siempre ocurrió antes que el Past Simple (reached)."
   },
@@ -93,7 +93,7 @@
     "id": "pp-08",
     "topic": "past-perfect",
     "type": "multiple-choice",
-    "prompt": "¿Cuál es la forma interrogativa correcta en Past Perfect?",
+    "prompt": "¿Cuál es la forma interrogativa correcta para esta situación en el pasado?",
     "sentence": "______ you ______ the email before the teacher asked for it?",
     "options": [
       "Had / sent",
@@ -149,7 +149,7 @@
     "id": "pp-12",
     "topic": "past-perfect",
     "type": "correct-incorrect",
-    "prompt": "¿Es correcta esta oración?",
+    "prompt": "Completa la oración con la forma verbal correcta:",
     "sentence": "After we had ate dinner, we watched a movie.",
     "isCorrect": false,
     "correctionIfWrong": "had eaten",
@@ -159,10 +159,10 @@
     "id": "pp-13",
     "topic": "past-perfect",
     "type": "binary-classify",
-    "prompt": "¿Qué acción ocurrió SEGUNDO (después)?",
+    "prompt": "¿Qué acción ocurrió en segundo lugar?",
     "phrase": "After Sofia had studied hard, she passed the exam.",
-    "categoryA": "Estudió (had studied)",
-    "categoryB": "Aprobó el examen (passed)",
+    "categoryA": "Estudió",
+    "categoryB": "Aprobó el examen",
     "correctCategory": "B",
     "explanation": "Aprobó (passed) ocurrió en segundo lugar; primero había estudiado (had studied)."
   },
@@ -170,7 +170,7 @@
     "id": "pp-14",
     "topic": "past-perfect",
     "type": "quick-slot",
-    "prompt": "Elige la conjugación adecuada:",
+    "prompt": "Elige la opción correcta para completar la oración:",
     "sentenceBefore": "I recognized him because I",
     "sentenceAfter": "him at summer camp.",
     "options": [
@@ -200,7 +200,7 @@
     "id": "pp-16",
     "topic": "past-perfect",
     "type": "correct-incorrect",
-    "prompt": "¿La siguiente oración gramaticalmente es correcta?",
+    "prompt": "Elige la opción que completa adecuadamente la oración:",
     "sentence": "He failed the quiz because he hadn’t studied the notes.",
     "isCorrect": true,
     "explanation": "Correcto: hadn’t studied es la contracción estándar de had not studied."
@@ -226,7 +226,7 @@
     "type": "binary-classify",
     "prompt": "¿Esta frase expresa una acción antes de otra en el pasado?",
     "phrase": "They had already sold all tickets when we logged in.",
-    "categoryA": "Sí, acción anterior (Past Perfect)",
+    "categoryA": "Sí, acción anterior",
     "categoryB": "No, acción simultánea",
     "correctCategory": "A",
     "explanation": "Ya habían vendido las entradas antes de iniciar sesión."
@@ -235,7 +235,7 @@
     "id": "pp-19",
     "topic": "past-perfect",
     "type": "quick-slot",
-    "prompt": "Completa la oración:",
+    "prompt": "Selecciona la forma correcta para completar la frase:",
     "sentenceBefore": "She was nervous because she",
     "sentenceAfter": "in public before.",
     "options": [
@@ -265,7 +265,7 @@
     "id": "zc-01",
     "topic": "zero-conditional",
     "type": "multiple-choice",
-    "prompt": "Completa con la regla del Zero Conditional:",
+    "prompt": "Completa la oración con la forma verbal adecuada:",
     "sentence": "If you ______ ice, it ______.",
     "options": [
       "heat / melts",
@@ -295,7 +295,7 @@
     "id": "zc-03",
     "topic": "zero-conditional",
     "type": "correct-incorrect",
-    "prompt": "¿Es correcta esta oración de Zero Conditional?",
+    "prompt": "¿La siguiente oración está gramaticalmente bien estructurada?",
     "sentence": "If people don’t drink water, they die.",
     "isCorrect": true,
     "explanation": "Correcto: hecho biológico universal expresado con Present Simple en ambas partes."
@@ -304,7 +304,7 @@
     "id": "zc-04",
     "topic": "zero-conditional",
     "type": "multiple-choice",
-    "prompt": "Atención a la tercera persona en Zero Conditional:",
+    "prompt": "Elige la conjugación correcta para completar la oración:",
     "sentence": "If it rains, the grass ______ wet.",
     "options": [
       "gets",
@@ -321,8 +321,8 @@
     "type": "binary-classify",
     "prompt": "¿Esta afirmación describe una ley científica general o un plan futuro?",
     "phrase": "If you mix red and blue, you get purple.",
-    "categoryA": "Hecho constante / Ley física (Zero)",
-    "categoryB": "Plan futuro probable (First)",
+    "categoryA": "Hecho constante / Ley física",
+    "categoryB": "Plan futuro probable",
     "correctCategory": "A",
     "explanation": "Es una verdad científica y universal sobre los colores: Zero Conditional."
   },
@@ -370,7 +370,7 @@
     "id": "zc-09",
     "topic": "zero-conditional",
     "type": "binary-classify",
-    "prompt": "¿Qué estructura gramatical tiene el Zero Conditional?",
+    "prompt": "¿Qué estructura verbal corresponde a esta afirmación universal?",
     "phrase": "If + Present Simple, [ ??? ]",
     "categoryA": "Present Simple",
     "categoryB": "will + Verb",
@@ -450,7 +450,7 @@
     "id": "zc-15",
     "topic": "zero-conditional",
     "type": "binary-classify",
-    "prompt": "¿En el Zero Conditional se puede sustituir IF por WHEN sin cambiar el sentido?",
+    "prompt": "¿En esta estructura se puede sustituir IF por WHEN manteniendo el sentido?",
     "phrase": "IF water reaches 0°C, it freezes. = WHEN water reaches 0°C, it freezes.",
     "categoryA": "Sí, totalmente equivalente",
     "categoryB": "No, altera el significado",
@@ -461,7 +461,7 @@
     "id": "fc-01",
     "topic": "first-conditional",
     "type": "multiple-choice",
-    "prompt": "Completa la oración de First Conditional:",
+    "prompt": "Elige la opción que completa correctamente la oración:",
     "sentence": "If it rains this afternoon, we ______ our soccer match.",
     "options": [
       "will cancel",
@@ -491,7 +491,7 @@
     "id": "fc-03",
     "topic": "first-conditional",
     "type": "correct-incorrect",
-    "prompt": "¿Es correcta esta oración de First Conditional?",
+    "prompt": "¿La siguiente oración está gramaticalmente bien estructurada?",
     "sentence": "If she will arrive early, I will tell her the news.",
     "isCorrect": false,
     "correctionIfWrong": "If she arrives early",
@@ -501,7 +501,7 @@
     "id": "fc-04",
     "topic": "first-conditional",
     "type": "multiple-choice",
-    "prompt": "Selecciona el resultado futuro en First Conditional:",
+    "prompt": "Selecciona la opción correcta para el resultado de esta condición:",
     "sentence": "If we hurry up, we ______ the last train home.",
     "options": [
       "will catch",
@@ -516,7 +516,7 @@
     "id": "fc-05",
     "topic": "first-conditional",
     "type": "binary-classify",
-    "prompt": "¿Dónde se ubica \"will\" en el First Conditional?",
+    "prompt": "¿Dónde debe ubicarse el auxiliar \"will\" en esta oración?",
     "phrase": "If you wake up late, you will miss breakfast.",
     "categoryA": "En la cláusula de resultado",
     "categoryB": "En la cláusula del IF",
@@ -596,7 +596,7 @@
     "id": "fc-11",
     "topic": "first-conditional",
     "type": "binary-classify",
-    "prompt": "¿Qué tipo de situación expresa el First Conditional?",
+    "prompt": "¿Qué tipo de situación expresa la siguiente oración?",
     "phrase": "If the weather is sunny tomorrow, we will go to the pool.",
     "categoryA": "Situación real y probable en el futuro",
     "categoryB": "Situación imposible en el pasado",
@@ -607,7 +607,7 @@
     "id": "fc-12",
     "topic": "first-conditional",
     "type": "correct-incorrect",
-    "prompt": "¿Es correcta esta oración con UNLESS (a menos que)?",
+    "prompt": "¿Es correcta esta oración con el conector UNLESS?",
     "sentence": "Unless you hurry, you will miss the flight.",
     "isCorrect": true,
     "explanation": "Correcto: Unless significa \"If you do not\" y se usa comúnmente en First Conditional."
@@ -663,8 +663,8 @@
     "type": "binary-classify",
     "prompt": "Clasifica el tipo de condicional:",
     "phrase": "If you drop glass on concrete, it breaks.",
-    "categoryA": "Zero Conditional (Hecho universal)",
-    "categoryB": "First Conditional (Posibilidad futura)",
+    "categoryA": "Zero Conditional",
+    "categoryB": "First Conditional",
     "correctCategory": "A",
     "explanation": "Present + Present describe un hecho físico general: Zero Conditional."
   },
@@ -675,7 +675,7 @@
     "prompt": "Clasifica el tipo de condicional:",
     "phrase": "If I drop this specific glass, it will break on the floor.",
     "categoryA": "Zero Conditional",
-    "categoryB": "First Conditional (Caso particular en futuro)",
+    "categoryB": "First Conditional",
     "correctCategory": "B",
     "explanation": "Usa \"will break\" para referirse a un evento futuro concreto: First Conditional."
   },
@@ -683,11 +683,11 @@
     "id": "zvf-03",
     "topic": "zero-vs-first",
     "type": "multiple-choice",
-    "prompt": "Identifica si es Zero o First Conditional según el contexto:",
+    "prompt": "Selecciona la forma verbal correcta según el sentido de la oración:",
     "sentence": "When the sun sets, it ______ dark everywhere.",
     "options": [
-      "gets (Zero)",
-      "will get (First)",
+      "gets",
+      "will get",
       "got",
       "is getting"
     ],
@@ -698,11 +698,11 @@
     "id": "zvf-04",
     "topic": "zero-vs-first",
     "type": "multiple-choice",
-    "prompt": "Identifica si es Zero o First Conditional según el contexto:",
+    "prompt": "Selecciona la opción correcta para completar la oración:",
     "sentence": "If you come to my house this evening, I ______ you my new video game.",
     "options": [
-      "will show (First)",
-      "show (Zero)",
+      "will show",
+      "show",
       "showed",
       "showing"
     ],
@@ -713,7 +713,7 @@
     "id": "zvf-05",
     "topic": "zero-vs-first",
     "type": "binary-classify",
-    "prompt": "¿Zero o First Conditional?",
+    "prompt": "Clasifica a qué tipo de estructura condicional pertenece esta oración:",
     "phrase": "If you freeze water, it expands.",
     "categoryA": "Zero Conditional",
     "categoryB": "First Conditional",
@@ -724,7 +724,7 @@
     "id": "zvf-06",
     "topic": "zero-vs-first",
     "type": "binary-classify",
-    "prompt": "¿Zero o First Conditional?",
+    "prompt": "Clasifica a qué tipo de estructura condicional pertenece esta oración:",
     "phrase": "If you eat all that cake now, you will feel sick later.",
     "categoryA": "Zero Conditional",
     "categoryB": "First Conditional",
@@ -735,7 +735,7 @@
     "id": "zvf-07",
     "topic": "zero-vs-first",
     "type": "quick-slot",
-    "prompt": "Elige la opción que convierte la frase en First Conditional:",
+    "prompt": "Elige la opción que completa coherentemente la oración:",
     "sentenceBefore": "If it snows tomorrow morning, we",
     "sentenceAfter": "a snowman.",
     "options": [
@@ -750,7 +750,7 @@
     "id": "zvf-08",
     "topic": "zero-vs-first",
     "type": "quick-slot",
-    "prompt": "Elige la opción que convierte la frase en Zero Conditional (regla general):",
+    "prompt": "Elige la opción que completa la afirmación general:",
     "sentenceBefore": "If people exercise regularly, their health",
     "sentenceAfter": ".",
     "options": [
@@ -792,7 +792,7 @@
     "type": "binary-classify",
     "prompt": "Clasifica la oración:",
     "phrase": "If Sofia calls me, I will tell her to join us.",
-    "categoryA": "First Conditional (will)",
+    "categoryA": "First Conditional",
     "categoryB": "Zero Conditional",
     "correctCategory": "A",
     "explanation": "Lleva \"will tell\", indicando consecuencia futura particular: First Conditional."
@@ -803,7 +803,7 @@
     "type": "binary-classify",
     "prompt": "Clasifica la oración:",
     "phrase": "Oil floats if you pour it into water.",
-    "categoryA": "Zero Conditional (Densidad física)",
+    "categoryA": "Zero Conditional",
     "categoryB": "First Conditional",
     "correctCategory": "A",
     "explanation": "Ley física de densidad de líquidos: Zero Conditional."
@@ -812,7 +812,7 @@
     "id": "zvf-13",
     "topic": "zero-vs-first",
     "type": "multiple-choice",
-    "prompt": "Completa para First Conditional:",
+    "prompt": "Completa la oración con la opción correcta:",
     "sentence": "If we win the tournament on Saturday, we ______ with pizza.",
     "options": [
       "will celebrate",
@@ -851,7 +851,7 @@
     "id": "sc-01",
     "topic": "second-conditional",
     "type": "multiple-choice",
-    "prompt": "Estructura del Second Conditional (situaciones hipotéticas):",
+    "prompt": "Selecciona la combinación verbal correcta para completar la oración:",
     "sentence": "If I ______ a million dollars, I ______ around the world.",
     "options": [
       "had / would travel",
@@ -866,7 +866,7 @@
     "id": "sc-02",
     "topic": "second-conditional",
     "type": "binary-classify",
-    "prompt": "¿Qué tipo de situación expresa el Second Conditional?",
+    "prompt": "¿Qué tipo de situación expresa la siguiente oración?",
     "phrase": "If I were invisible, I would explore the city at night.",
     "categoryA": "Hipotética / Imaginaria en el presente",
     "categoryB": "Hecho real comprobado",
@@ -877,7 +877,7 @@
     "id": "sc-03",
     "topic": "second-conditional",
     "type": "quick-slot",
-    "prompt": "Atención a la regla formal de \"were\" en Second Conditional:",
+    "prompt": "Elige la forma verbal correcta para esta situación hipotética:",
     "sentenceBefore": "If I",
     "sentenceAfter": "you, I would accept that job offer.",
     "options": [
@@ -892,7 +892,7 @@
     "id": "sc-04",
     "topic": "second-conditional",
     "type": "multiple-choice",
-    "prompt": "Completa la oración hipotética:",
+    "prompt": "Completa la oración con la forma verbal adecuada:",
     "sentence": "If she knew the answer, she ______ us right now.",
     "options": [
       "would tell",
@@ -907,7 +907,7 @@
     "id": "sc-05",
     "topic": "second-conditional",
     "type": "correct-incorrect",
-    "prompt": "¿Es correcta esta oración de Second Conditional?",
+    "prompt": "¿La siguiente oración está gramaticalmente bien estructurada?",
     "sentence": "If we lived near the beach, we would swim every day.",
     "isCorrect": true,
     "explanation": "Correcto: If + Past Simple (lived), would + Verbo base (would swim)."
@@ -946,7 +946,7 @@
     "id": "sc-08",
     "topic": "second-conditional",
     "type": "binary-classify",
-    "prompt": "¿Qué auxiliar es característico del resultado en Second Conditional?",
+    "prompt": "¿Qué auxiliar es característico del resultado en esta oración?",
     "phrase": "If he trained harder, he [ ??? ] win the race.",
     "categoryA": "would",
     "categoryB": "will",
@@ -999,7 +999,7 @@
     "type": "binary-classify",
     "prompt": "¿La siguiente oración se refiere al presente o al pasado?",
     "phrase": "If I spoke fluent Japanese, I would move to Tokyo.",
-    "categoryA": "Presente hipotético (no hablo japonés ahora)",
+    "categoryA": "Presente hipotético",
     "categoryB": "Pasado histórico",
     "correctCategory": "A",
     "explanation": "Aunque usa verbos en forma pasada (spoke), describe una hipótesis en el presente."
@@ -1008,7 +1008,7 @@
     "id": "tc-01",
     "topic": "third-conditional",
     "type": "multiple-choice",
-    "prompt": "Estructura del Third Conditional (pasado imposible / arrepentimiento):",
+    "prompt": "Selecciona la estructura verbal correcta para completar la oración:",
     "sentence": "If I ______ harder, I ______ the test.",
     "options": [
       "had studied / would have passed",
@@ -1025,7 +1025,7 @@
     "type": "binary-classify",
     "prompt": "¿Qué expresa esta oración?",
     "phrase": "If we had left earlier, we would have caught the flight.",
-    "categoryA": "Un pasado que ya no se puede cambiar (arrepentimiento)",
+    "categoryA": "Un pasado que ya no se puede cambiar",
     "categoryB": "Un plan para mañana",
     "correctCategory": "A",
     "explanation": "El vuelo ya se perdió en el pasado; describe lo que habría ocurrido en una situación contraria."
@@ -1049,7 +1049,7 @@
     "id": "tc-04",
     "topic": "third-conditional",
     "type": "correct-incorrect",
-    "prompt": "¿Es correcta esta oración de Third Conditional?",
+    "prompt": "¿La siguiente oración está gramaticalmente bien estructurada?",
     "sentence": "If you had told me, I would have helped you.",
     "isCorrect": true,
     "explanation": "Correcto: If + had told (Past Perfect), would have helped (resultado)."
@@ -1154,10 +1154,10 @@
     "id": "tc-12",
     "topic": "third-conditional",
     "type": "binary-classify",
-    "prompt": "¿Qué tiempo verbal va dentro de la cláusula IF en el Third Conditional?",
+    "prompt": "¿Qué forma verbal debe usarse dentro de la cláusula con IF?",
     "phrase": "If + [ ??? ], would have + V3",
-    "categoryA": "Past Perfect (had + V3)",
-    "categoryB": "Past Simple (V2)",
+    "categoryA": "Past Perfect",
+    "categoryB": "Past Simple",
     "correctCategory": "A",
     "explanation": "La regla del Third Conditional exige Past Perfect en la cláusula condicional."
   },
@@ -1182,8 +1182,8 @@
     "type": "binary-classify",
     "prompt": "Clasifica la oración:",
     "phrase": "If I were taller, I would play basketball.",
-    "categoryA": "Second Conditional (Presente hipotético)",
-    "categoryB": "Third Conditional (Pasado imposible)",
+    "categoryA": "Second Conditional",
+    "categoryB": "Third Conditional",
     "correctCategory": "A",
     "explanation": "Habla de una característica actual hipotética (were / would play): Second Conditional."
   },
@@ -1194,7 +1194,7 @@
     "prompt": "Clasifica la oración:",
     "phrase": "If I had been taller back in high school, I would have played in that final.",
     "categoryA": "Second Conditional",
-    "categoryB": "Third Conditional (Pasado imposible)",
+    "categoryB": "Third Conditional",
     "correctCategory": "B",
     "explanation": "had been / would have played se refiere a una situación pasada que no se puede cambiar."
   },
@@ -1202,11 +1202,11 @@
     "id": "svt-03",
     "topic": "second-vs-third",
     "type": "multiple-choice",
-    "prompt": "Identifica si es Second o Third Conditional:",
+    "prompt": "Elige la opción que completa coherentemente la oración:",
     "sentence": "If we had an umbrella right now, we ______ wet. (Presente)",
     "options": [
-      "would not get (Second)",
-      "would not have gotten (Third)",
+      "would not get",
+      "would not have gotten",
       "will not get",
       "do not get"
     ],
@@ -1217,11 +1217,11 @@
     "id": "svt-04",
     "topic": "second-vs-third",
     "type": "multiple-choice",
-    "prompt": "Identifica si es Second o Third Conditional:",
+    "prompt": "Elige la opción que completa coherentemente la oración:",
     "sentence": "If we had brought an umbrella yesterday, we ______ soaked. (Pasado)",
     "options": [
-      "would not have gotten (Third)",
-      "would not get (Second)",
+      "would not have gotten",
+      "would not get",
       "will not get",
       "did not get"
     ],
@@ -1232,10 +1232,10 @@
     "id": "svt-05",
     "topic": "second-vs-third",
     "type": "binary-classify",
-    "prompt": "¿A qué tiempo se refiere?",
+    "prompt": "¿A qué momento temporal se refiere esta situación?",
     "phrase": "If I had studied, I would have passed the test.",
-    "categoryA": "Al pasado (Third Conditional)",
-    "categoryB": "Al presente o futuro (Second Conditional)",
+    "categoryA": "Al pasado",
+    "categoryB": "Al presente o futuro",
     "correctCategory": "A",
     "explanation": "had studied / would have passed es Third Conditional y se refiere al pasado."
   },
@@ -1243,7 +1243,7 @@
     "id": "svt-06",
     "topic": "second-vs-third",
     "type": "quick-slot",
-    "prompt": "Completa la hipótesis en presente (Second):",
+    "prompt": "Completa la oración con la combinación verbal correcta:",
     "sentenceBefore": "If she had time today, she",
     "sentenceAfter": "us at the cafe.",
     "options": [
@@ -1258,7 +1258,7 @@
     "id": "svt-07",
     "topic": "second-vs-third",
     "type": "quick-slot",
-    "prompt": "Completa el arrepentimiento del pasado (Third):",
+    "prompt": "Completa la oración con la combinación verbal correcta:",
     "sentenceBefore": "If she had had time yesterday, she",
     "sentenceAfter": "us at the cafe.",
     "options": [
@@ -1282,10 +1282,10 @@
     "id": "svt-09",
     "topic": "second-vs-third",
     "type": "binary-classify",
-    "prompt": "¿Second o Third Conditional?",
+    "prompt": "Clasifica a qué tipo de condicional corresponde la siguiente oración:",
     "phrase": "If humans lived on Mars today, life would be very different.",
-    "categoryA": "Second Conditional (Hipotético en presente)",
-    "categoryB": "Third Conditional (Pasado)",
+    "categoryA": "Second Conditional",
+    "categoryB": "Third Conditional",
     "correctCategory": "A",
     "explanation": "Habla de cómo sería la vida hoy: Second Conditional (lived / would be)."
   },
@@ -1293,7 +1293,7 @@
     "id": "svt-10",
     "topic": "second-vs-third",
     "type": "multiple-choice",
-    "prompt": "Selecciona la opción correcta para esta hipótesis presente:",
+    "prompt": "Selecciona la opción correcta para completar la oración:",
     "sentence": "If I ______ a superhero, I ______ save people every day.",
     "options": [
       "were / would",
@@ -1308,7 +1308,7 @@
     "id": "mp-01",
     "topic": "past-perfect",
     "type": "match-pairs",
-    "prompt": "Conecta cada cláusula temporal con su acción previa correspondiente:",
+    "prompt": "Conecta cada cláusula temporal con su acción correspondiente:",
     "pairs": [
       {
         "id": "p1",
@@ -1332,7 +1332,7 @@
     "id": "mp-02",
     "topic": "past-perfect",
     "type": "match-pairs",
-    "prompt": "Conecta cada causa pasada con su efecto:",
+    "prompt": "Conecta cada causa con su consecuencia lógica:",
     "pairs": [
       {
         "id": "p1",
@@ -1356,7 +1356,7 @@
     "id": "mp-03",
     "topic": "past-perfect",
     "type": "match-pairs",
-    "prompt": "Conecta cada situación con su antecedente en Past Perfect:",
+    "prompt": "Conecta cada acción con lo que ocurrió previamente:",
     "pairs": [
       {
         "id": "p1",
@@ -1380,7 +1380,7 @@
     "id": "mp-04",
     "topic": "past-perfect",
     "type": "match-pairs",
-    "prompt": "Conecta cada acción con lo que había ocurrido previamente:",
+    "prompt": "Conecta cada acción con su antecedente en el pasado:",
     "pairs": [
       {
         "id": "p1",
@@ -1404,7 +1404,7 @@
     "id": "mp-05",
     "topic": "past-perfect",
     "type": "match-pairs",
-    "prompt": "Conecta cada expresión temporal con su cláusula en Past Perfect:",
+    "prompt": "Conecta cada expresión temporal con su cláusula correspondiente:",
     "pairs": [
       {
         "id": "p1",
@@ -1428,7 +1428,7 @@
     "id": "mp-06",
     "topic": "zero-conditional",
     "type": "match-pairs",
-    "prompt": "Conecta cada causa natural con su efecto científico (Zero Conditional):",
+    "prompt": "Conecta cada condición con su resultado permanente:",
     "pairs": [
       {
         "id": "p1",
@@ -1452,7 +1452,7 @@
     "id": "mp-07",
     "topic": "zero-conditional",
     "type": "match-pairs",
-    "prompt": "Conecta cada condición universal con su resultado permanente:",
+    "prompt": "Conecta cada condición con su efecto invariable:",
     "pairs": [
       {
         "id": "p1",
@@ -1476,7 +1476,7 @@
     "id": "mp-08",
     "topic": "zero-conditional",
     "type": "match-pairs",
-    "prompt": "Conecta cada hábito biológico con su consecuencia inmediata:",
+    "prompt": "Conecta cada situación cotidiana con su consecuencia inmediata:",
     "pairs": [
       {
         "id": "p1",
@@ -1548,7 +1548,7 @@
     "id": "mp-11",
     "topic": "first-conditional",
     "type": "match-pairs",
-    "prompt": "Conecta cada condición real futura con su consecuencia probable (First Conditional):",
+    "prompt": "Conecta cada condición con su desenlace correspondiente:",
     "pairs": [
       {
         "id": "p1",
@@ -1596,7 +1596,7 @@
     "id": "mp-13",
     "topic": "first-conditional",
     "type": "match-pairs",
-    "prompt": "Conecta cada condición con su resultado First Conditional:",
+    "prompt": "Conecta cada condición con su resultado correspondiente:",
     "pairs": [
       {
         "id": "p1",
@@ -1620,7 +1620,7 @@
     "id": "mp-14",
     "topic": "first-conditional",
     "type": "match-pairs",
-    "prompt": "Conecta cada promesa o advertencia con su desenlace:",
+    "prompt": "Conecta cada condición con su desenlace probable:",
     "pairs": [
       {
         "id": "p1",
@@ -1668,7 +1668,7 @@
     "id": "mp-16",
     "topic": "second-conditional",
     "type": "match-pairs",
-    "prompt": "Conecta cada hipótesis presente o imaginaria con su resultado (Second Conditional):",
+    "prompt": "Conecta cada situación hipotética con su consecuencia:",
     "pairs": [
       {
         "id": "p1",
@@ -1692,7 +1692,7 @@
     "id": "mp-17",
     "topic": "second-conditional",
     "type": "match-pairs",
-    "prompt": "Conecta cada consejo o situación imaginaria:",
+    "prompt": "Conecta cada escenario imaginario con su desenlace:",
     "pairs": [
       {
         "id": "p1",
@@ -1740,7 +1740,7 @@
     "id": "mp-19",
     "topic": "second-conditional",
     "type": "match-pairs",
-    "prompt": "Conecta cada fantasía con su consecuencia imaginaria:",
+    "prompt": "Conecta cada hipótesis con su consecuencia imaginaria:",
     "pairs": [
       {
         "id": "p1",
@@ -1764,7 +1764,7 @@
     "id": "mp-20",
     "topic": "second-conditional",
     "type": "match-pairs",
-    "prompt": "Conecta cada premisa con su resultado en Second Conditional:",
+    "prompt": "Conecta cada premisa con su resultado correspondiente:",
     "pairs": [
       {
         "id": "p1",
@@ -1788,7 +1788,7 @@
     "id": "mp-21",
     "topic": "third-conditional",
     "type": "match-pairs",
-    "prompt": "Conecta cada condición del pasado con su lamento o resultado imposible (Third Conditional):",
+    "prompt": "Conecta cada condición del pasado con su resultado imposible:",
     "pairs": [
       {
         "id": "p1",
@@ -1836,7 +1836,7 @@
     "id": "mp-23",
     "topic": "third-conditional",
     "type": "match-pairs",
-    "prompt": "Conecta cada condición en Third Conditional:",
+    "prompt": "Conecta cada condición con lo que habría ocurrido:",
     "pairs": [
       {
         "id": "p1",
@@ -1908,706 +1908,926 @@
     "id": "sb-01",
     "topic": "past-perfect",
     "type": "sentence-builder",
-    "prompt": "Ordena los bloques para construir la oración en Past Perfect:",
+    "prompt": "Ordena los bloques para construir la oración gramaticalmente correcta:",
     "tokens": [
       {
+        "id": "t3",
+        "text": "already left"
+      },
+      {
         "id": "t1",
-        "text": "They had left"
+        "text": "They had"
+      },
+      {
+        "id": "t5",
+        "text": "started."
       },
       {
         "id": "t2",
         "text": "before"
       },
       {
-        "id": "t3",
-        "text": "the party"
-      },
-      {
         "id": "t4",
-        "text": "started."
+        "text": "the party"
       }
     ],
     "correctSequence": [
       "t1",
-      "t2",
       "t3",
-      "t4"
+      "t2",
+      "t4",
+      "t5"
     ],
-    "fullSentence": "They had left before the party started.",
-    "explanation": "La acción primera (\"They had left\") va en Past Perfect, seguida de la segunda acción en Past Simple (\"started\")."
+    "fullSentence": "They had already left before the party started.",
+    "explanation": "La acción previa va en Past Perfect con el adverbio \"already\" (\"They had already left\"), antes de \"the party started\"."
   },
   {
     "id": "sb-02",
     "topic": "past-perfect",
     "type": "sentence-builder",
-    "prompt": "Construye la oración gramaticalmente correcta:",
+    "prompt": "Ordena los bloques para construir la oración gramaticalmente correcta:",
     "tokens": [
       {
+        "id": "t4",
+        "text": "huge waterfall"
+      },
+      {
         "id": "t1",
-        "text": "She had never seen"
+        "text": "She had"
+      },
+      {
+        "id": "t5",
+        "text": "before."
       },
       {
         "id": "t2",
-        "text": "such a huge"
+        "text": "never seen"
       },
       {
         "id": "t3",
-        "text": "waterfall"
-      },
-      {
-        "id": "t4",
-        "text": "before."
+        "text": "such a"
       }
     ],
     "correctSequence": [
       "t1",
       "t2",
       "t3",
-      "t4"
+      "t4",
+      "t5"
     ],
     "fullSentence": "She had never seen such a huge waterfall before.",
-    "explanation": "En Past Perfect con \"never\", el adverbio se ubica entre \"had\" y el participio (\"had never seen\")."
+    "explanation": "El adverbio \"never\" se ubica estrictamente entre \"had\" y el participio pasado \"seen\" (had never seen)."
   },
   {
     "id": "sb-03",
     "topic": "past-perfect",
     "type": "sentence-builder",
-    "prompt": "Ordena la secuencia temporal en pasado:",
+    "prompt": "Ordena los bloques para construir la oración gramaticalmente correcta:",
     "tokens": [
       {
-        "id": "t1",
-        "text": "When I arrived,"
+        "id": "t5",
+        "text": "lunch."
       },
       {
         "id": "t2",
         "text": "Carlos"
       },
       {
-        "id": "t3",
-        "text": "had already cooked"
+        "id": "t4",
+        "text": "cooked"
       },
       {
-        "id": "t4",
-        "text": "lunch."
+        "id": "t1",
+        "text": "When I arrived,"
+      },
+      {
+        "id": "t3",
+        "text": "had already"
       }
     ],
     "correctSequence": [
       "t1",
       "t2",
       "t3",
-      "t4"
+      "t4",
+      "t5"
     ],
     "fullSentence": "When I arrived, Carlos had already cooked lunch.",
-    "explanation": "Cocinar el almuerzo fue la acción previa completada antes de la llegada."
+    "explanation": "La acción concluida con anterioridad lleva \"had already cooked\"."
   },
   {
     "id": "sb-04",
     "topic": "past-perfect",
     "type": "sentence-builder",
-    "prompt": "Organiza los bloques sintácticos del Past Perfect:",
+    "prompt": "Ordena los bloques para construir la oración gramaticalmente correcta:",
     "tokens": [
+      {
+        "id": "t3",
+        "text": "had already"
+      },
       {
         "id": "t1",
         "text": "By 9:00 PM,"
+      },
+      {
+        "id": "t5",
+        "text": "their exam."
       },
       {
         "id": "t2",
         "text": "the students"
       },
       {
-        "id": "t3",
-        "text": "had finished"
-      },
-      {
         "id": "t4",
-        "text": "their exam."
+        "text": "finished"
       }
     ],
     "correctSequence": [
       "t1",
       "t2",
       "t3",
-      "t4"
+      "t4",
+      "t5"
     ],
-    "fullSentence": "By 9:00 PM, the students had finished their exam.",
-    "explanation": "\"By + hora en el pasado\" introduce el límite temporal donde la acción ya había culminado (\"had finished\")."
+    "fullSentence": "By 9:00 PM, the students had already finished their exam.",
+    "explanation": "\"By + hora pasada\" marca el punto temporal donde el examen ya había culminado (had already finished)."
   },
   {
     "id": "sb-05",
     "topic": "past-perfect",
     "type": "sentence-builder",
-    "prompt": "Arma la oración de causa y efecto en pasado:",
+    "prompt": "Ordena los bloques para construir la oración gramaticalmente correcta:",
     "tokens": [
+      {
+        "id": "t4",
+        "text": "forgotten"
+      },
       {
         "id": "t1",
         "text": "He realized"
       },
       {
-        "id": "t2",
-        "text": "that he had forgotten"
-      },
-      {
         "id": "t3",
-        "text": "his passport"
+        "text": "completely"
       },
       {
-        "id": "t4",
-        "text": "at home."
+        "id": "t5",
+        "text": "his passport."
+      },
+      {
+        "id": "t2",
+        "text": "that he had"
       }
     ],
     "correctSequence": [
       "t1",
       "t2",
       "t3",
-      "t4"
+      "t4",
+      "t5"
     ],
-    "fullSentence": "He realized that he had forgotten his passport at home.",
-    "explanation": "Darse cuenta (\"realized\") ocurrió después de haber olvidado el pasaporte (\"had forgotten\")."
+    "fullSentence": "He realized that he had completely forgotten his passport.",
+    "explanation": "El adverbio \"completely\" califica la acción anterior al momento en que se dio cuenta (realized)."
   },
   {
     "id": "sb-06",
     "topic": "zero-conditional",
     "type": "sentence-builder",
-    "prompt": "Arma la ley física en Zero Conditional:",
+    "prompt": "Ordena los bloques para construir la oración gramaticalmente correcta:",
     "tokens": [
-      {
-        "id": "t1",
-        "text": "If you freeze water,"
-      },
-      {
-        "id": "t2",
-        "text": "it turns into"
-      },
-      {
-        "id": "t3",
-        "text": "solid ice."
-      }
-    ],
-    "correctSequence": [
-      "t1",
-      "t2",
-      "t3"
-    ],
-    "fullSentence": "If you freeze water, it turns into solid ice.",
-    "explanation": "Causa en presente simple (\"freeze\") y consecuencia física invariable en presente simple (\"turns into\")."
-  },
-  {
-    "id": "sb-07",
-    "topic": "zero-conditional",
-    "type": "sentence-builder",
-    "prompt": "Arma la verdad biológica en inglés:",
-    "tokens": [
-      {
-        "id": "t1",
-        "text": "Plants dry up"
-      },
-      {
-        "id": "t2",
-        "text": "if they do not get"
-      },
-      {
-        "id": "t3",
-        "text": "enough water."
-      }
-    ],
-    "correctSequence": [
-      "t1",
-      "t2",
-      "t3"
-    ],
-    "fullSentence": "Plants dry up if they do not get enough water.",
-    "explanation": "El resultado puede ir primero sin coma (\"Plants dry up if they do not get enough water\")."
-  },
-  {
-    "id": "sb-08",
-    "topic": "zero-conditional",
-    "type": "sentence-builder",
-    "prompt": "Construye la relación causa-efecto en Zero Conditional:",
-    "tokens": [
-      {
-        "id": "t1",
-        "text": "If you heat butter,"
-      },
-      {
-        "id": "t2",
-        "text": "it melts"
-      },
-      {
-        "id": "t3",
-        "text": "very quickly."
-      }
-    ],
-    "correctSequence": [
-      "t1",
-      "t2",
-      "t3"
-    ],
-    "fullSentence": "If you heat butter, it melts very quickly.",
-    "explanation": "Presente simple en ambas cláusulas al tratarse de un hecho físico cotidiano."
-  },
-  {
-    "id": "sb-09",
-    "topic": "zero-conditional",
-    "type": "sentence-builder",
-    "prompt": "Ordena la afirmación natural en Zero Conditional:",
-    "tokens": [
-      {
-        "id": "t1",
-        "text": "When the sun sets,"
-      },
-      {
-        "id": "t2",
-        "text": "darkness"
-      },
-      {
-        "id": "t3",
-        "text": "covers the city."
-      }
-    ],
-    "correctSequence": [
-      "t1",
-      "t2",
-      "t3"
-    ],
-    "fullSentence": "When the sun sets, darkness covers the city.",
-    "explanation": "\"When\" se usa de forma idéntica a \"If\" en Zero Conditional para hechos invariables."
-  },
-  {
-    "id": "sb-10",
-    "topic": "zero-conditional",
-    "type": "sentence-builder",
-    "prompt": "Arma la oración de causa y efecto inmediato:",
-    "tokens": [
-      {
-        "id": "t1",
-        "text": "If you touch a cactus,"
-      },
-      {
-        "id": "t2",
-        "text": "the sharp spines"
-      },
-      {
-        "id": "t3",
-        "text": "hurt your skin."
-      }
-    ],
-    "correctSequence": [
-      "t1",
-      "t2",
-      "t3"
-    ],
-    "fullSentence": "If you touch a cactus, the sharp spines hurt your skin.",
-    "explanation": "Estructura Zero Conditional directa y sin modales futuros."
-  },
-  {
-    "id": "sb-11",
-    "topic": "first-conditional",
-    "type": "sentence-builder",
-    "prompt": "Ordena los bloques en First Conditional:",
-    "tokens": [
-      {
-        "id": "t1",
-        "text": "If it rains tomorrow,"
-      },
-      {
-        "id": "t2",
-        "text": "we will stay"
-      },
-      {
-        "id": "t3",
-        "text": "inside the house."
-      }
-    ],
-    "correctSequence": [
-      "t1",
-      "t2",
-      "t3"
-    ],
-    "fullSentence": "If it rains tomorrow, we will stay inside the house.",
-    "explanation": "If + Present Simple (\"rains\") -> Will + Base (\"will stay\")."
-  },
-  {
-    "id": "sb-12",
-    "topic": "first-conditional",
-    "type": "sentence-builder",
-    "prompt": "Arma la predicción condicional en First Conditional:",
-    "tokens": [
-      {
-        "id": "t1",
-        "text": "You will pass the test"
-      },
-      {
-        "id": "t2",
-        "text": "if you study"
-      },
-      {
-        "id": "t3",
-        "text": "every afternoon."
-      }
-    ],
-    "correctSequence": [
-      "t1",
-      "t2",
-      "t3"
-    ],
-    "fullSentence": "You will pass the test if you study every afternoon.",
-    "explanation": "Resultado con will al inicio (\"You will pass the test\") seguido de la condición con if."
-  },
-  {
-    "id": "sb-13",
-    "topic": "first-conditional",
-    "type": "sentence-builder",
-    "prompt": "Construye la advertencia en First Conditional:",
-    "tokens": [
-      {
-        "id": "t1",
-        "text": "If she does not hurry,"
-      },
-      {
-        "id": "t2",
-        "text": "she will miss"
-      },
-      {
-        "id": "t3",
-        "text": "the school bus."
-      }
-    ],
-    "correctSequence": [
-      "t1",
-      "t2",
-      "t3"
-    ],
-    "fullSentence": "If she does not hurry, she will miss the school bus.",
-    "explanation": "Presente simple negativo (\"does not hurry\") con resultado futuro probable (\"will miss\")."
-  },
-  {
-    "id": "sb-14",
-    "topic": "first-conditional",
-    "type": "sentence-builder",
-    "prompt": "Ordena los componentes del First Conditional:",
-    "tokens": [
-      {
-        "id": "t1",
-        "text": "If they invite us,"
-      },
-      {
-        "id": "t2",
-        "text": "we will attend"
-      },
-      {
-        "id": "t3",
-        "text": "their birthday party."
-      }
-    ],
-    "correctSequence": [
-      "t1",
-      "t2",
-      "t3"
-    ],
-    "fullSentence": "If they invite us, we will attend their birthday party.",
-    "explanation": "Condición probable en presente (\"invite\") y decisión futura (\"will attend\")."
-  },
-  {
-    "id": "sb-15",
-    "topic": "first-conditional",
-    "type": "sentence-builder",
-    "prompt": "Construye el compromiso futuro condicional:",
-    "tokens": [
-      {
-        "id": "t1",
-        "text": "I will call you"
-      },
-      {
-        "id": "t2",
-        "text": "as soon as"
-      },
-      {
-        "id": "t3",
-        "text": "I arrive at"
-      },
       {
         "id": "t4",
-        "text": "the station."
+        "text": "turns into"
+      },
+      {
+        "id": "t1",
+        "text": "If you"
+      },
+      {
+        "id": "t5",
+        "text": "solid ice."
+      },
+      {
+        "id": "t2",
+        "text": "freeze water,"
+      },
+      {
+        "id": "t3",
+        "text": "it always"
       }
     ],
     "correctSequence": [
       "t1",
       "t2",
       "t3",
-      "t4"
+      "t4",
+      "t5"
     ],
-    "fullSentence": "I will call you as soon as I arrive at the station.",
-    "explanation": "\"As soon as\" funciona como conector temporal en First Conditional llevando presente simple (\"arrive\")."
+    "fullSentence": "If you freeze water, it always turns into solid ice.",
+    "explanation": "Causa y consecuencia general con el adverbio \"always\" entre el sujeto y el verbo en presente simple."
+  },
+  {
+    "id": "sb-07",
+    "topic": "zero-conditional",
+    "type": "sentence-builder",
+    "prompt": "Ordena los bloques para construir la oración gramaticalmente correcta:",
+    "tokens": [
+      {
+        "id": "t5",
+        "text": "enough water."
+      },
+      {
+        "id": "t2",
+        "text": "always dry up"
+      },
+      {
+        "id": "t4",
+        "text": "do not get"
+      },
+      {
+        "id": "t1",
+        "text": "Plants"
+      },
+      {
+        "id": "t3",
+        "text": "if they"
+      }
+    ],
+    "correctSequence": [
+      "t1",
+      "t2",
+      "t3",
+      "t4",
+      "t5"
+    ],
+    "fullSentence": "Plants always dry up if they do not get enough water.",
+    "explanation": "La cláusula principal puede ir primero sin coma, conectada directamente por \"if\"."
+  },
+  {
+    "id": "sb-08",
+    "topic": "zero-conditional",
+    "type": "sentence-builder",
+    "prompt": "Ordena los bloques para construir la oración gramaticalmente correcta:",
+    "tokens": [
+      {
+        "id": "t3",
+        "text": "it melts"
+      },
+      {
+        "id": "t1",
+        "text": "If you"
+      },
+      {
+        "id": "t5",
+        "text": "on the pan."
+      },
+      {
+        "id": "t2",
+        "text": "heat butter,"
+      },
+      {
+        "id": "t4",
+        "text": "very quickly"
+      }
+    ],
+    "correctSequence": [
+      "t1",
+      "t2",
+      "t3",
+      "t4",
+      "t5"
+    ],
+    "fullSentence": "If you heat butter, it melts very quickly on the pan.",
+    "explanation": "Presente simple en ambas partes: heat butter $\\rightarrow$ melts very quickly."
+  },
+  {
+    "id": "sb-09",
+    "topic": "zero-conditional",
+    "type": "sentence-builder",
+    "prompt": "Ordena los bloques para construir la oración gramaticalmente correcta:",
+    "tokens": [
+      {
+        "id": "t4",
+        "text": "slowly covers"
+      },
+      {
+        "id": "t2",
+        "text": "the sun sets,"
+      },
+      {
+        "id": "t5",
+        "text": "the city."
+      },
+      {
+        "id": "t1",
+        "text": "When"
+      },
+      {
+        "id": "t3",
+        "text": "darkness"
+      }
+    ],
+    "correctSequence": [
+      "t1",
+      "t2",
+      "t3",
+      "t4",
+      "t5"
+    ],
+    "fullSentence": "When the sun sets, darkness slowly covers the city.",
+    "explanation": "\"When\" introduce la condición temporal invariable equivalente a \"if\"."
+  },
+  {
+    "id": "sb-10",
+    "topic": "zero-conditional",
+    "type": "sentence-builder",
+    "prompt": "Ordena los bloques para construir la oración gramaticalmente correcta:",
+    "tokens": [
+      {
+        "id": "t5",
+        "text": "your skin."
+      },
+      {
+        "id": "t1",
+        "text": "If you touch"
+      },
+      {
+        "id": "t3",
+        "text": "the sharp spines"
+      },
+      {
+        "id": "t2",
+        "text": "a cactus,"
+      },
+      {
+        "id": "t4",
+        "text": "instantly hurt"
+      }
+    ],
+    "correctSequence": [
+      "t1",
+      "t2",
+      "t3",
+      "t4",
+      "t5"
+    ],
+    "fullSentence": "If you touch a cactus, the sharp spines instantly hurt your skin.",
+    "explanation": "Reacción física directa: \"instantly hurt your skin\"."
+  },
+  {
+    "id": "sb-11",
+    "topic": "first-conditional",
+    "type": "sentence-builder",
+    "prompt": "Ordena los bloques para construir la oración gramaticalmente correcta:",
+    "tokens": [
+      {
+        "id": "t4",
+        "text": "definitely stay"
+      },
+      {
+        "id": "t1",
+        "text": "If it rains"
+      },
+      {
+        "id": "t5",
+        "text": "inside the house."
+      },
+      {
+        "id": "t2",
+        "text": "tomorrow,"
+      },
+      {
+        "id": "t3",
+        "text": "we will"
+      }
+    ],
+    "correctSequence": [
+      "t1",
+      "t2",
+      "t3",
+      "t4",
+      "t5"
+    ],
+    "fullSentence": "If it rains tomorrow, we will definitely stay inside the house.",
+    "explanation": "El adverbio \"definitely\" se coloca tras el modal \"will\" (we will definitely stay)."
+  },
+  {
+    "id": "sb-12",
+    "topic": "first-conditional",
+    "type": "sentence-builder",
+    "prompt": "Ordena los bloques para construir la oración gramaticalmente correcta:",
+    "tokens": [
+      {
+        "id": "t3",
+        "text": "if you"
+      },
+      {
+        "id": "t1",
+        "text": "You will"
+      },
+      {
+        "id": "t5",
+        "text": "every afternoon."
+      },
+      {
+        "id": "t2",
+        "text": "pass the test"
+      },
+      {
+        "id": "t4",
+        "text": "study hard"
+      }
+    ],
+    "correctSequence": [
+      "t1",
+      "t2",
+      "t3",
+      "t4",
+      "t5"
+    ],
+    "fullSentence": "You will pass the test if you study hard every afternoon.",
+    "explanation": "Resultado con will al comienzo (\"You will pass the test\") seguido de la condición en presente."
+  },
+  {
+    "id": "sb-13",
+    "topic": "first-conditional",
+    "type": "sentence-builder",
+    "prompt": "Ordena los bloques para construir la oración gramaticalmente correcta:",
+    "tokens": [
+      {
+        "id": "t5",
+        "text": "the school bus."
+      },
+      {
+        "id": "t1",
+        "text": "If she"
+      },
+      {
+        "id": "t4",
+        "text": "definitely miss"
+      },
+      {
+        "id": "t2",
+        "text": "does not hurry,"
+      },
+      {
+        "id": "t3",
+        "text": "she will"
+      }
+    ],
+    "correctSequence": [
+      "t1",
+      "t2",
+      "t3",
+      "t4",
+      "t5"
+    ],
+    "fullSentence": "If she does not hurry, she will definitely miss the school bus.",
+    "explanation": "Presente simple con \"does not\" en el condicional, seguido de \"will definitely miss\"."
+  },
+  {
+    "id": "sb-14",
+    "topic": "first-conditional",
+    "type": "sentence-builder",
+    "prompt": "Ordena los bloques para construir la oración gramaticalmente correcta:",
+    "tokens": [
+      {
+        "id": "t4",
+        "text": "happily attend"
+      },
+      {
+        "id": "t1",
+        "text": "If they"
+      },
+      {
+        "id": "t3",
+        "text": "we will"
+      },
+      {
+        "id": "t5",
+        "text": "their party."
+      },
+      {
+        "id": "t2",
+        "text": "invite us,"
+      }
+    ],
+    "correctSequence": [
+      "t1",
+      "t2",
+      "t3",
+      "t4",
+      "t5"
+    ],
+    "fullSentence": "If they invite us, we will happily attend their party.",
+    "explanation": "Estructura futura contingente: \"If they invite us, we will happily attend their party\"."
+  },
+  {
+    "id": "sb-15",
+    "topic": "first-conditional",
+    "type": "sentence-builder",
+    "prompt": "Ordena los bloques para construir la oración gramaticalmente correcta:",
+    "tokens": [
+      {
+        "id": "t4",
+        "text": "arrive at"
+      },
+      {
+        "id": "t1",
+        "text": "I will call you"
+      },
+      {
+        "id": "t3",
+        "text": "I finally"
+      },
+      {
+        "id": "t5",
+        "text": "the station."
+      },
+      {
+        "id": "t2",
+        "text": "as soon as"
+      }
+    ],
+    "correctSequence": [
+      "t1",
+      "t2",
+      "t3",
+      "t4",
+      "t5"
+    ],
+    "fullSentence": "I will call you as soon as I finally arrive at the station.",
+    "explanation": "\"As soon as\" funciona como nexo temporal en presente (\"as soon as I finally arrive\")."
   },
   {
     "id": "sb-16",
     "topic": "second-conditional",
     "type": "sentence-builder",
-    "prompt": "Construye la hipótesis imaginaria (Second Conditional):",
+    "prompt": "Ordena los bloques para construir la oración gramaticalmente correcta:",
     "tokens": [
       {
-        "id": "t1",
-        "text": "If I won the lottery,"
+        "id": "t4",
+        "text": "travel across"
       },
       {
-        "id": "t2",
-        "text": "I would travel"
+        "id": "t1",
+        "text": "If I"
       },
       {
         "id": "t3",
-        "text": "across Europe."
+        "text": "I would"
+      },
+      {
+        "id": "t5",
+        "text": "Europe."
+      },
+      {
+        "id": "t2",
+        "text": "won the lottery,"
       }
     ],
     "correctSequence": [
       "t1",
       "t2",
-      "t3"
+      "t3",
+      "t4",
+      "t5"
     ],
     "fullSentence": "If I won the lottery, I would travel across Europe.",
-    "explanation": "Second Conditional: If + Past Simple (\"won\") -> would + base verb (\"would travel\")."
+    "explanation": "If + Past Simple (\"won\") $\\rightarrow$ would + base verb (\"would travel\")."
   },
   {
     "id": "sb-17",
     "topic": "second-conditional",
     "type": "sentence-builder",
-    "prompt": "Arma la situación hipotética presente:",
+    "prompt": "Ordena los bloques para construir la oración gramaticalmente correcta:",
     "tokens": [
       {
-        "id": "t1",
-        "text": "If she were taller,"
+        "id": "t4",
+        "text": "definitely play"
       },
       {
         "id": "t2",
-        "text": "she would play"
+        "text": "were taller,"
+      },
+      {
+        "id": "t5",
+        "text": "on the team."
+      },
+      {
+        "id": "t1",
+        "text": "If she"
       },
       {
         "id": "t3",
-        "text": "on the basketball team."
+        "text": "she would"
       }
     ],
     "correctSequence": [
       "t1",
       "t2",
-      "t3"
+      "t3",
+      "t4",
+      "t5"
     ],
-    "fullSentence": "If she were taller, she would play on the basketball team.",
-    "explanation": "Uso de subjuntivo \"were\" con tercera persona en condiciones hipotéticas formales."
+    "fullSentence": "If she were taller, she would definitely play on the team.",
+    "explanation": "Uso de subjuntivo formal \"were\" con she, seguido de \"would definitely play\"."
   },
   {
     "id": "sb-18",
     "topic": "second-conditional",
     "type": "sentence-builder",
-    "prompt": "Ordena la hipótesis doméstica en Second Conditional:",
+    "prompt": "Ordena los bloques para construir la oración gramaticalmente correcta:",
     "tokens": [
       {
-        "id": "t1",
-        "text": "We would adopt a dog"
+        "id": "t5",
+        "text": "bigger garden."
       },
       {
-        "id": "t2",
-        "text": "if we had"
+        "id": "t1",
+        "text": "We would"
       },
       {
         "id": "t3",
-        "text": "a bigger garden."
+        "text": "if we"
+      },
+      {
+        "id": "t2",
+        "text": "adopt a dog"
+      },
+      {
+        "id": "t4",
+        "text": "had a"
       }
     ],
     "correctSequence": [
       "t1",
       "t2",
-      "t3"
+      "t3",
+      "t4",
+      "t5"
     ],
     "fullSentence": "We would adopt a dog if we had a bigger garden.",
-    "explanation": "Sería el resultado (\"would adopt\") condicionado a tener un jardín más grande (\"if we had\")."
+    "explanation": "Consecuencia hipotética primero (\"We would adopt a dog\") + condición (\"if we had\")."
   },
   {
     "id": "sb-19",
     "topic": "second-conditional",
     "type": "sentence-builder",
-    "prompt": "Construye la especulación sobre habilidades:",
+    "prompt": "Ordena los bloques para construir la oración gramaticalmente correcta:",
     "tokens": [
       {
-        "id": "t1",
-        "text": "If he spoke English fluently,"
+        "id": "t4",
+        "text": "apply for"
       },
       {
-        "id": "t2",
-        "text": "he would apply"
+        "id": "t1",
+        "text": "If he spoke"
       },
       {
         "id": "t3",
-        "text": "for that scholarship."
+        "text": "he would"
+      },
+      {
+        "id": "t5",
+        "text": "that scholarship."
+      },
+      {
+        "id": "t2",
+        "text": "English fluently,"
       }
     ],
     "correctSequence": [
       "t1",
       "t2",
-      "t3"
+      "t3",
+      "t4",
+      "t5"
     ],
     "fullSentence": "If he spoke English fluently, he would apply for that scholarship.",
-    "explanation": "Past Simple en la condición irreal (\"spoke\") y would en la consecuencia (\"would apply\")."
+    "explanation": "Hipótesis sobre el presente irreal: \"If he spoke English fluently, he would apply for that scholarship\"."
   },
   {
     "id": "sb-20",
     "topic": "second-conditional",
     "type": "sentence-builder",
-    "prompt": "Ordena la pregunta hipotética en Second Conditional:",
+    "prompt": "Ordena los bloques para construir la oración gramaticalmente correcta:",
     "tokens": [
       {
-        "id": "t1",
-        "text": "What would you do"
+        "id": "t4",
+        "text": "ever found"
       },
       {
-        "id": "t2",
-        "text": "if you found"
+        "id": "t1",
+        "text": "What would"
       },
       {
         "id": "t3",
+        "text": "if you"
+      },
+      {
+        "id": "t5",
         "text": "a lost wallet?"
+      },
+      {
+        "id": "t2",
+        "text": "you do"
       }
     ],
     "correctSequence": [
       "t1",
       "t2",
-      "t3"
+      "t3",
+      "t4",
+      "t5"
     ],
-    "fullSentence": "What would you do if you found a lost wallet?",
-    "explanation": "Pregunta en Second: What would you do + If + Past Simple (\"found\")."
+    "fullSentence": "What would you do if you ever found a lost wallet?",
+    "explanation": "Pregunta hipotética con el adverbio \"ever\" antes del verbo en pasado simple (\"ever found\")."
   },
   {
     "id": "sb-21",
     "topic": "third-conditional",
     "type": "sentence-builder",
-    "prompt": "Construye el lamento sobre el pasado (Third Conditional):",
+    "prompt": "Ordena los bloques para construir la oración gramaticalmente correcta:",
     "tokens": [
       {
-        "id": "t1",
-        "text": "If you had told me,"
+        "id": "t4",
+        "text": "gladly helped"
       },
       {
         "id": "t2",
-        "text": "I would have helped"
+        "text": "told me,"
+      },
+      {
+        "id": "t5",
+        "text": "with your project."
+      },
+      {
+        "id": "t1",
+        "text": "If you had"
       },
       {
         "id": "t3",
-        "text": "with your project."
+        "text": "I would have"
       }
     ],
     "correctSequence": [
       "t1",
       "t2",
-      "t3"
+      "t3",
+      "t4",
+      "t5"
     ],
-    "fullSentence": "If you had told me, I would have helped with your project.",
-    "explanation": "Third Conditional: If + had + V3 (\"had told\") -> would have + V3 (\"would have helped\")."
+    "fullSentence": "If you had told me, I would have gladly helped with your project.",
+    "explanation": "El adverbio \"gladly\" se ubica entre \"would have\" y el participio pasado \"helped\"."
   },
   {
     "id": "sb-22",
     "topic": "third-conditional",
     "type": "sentence-builder",
-    "prompt": "Arma la conclusión sobre un resultado pasado:",
+    "prompt": "Ordena los bloques para construir la oración gramaticalmente correcta:",
     "tokens": [
       {
-        "id": "t1",
-        "text": "She would have won"
+        "id": "t4",
+        "text": "practiced"
       },
       {
-        "id": "t2",
-        "text": "if she had practiced"
+        "id": "t1",
+        "text": "She would have"
       },
       {
         "id": "t3",
+        "text": "if she had"
+      },
+      {
+        "id": "t5",
         "text": "more diligently."
+      },
+      {
+        "id": "t2",
+        "text": "won the match"
       }
     ],
     "correctSequence": [
       "t1",
       "t2",
-      "t3"
+      "t3",
+      "t4",
+      "t5"
     ],
-    "fullSentence": "She would have won if she had practiced more diligently.",
-    "explanation": "Resultado imposible en el pasado (\"would have won\") porque no practicó lo suficiente."
+    "fullSentence": "She would have won the match if she had practiced more diligently.",
+    "explanation": "Resultado imposible del pasado: \"She would have won the match if she had practiced more diligently\"."
   },
   {
     "id": "sb-23",
     "topic": "third-conditional",
     "type": "sentence-builder",
-    "prompt": "Ordena la contingencia retrospectiva:",
+    "prompt": "Ordena los bloques para construir la oración gramaticalmente correcta:",
     "tokens": [
       {
-        "id": "t1",
-        "text": "If it had not rained,"
+        "id": "t4",
+        "text": "played soccer"
       },
       {
         "id": "t2",
-        "text": "we would have played"
+        "text": "not rained,"
+      },
+      {
+        "id": "t5",
+        "text": "outside."
+      },
+      {
+        "id": "t1",
+        "text": "If it had"
       },
       {
         "id": "t3",
-        "text": "soccer outside."
+        "text": "we would have"
       }
     ],
     "correctSequence": [
       "t1",
       "t2",
-      "t3"
+      "t3",
+      "t4",
+      "t5"
     ],
     "fullSentence": "If it had not rained, we would have played soccer outside.",
-    "explanation": "Condición negativa en pasado (\"had not rained\") con consecuencia hipotética en Third Conditional."
+    "explanation": "Negación en pasado (\"had not rained\") con consecuencia irreal \"would have played\"."
   },
   {
     "id": "sb-24",
     "topic": "third-conditional",
     "type": "sentence-builder",
-    "prompt": "Construye la oportunidad perdida en el pasado:",
+    "prompt": "Ordena los bloques para construir la oración gramaticalmente correcta:",
     "tokens": [
       {
-        "id": "t1",
-        "text": "They would have caught"
+        "id": "t4",
+        "text": "only left"
       },
       {
-        "id": "t2",
-        "text": "the flight"
+        "id": "t1",
+        "text": "They would have"
       },
       {
         "id": "t3",
-        "text": "if they had left earlier."
+        "text": "if they had"
+      },
+      {
+        "id": "t5",
+        "text": "much earlier."
+      },
+      {
+        "id": "t2",
+        "text": "caught the flight"
       }
     ],
     "correctSequence": [
       "t1",
       "t2",
-      "t3"
+      "t3",
+      "t4",
+      "t5"
     ],
-    "fullSentence": "They would have caught the flight if they had left earlier.",
-    "explanation": "Perdieron el vuelo porque no salieron más temprano."
+    "fullSentence": "They would have caught the flight if they had only left much earlier.",
+    "explanation": "Lamento sobre el pasado: \"They would have caught the flight if they had only left much earlier\"."
   },
   {
     "id": "sb-25",
     "topic": "third-conditional",
     "type": "sentence-builder",
-    "prompt": "Arma la advertencia sobre un hecho consumado:",
+    "prompt": "Ordena los bloques para construir la oración gramaticalmente correcta:",
     "tokens": [
       {
-        "id": "t1",
-        "text": "If he had worn a jacket,"
+        "id": "t4",
+        "text": "have caught"
       },
       {
         "id": "t2",
-        "text": "he would not have caught"
+        "text": "worn a jacket,"
+      },
+      {
+        "id": "t5",
+        "text": "a bad cold."
+      },
+      {
+        "id": "t1",
+        "text": "If he had"
       },
       {
         "id": "t3",
-        "text": "a bad cold."
+        "text": "he would not"
       }
     ],
     "correctSequence": [
       "t1",
       "t2",
-      "t3"
+      "t3",
+      "t4",
+      "t5"
     ],
     "fullSentence": "If he had worn a jacket, he would not have caught a bad cold.",
-    "explanation": "had worn (ropa) $\\rightarrow$ would not have caught (resfriado)."
+    "explanation": "If + Past Perfect (had worn) $\\rightarrow$ would not have + participio pasado (caught)."
   },
   {
     "id": "bh-01",
@@ -3304,8 +3524,8 @@
     "type": "timeline-sorter",
     "prompt": "¿Cuál de las dos acciones ocurrió PRIMERO en la línea de tiempo?",
     "sentenceContext": "When Diego arrived at the train station, the express train had already departed.",
-    "eventA": "Diego llegó a la estación de trenes (arrived)",
-    "eventB": "El tren expreso partió de la estación (had departed)",
+    "eventA": "Diego llegó a la estación de trenes",
+    "eventB": "El tren expreso partió de la estación",
     "firstEvent": "B",
     "explanation": "El Past Perfect (\"had departed\") señala la acción más antigua en el pasado (ocurrió primero), antes de que Diego llegara."
   },
@@ -3315,8 +3535,8 @@
     "type": "timeline-sorter",
     "prompt": "¿Cuál de las dos acciones ocurrió PRIMERO en la línea de tiempo?",
     "sentenceContext": "Sofia had already cooked a delicious pasta before her family arrived home.",
-    "eventA": "Sofía cocinó la pasta (had cooked)",
-    "eventB": "La familia llegó a la casa (arrived)",
+    "eventA": "Sofía cocinó la pasta",
+    "eventB": "La familia llegó a la casa",
     "firstEvent": "A",
     "explanation": "Cocinar la pasta ocurrió primero (\"had cooked\"), por eso lleva Past Perfect frente a la llegada posterior (\"arrived\")."
   },
@@ -3326,8 +3546,8 @@
     "type": "timeline-sorter",
     "prompt": "¿Cuál de las dos acciones ocurrió PRIMERO en la línea de tiempo?",
     "sentenceContext": "The football match started after the heavy thunderstorm had stopped.",
-    "eventA": "El partido de fútbol comenzó (started)",
-    "eventB": "La fuerte tormenta se detuvo (had stopped)",
+    "eventA": "El partido de fútbol comenzó",
+    "eventB": "La fuerte tormenta se detuvo",
     "firstEvent": "B",
     "explanation": "La tormenta cesó primero (\"had stopped\"), y solo después empezó el partido (\"started\")."
   },
@@ -3337,8 +3557,8 @@
     "type": "timeline-sorter",
     "prompt": "¿Cuál de las dos acciones ocurrió PRIMERO en la línea de tiempo?",
     "sentenceContext": "Carlos couldn’t buy the concert ticket because he had forgotten his credit card at home.",
-    "eventA": "Carlos no pudo comprar la entrada (could not buy)",
-    "eventB": "Carlos olvidó su tarjeta en casa (had forgotten)",
+    "eventA": "Carlos no pudo comprar la entrada",
+    "eventB": "Carlos olvidó su tarjeta en casa",
     "firstEvent": "B",
     "explanation": "Olvidar la tarjeta (\"had forgotten\") ocurrió antes de intentar comprar la entrada en la taquilla."
   },
@@ -3348,8 +3568,8 @@
     "type": "timeline-sorter",
     "prompt": "¿Cuál de las dos acciones ocurrió PRIMERO en la línea de tiempo?",
     "sentenceContext": "By the time the firefighter arrived, the neighbors had put out the fire.",
-    "eventA": "Llegaron los bomberos al lugar (arrived)",
-    "eventB": "Los vecinos apagaron el fuego (had put out)",
+    "eventA": "Llegaron los bomberos al lugar",
+    "eventB": "Los vecinos apagaron el fuego",
     "firstEvent": "B",
     "explanation": "Los vecinos apagaron el fuego primero (\"had put out\") antes de la llegada de los bomberos."
   },
@@ -3359,8 +3579,8 @@
     "type": "timeline-sorter",
     "prompt": "¿Cuál de las dos acciones ocurrió PRIMERO en la línea de tiempo?",
     "sentenceContext": "Mariana had finished all her homework before she turned on the television.",
-    "eventA": "Mariana terminó toda su tarea (had finished)",
-    "eventB": "Mariana encendió la televisión (turned on)",
+    "eventA": "Mariana terminó toda su tarea",
+    "eventB": "Mariana encendió la televisión",
     "firstEvent": "A",
     "explanation": "Terminar las tareas (\"had finished\") fue completado antes de encender la TV (\"turned on\")."
   },
@@ -3370,8 +3590,8 @@
     "type": "timeline-sorter",
     "prompt": "¿Cuál de las dos acciones ocurrió PRIMERO en la línea de tiempo?",
     "sentenceContext": "When we reached the cinema hall, the opening previews had already begun.",
-    "eventA": "Llegamos a la sala de cine (reached)",
-    "eventB": "Empezaron los tráileres de estreno (had begun)",
+    "eventA": "Llegamos a la sala de cine",
+    "eventB": "Empezaron los tráileres de estreno",
     "firstEvent": "B",
     "explanation": "Los avances ya habían comenzado (\"had begun\") antes de nuestro ingreso a la sala (\"reached\")."
   },
@@ -3381,8 +3601,8 @@
     "type": "timeline-sorter",
     "prompt": "¿Cuál de las dos acciones ocurrió PRIMERO en la línea de tiempo?",
     "sentenceContext": "Lucas had saved money for six months before he purchased his new bicycle.",
-    "eventA": "Lucas ahorró dinero durante seis meses (had saved)",
-    "eventB": "Lucas compró su bicicleta nueva (purchased)",
+    "eventA": "Lucas ahorró dinero durante seis meses",
+    "eventB": "Lucas compró su bicicleta nueva",
     "firstEvent": "A",
     "explanation": "El ahorro prolongado (\"had saved\") precedió temporalmente al momento de la compra (\"purchased\")."
   },
@@ -3392,8 +3612,8 @@
     "type": "timeline-sorter",
     "prompt": "¿Cuál de las dos acciones ocurrió PRIMERO en la línea de tiempo?",
     "sentenceContext": "The doctor explained the treatment after the nurse had checked the patient’s vital signs.",
-    "eventA": "El médico explicó el tratamiento (explained)",
-    "eventB": "La enfermera revisó los signos vitales (had checked)",
+    "eventA": "El médico explicó el tratamiento",
+    "eventB": "La enfermera revisó los signos vitales",
     "firstEvent": "B",
     "explanation": "La enfermera tomó los signos vitales primero (\"had checked\"), permitiendo luego la consulta médica."
   },
@@ -3403,8 +3623,8 @@
     "type": "timeline-sorter",
     "prompt": "¿Cuál de las dos acciones ocurrió PRIMERO en la línea de tiempo?",
     "sentenceContext": "I knew the city streets well because I had lived there five years ago.",
-    "eventA": "Conocía bien las calles de la ciudad (knew)",
-    "eventB": "Viví en esa ciudad años atrás (had lived)",
+    "eventA": "Conocía bien las calles de la ciudad",
+    "eventB": "Viví en esa ciudad años atrás",
     "firstEvent": "B",
     "explanation": "Haber vivido allí en el pasado remoto (\"had lived\") ocurrió primero y fundamenta el conocimiento posterior (\"knew\")."
   },
@@ -3414,8 +3634,8 @@
     "type": "timeline-sorter",
     "prompt": "¿Cuál de las dos acciones ocurrió PRIMERO en la línea de tiempo?",
     "sentenceContext": "Before the teacher collected the test sheets, Daniel had checked all his calculations.",
-    "eventA": "El profesor recogió las hojas de examen (collected)",
-    "eventB": "Daniel revisó todos sus cálculos matemáticos (had checked)",
+    "eventA": "El profesor recogió las hojas de examen",
+    "eventB": "Daniel revisó todos sus cálculos matemáticos",
     "firstEvent": "B",
     "explanation": "Daniel verificó sus cuentas primero (\"had checked\") antes de la recolección (\"collected\")."
   },
@@ -3425,8 +3645,8 @@
     "type": "timeline-sorter",
     "prompt": "¿Cuál de las dos acciones ocurrió PRIMERO en la línea de tiempo?",
     "sentenceContext": "She felt very confident during the interview because she had practiced her answers.",
-    "eventA": "Se sintió muy segura durante la entrevista (felt confident)",
-    "eventB": "Practicó sus respuestas minuciosamente (had practiced)",
+    "eventA": "Se sintió muy segura durante la entrevista",
+    "eventB": "Practicó sus respuestas minuciosamente",
     "firstEvent": "B",
     "explanation": "Practicar con anticipación (\"had practiced\") fue la causa anterior a sentirse segura en la entrevista."
   },
@@ -3436,8 +3656,8 @@
     "type": "timeline-sorter",
     "prompt": "¿Cuál de las dos acciones ocurrió PRIMERO en la línea de tiempo?",
     "sentenceContext": "When the police arrived at the warehouse, the burglars had escaped through the back.",
-    "eventA": "La policía llegó al almacén (arrived)",
-    "eventB": "Los ladrones escaparon por la puerta trasera (had escaped)",
+    "eventA": "La policía llegó al almacén",
+    "eventB": "Los ladrones escaparon por la puerta trasera",
     "firstEvent": "B",
     "explanation": "El escape (\"had escaped\") ocurrió antes del arribo policial (\"arrived\")."
   },
@@ -3447,8 +3667,8 @@
     "type": "timeline-sorter",
     "prompt": "¿Cuál de las dos acciones ocurrió PRIMERO en la línea de tiempo?",
     "sentenceContext": "Grandmother had baked delicious chocolate cookies before the grandchildren visited her.",
-    "eventA": "La abuela horneó las galletas de chocolate (had baked)",
-    "eventB": "Los nietos llegaron a visitarla (visited)",
+    "eventA": "La abuela horneó las galletas de chocolate",
+    "eventB": "Los nietos llegaron a visitarla",
     "firstEvent": "A",
     "explanation": "Hornear las galletas (\"had baked\") se completó antes de la visita de los nietos (\"visited\")."
   },
@@ -3458,8 +3678,8 @@
     "type": "timeline-sorter",
     "prompt": "¿Cuál de las dos acciones ocurrió PRIMERO en la línea de tiempo?",
     "sentenceContext": "We discovered that somebody had broken the classroom window during the night.",
-    "eventA": "Descubrimos la ventana rota por la mañana (discovered)",
-    "eventB": "Alguien rompió la ventana durante la noche (had broken)",
+    "eventA": "Descubrimos la ventana rota por la mañana",
+    "eventB": "Alguien rompió la ventana durante la noche",
     "firstEvent": "B",
     "explanation": "Romper la ventana ocurrió en la noche previa (\"had broken\"), antes de ser descubierta en la mañana (\"discovered\")."
   },
@@ -3469,8 +3689,8 @@
     "type": "binary-classify",
     "prompt": "Clasifica a qué tipo de condicional pertenece la siguiente oración:",
     "phrase": "If you boil water, it turns into steam.",
-    "categoryA": "Zero Conditional (Ley Universal)",
-    "categoryB": "First Conditional (Posibilidad Futura)",
+    "categoryA": "Zero Conditional",
+    "categoryB": "First Conditional",
     "correctCategory": "A",
     "explanation": "Es un hecho científico y universal constante, por lo que pertenece a Zero Conditional."
   },
@@ -3480,8 +3700,8 @@
     "type": "binary-classify",
     "prompt": "Clasifica a qué tipo de condicional pertenece la siguiente oración:",
     "phrase": "If it rains tomorrow, we will stay at home.",
-    "categoryA": "Zero Conditional (Ley Universal)",
-    "categoryB": "First Conditional (Posibilidad Futura)",
+    "categoryA": "Zero Conditional",
+    "categoryB": "First Conditional",
     "correctCategory": "B",
     "explanation": "Habla de una posibilidad específica en el futuro (\"tomorrow\") con resultado probable (\"will stay\")."
   },
@@ -3491,8 +3711,8 @@
     "type": "binary-classify",
     "prompt": "Clasifica a qué tipo de condicional pertenece la siguiente oración:",
     "phrase": "If you mix red and yellow paint, you get orange.",
-    "categoryA": "Zero Conditional (Ley Universal)",
-    "categoryB": "First Conditional (Posibilidad Futura)",
+    "categoryA": "Zero Conditional",
+    "categoryB": "First Conditional",
     "correctCategory": "A",
     "explanation": "Mezclar colores siempre produce el mismo resultado científico comprobado (Zero Conditional)."
   },
@@ -3502,8 +3722,8 @@
     "type": "binary-classify",
     "prompt": "Clasifica a qué tipo de condicional pertenece la siguiente oración:",
     "phrase": "If she passes the exam on Friday, she will celebrate with her friends.",
-    "categoryA": "Zero Conditional (Ley Universal)",
-    "categoryB": "First Conditional (Posibilidad Futura)",
+    "categoryA": "Zero Conditional",
+    "categoryB": "First Conditional",
     "correctCategory": "B",
     "explanation": "Es un evento futuro particular condicionado (First Conditional con \"will\")."
   },
@@ -3513,8 +3733,8 @@
     "type": "binary-classify",
     "prompt": "Clasifica a qué tipo de condicional pertenece la siguiente oración:",
     "phrase": "Plants die if they do not receive regular sunlight and water.",
-    "categoryA": "Zero Conditional (Ley Universal)",
-    "categoryB": "First Conditional (Posibilidad Futura)",
+    "categoryA": "Zero Conditional",
+    "categoryB": "First Conditional",
     "correctCategory": "A",
     "explanation": "Verdad biológica universal sin referencia a un evento futuro específico."
   },
@@ -3524,8 +3744,8 @@
     "type": "binary-classify",
     "prompt": "Clasifica el sentido temporal de la siguiente hipótesis:",
     "phrase": "If I were a millionaire today, I would buy a luxury sports car.",
-    "categoryA": "Second (Imaginaria en el Presente)",
-    "categoryB": "Third (Lamento Imposible en el Pasado)",
+    "categoryA": "Second",
+    "categoryB": "Third",
     "correctCategory": "A",
     "explanation": "Second Conditional: hipótesis irreal sobre el presente o futuro (If + past simple -> would + base)."
   },
@@ -3535,8 +3755,8 @@
     "type": "binary-classify",
     "prompt": "Clasifica el sentido temporal de la siguiente hipótesis:",
     "phrase": "If you had told me yesterday, I would have helped you with the luggage.",
-    "categoryA": "Second (Imaginaria en el Presente)",
-    "categoryB": "Third (Lamento Imposible en el Pasado)",
+    "categoryA": "Second",
+    "categoryB": "Third",
     "correctCategory": "B",
     "explanation": "Third Conditional: el evento ocurrió ayer (\"yesterday\"), ya no puede cambiarse (had told -> would have helped)."
   },
@@ -3546,8 +3766,8 @@
     "type": "binary-classify",
     "prompt": "Clasifica el sentido temporal de la siguiente hipótesis:",
     "phrase": "If humans had wings, we would fly across the mountain peaks.",
-    "categoryA": "Second (Imaginaria en el Presente)",
-    "categoryB": "Third (Lamento Imposible en el Pasado)",
+    "categoryA": "Second",
+    "categoryB": "Third",
     "correctCategory": "A",
     "explanation": "Fantasía hipotética general en el presente/atemporal (Second Conditional)."
   },
@@ -3557,8 +3777,8 @@
     "type": "binary-classify",
     "prompt": "Clasifica el sentido temporal de la siguiente hipótesis:",
     "phrase": "If she had woken up on time this morning, she would not have missed the flight.",
-    "categoryA": "Second (Imaginaria en el Presente)",
-    "categoryB": "Third (Lamento Imposible en el Pasado)",
+    "categoryA": "Second",
+    "categoryB": "Third",
     "correctCategory": "B",
     "explanation": "Se refiere a un hecho consumado esta mañana (\"this morning\"): el vuelo ya se perdió (Third Conditional)."
   },
@@ -3568,8 +3788,8 @@
     "type": "binary-classify",
     "prompt": "Clasifica el sentido temporal de la siguiente hipótesis:",
     "phrase": "If I knew his telephone number right now, I would call him immediately.",
-    "categoryA": "Second (Imaginaria en el Presente)",
-    "categoryB": "Third (Lamento Imposible en el Pasado)",
+    "categoryA": "Second",
+    "categoryB": "Third",
     "correctCategory": "A",
     "explanation": "Condición irreal en el momento presente (\"right now\"): no sé su número, por eso es Second Conditional."
   }

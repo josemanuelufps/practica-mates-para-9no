@@ -26,6 +26,36 @@ const FEEDBACK_DELAY_SECONDS = 5; // 5 seconds review
 // In-memory module cache so the 200 questions are only fetched once per browser session
 let cachedQuizPool: TimedQuestion[] | null = null;
 
+// True Fisher-Yates uniform shuffle algorithm
+function fisherYatesShuffle<T>(arr: T[]): T[] {
+  const result = [...arr];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
+// Guarantee sentence tokens are strictly non-trivial and never in solved sequence on mount
+function shuffleSentenceTokens(
+  tokens: { id: string; text: string }[],
+  correctSequence: string[]
+): { id: string; text: string }[] {
+  let shuffled = fisherYatesShuffle(tokens);
+  let attempts = 0;
+  while (
+    attempts < 10 &&
+    shuffled.map((t) => t.id).join(',') === correctSequence.join(',')
+  ) {
+    shuffled = fisherYatesShuffle(tokens);
+    attempts++;
+  }
+  if (shuffled.length > 1 && shuffled.map((t) => t.id).join(',') === correctSequence.join(',')) {
+    [shuffled[0], shuffled[1]] = [shuffled[1], shuffled[0]];
+  }
+  return shuffled;
+}
+
 export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding }) => {
   // Game states: 'intro' | 'active' | 'feedback' | 'summary'
   const [gameState, setGameState] = useState<'intro' | 'active' | 'feedback' | 'summary'>('intro');
@@ -97,7 +127,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
   // Shuffle and pick 10 random questions from loaded pool
   const startNewQuiz = () => {
     if (quizPool.length === 0) return;
-    const shuffled = [...quizPool].sort(() => 0.5 - Math.random());
+    const shuffled = fisherYatesShuffle(quizPool);
     const selectedTen = shuffled.slice(0, TOTAL_QUESTIONS_PER_ROUND);
 
     setActiveDeck(selectedTen);
@@ -122,10 +152,12 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
     if (currentQuestion.type === 'match-pairs') {
       const leftItems = currentQuestion.pairs.map((p) => ({ id: p.id, text: p.left }));
       const rightItems = currentQuestion.pairs.map((p) => ({ id: p.id, text: p.right }));
-      setShuffledLeft([...leftItems].sort(() => 0.5 - Math.random()));
-      setShuffledRight([...rightItems].sort(() => 0.5 - Math.random()));
+      setShuffledLeft(fisherYatesShuffle(leftItems));
+      setShuffledRight(fisherYatesShuffle(rightItems));
     } else if (currentQuestion.type === 'sentence-builder') {
-      setBuilderAvailable([...currentQuestion.tokens].sort(() => 0.5 - Math.random()));
+      setBuilderAvailable(
+        shuffleSentenceTokens(currentQuestion.tokens, currentQuestion.correctSequence)
+      );
       setBuilderPlaced([]);
     }
   }, [currentIndex, currentQuestion]);
