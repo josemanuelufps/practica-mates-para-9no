@@ -585,7 +585,9 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
                         setTimePerQuestion(preset.time);
                         setQuestionsCount(preset.count);
                       }}
-                      className={`p-3 rounded-xl border text-left transition-all active:scale-98 ${
+                      aria-pressed={isActive}
+                      aria-label={`Modo ${preset.label}: ${preset.desc}`}
+                      className={`p-3 rounded-xl border text-left transition-all active:scale-98 focus-visible:ring-2 focus-visible:ring-crimson-500 focus-visible:outline-hidden ${
                         isActive
                           ? 'border-crimson-500 bg-crimson-50 dark:bg-crimson-950/60 ring-2 ring-crimson-400/50 shadow-xs'
                           : 'border-slate-300 dark:border-navy-700 bg-white dark:bg-navy-900 hover:border-crimson-300'
@@ -622,7 +624,9 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
                       key={sec}
                       type="button"
                       onClick={() => setTimePerQuestion(sec)}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all min-h-[36px] ${
+                      aria-pressed={timePerQuestion === sec}
+                      aria-label={`${sec} segundos por pregunta`}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all min-h-[36px] focus-visible:ring-2 focus-visible:ring-crimson-500 focus-visible:outline-hidden ${
                         timePerQuestion === sec
                           ? 'bg-crimson-600 text-white shadow-2xs'
                           : 'border border-slate-300 dark:border-navy-700 bg-white dark:bg-navy-900 text-slate-700 dark:text-slate-300 hover:border-crimson-400'
@@ -651,7 +655,9 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
                       key={num}
                       type="button"
                       onClick={() => setQuestionsCount(num)}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all min-h-[36px] ${
+                      aria-pressed={questionsCount === num}
+                      aria-label={`${num} preguntas en la ronda`}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all min-h-[36px] focus-visible:ring-2 focus-visible:ring-crimson-500 focus-visible:outline-hidden ${
                         questionsCount === num
                           ? 'bg-crimson-600 text-white shadow-2xs'
                           : 'border border-slate-300 dark:border-navy-700 bg-white dark:bg-navy-900 text-slate-700 dark:text-slate-300 hover:border-crimson-400'
@@ -882,26 +888,44 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
       <div className="border border-slate-200 dark:border-navy-700 rounded-2xl p-5 bg-white dark:bg-navy-800 shadow-subtle dark:shadow-subtle-dark">
         <div className="flex items-center justify-between gap-3 mb-3">
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-navy-50 dark:bg-navy-900 text-navy-600 dark:text-slate-300 border border-slate-200 dark:border-navy-700">
+            <span
+              className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-navy-50 dark:bg-navy-900 text-navy-600 dark:text-slate-300 border border-slate-200 dark:border-navy-700"
+              aria-label={`Pregunta número ${currentIndex + 1} de un total de ${activeDeck.length || questionsCount}`}
+            >
               Pregunta {currentIndex + 1} de {activeDeck.length || questionsCount}
             </span>
           </div>
 
           {/* Dynamic Countdown badge */}
           <div
-            className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold transition-colors ${
+            role="timer"
+            aria-live="off"
+            aria-label={`Tiempo restante: ${timeRemaining} segundos`}
+            className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono tabular-nums font-bold transition-colors ${
               isTimeCritical
                 ? 'bg-crimson-600 text-white animate-pulse'
                 : 'bg-ice-200 dark:bg-navy-900 text-navy-600 dark:text-ice-300 border border-slate-200 dark:border-navy-700'
             }`}
           >
-            <Timer className="w-3.5 h-3.5" />
+            <Timer className="w-3.5 h-3.5" aria-hidden="true" />
             <span>{timeRemaining}s</span>
+          </div>
+
+          {/* Critical countdown announcement for screen readers */}
+          <div className="sr-only" role="status" aria-live="assertive" aria-atomic="true">
+            {isTimeCritical && timeRemaining > 0 && `Atención: quedan ${timeRemaining} segundos`}
           </div>
         </div>
 
         {/* Linear progress bar */}
-        <div className="w-full bg-ice-200 dark:bg-navy-900 h-2 rounded-full overflow-hidden">
+        <div
+          role="progressbar"
+          aria-valuenow={Math.round((timeRemaining / timePerQuestion) * 100)}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-label="Tiempo restante de la diapositiva actual"
+          className="w-full bg-ice-200 dark:bg-navy-900 h-2 rounded-full overflow-hidden"
+        >
           <div
             className={`h-full transition-all duration-1000 ease-linear ${
               isTimeCritical ? 'bg-crimson-600' : 'bg-navy-600 dark:bg-crimson-500'
@@ -949,14 +973,16 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
                       key={optIdx}
                       disabled={isFeedbackState}
                       onClick={() => handleAnswerSubmitted(opt)}
-                      className={`min-h-[50px] px-4 py-3 rounded-xl border text-left text-sm font-medium transition-all shadow-2xs active:scale-98 flex items-center justify-between ${btnStyle}`}
+                      aria-pressed={isOptionSelected}
+                      aria-label={`${opt}${isFeedbackState && isCorrectOption ? ' (Respuesta correcta)' : ''}${isFeedbackState && isOptionSelected && !lastAnswerWasCorrect ? ' (Tu respuesta, incorrecta)' : ''}`}
+                      className={`min-h-[50px] px-4 py-3 rounded-xl border text-left text-sm font-medium transition-all shadow-2xs active:scale-98 flex items-center justify-between focus-visible:ring-2 focus-visible:ring-crimson-500 focus-visible:outline-hidden ${btnStyle}`}
                     >
                       <span>{opt}</span>
                       {isFeedbackState && isCorrectOption && (
-                        <CheckCircle2 className="w-4 h-4 text-success-600 dark:text-success-400 shrink-0" />
+                        <CheckCircle2 className="w-4 h-4 text-success-600 dark:text-success-400 shrink-0" aria-hidden="true" />
                       )}
                       {isFeedbackState && isOptionSelected && !lastAnswerWasCorrect && (
-                        <XCircle className="w-4 h-4 text-crimson-600 dark:text-crimson-400 shrink-0" />
+                        <XCircle className="w-4 h-4 text-crimson-600 dark:text-crimson-400 shrink-0" aria-hidden="true" />
                       )}
                     </button>
                   );
@@ -998,7 +1024,9 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
                       key={cat.key}
                       disabled={isFeedbackState}
                       onClick={() => handleAnswerSubmitted(cat.key)}
-                      className={`min-h-[64px] px-5 py-4 rounded-xl border text-center font-bold text-sm sm:text-base transition-all shadow-xs active:scale-98 flex items-center justify-center gap-2 ${btnStyle}`}
+                      aria-pressed={isSelected}
+                      aria-label={`Clasificar como ${cat.label}`}
+                      className={`min-h-[64px] px-5 py-4 rounded-xl border text-center font-bold text-sm sm:text-base transition-all shadow-xs active:scale-98 flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-crimson-500 focus-visible:outline-hidden ${btnStyle}`}
                     >
                       <span>{cat.label}</span>
                     </button>
@@ -1013,7 +1041,11 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
             <div className="space-y-5">
               <div className="p-4 rounded-xl border border-slate-200 dark:border-navy-700 bg-ice-100/50 dark:bg-navy-900/40 text-base sm:text-lg text-slate-800 dark:text-ice-300 flex flex-wrap items-center gap-2 leading-relaxed font-medium">
                 <span>{currentQuestion.sentenceBefore}</span>
-                <span className="font-mono px-3 py-1 rounded-lg border-2 border-dashed border-crimson-400 bg-crimson-50/40 dark:bg-crimson-950/40 text-crimson-700 dark:text-crimson-300 font-bold">
+                <span
+                  role="status"
+                  aria-label="Espacio para completar"
+                  className="font-mono px-3 py-1 rounded-lg border-2 border-dashed border-crimson-400 bg-crimson-50/40 dark:bg-crimson-950/40 text-crimson-700 dark:text-crimson-300 font-bold"
+                >
                   {selectedAnswer ? (selectedAnswer === '__TIMEOUT__' ? '[Tiempo]' : selectedAnswer) : '[ ? ]'}
                 </span>
                 <span>{currentQuestion.sentenceAfter}</span>
@@ -1042,7 +1074,9 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
                       key={opt}
                       disabled={isFeedbackState}
                       onClick={() => handleAnswerSubmitted(opt)}
-                      className={`min-h-[48px] px-5 py-2.5 rounded-xl border font-bold text-sm transition-all shadow-xs active:scale-95 ${btnStyle}`}
+                      aria-pressed={isSelected}
+                      aria-label={`Opción: ${opt}`}
+                      className={`min-h-[48px] px-5 py-2.5 rounded-xl border font-bold text-sm transition-all shadow-xs active:scale-95 focus-visible:ring-2 focus-visible:ring-crimson-500 focus-visible:outline-hidden ${btnStyle}`}
                     >
                       {opt}
                     </button>
@@ -1085,7 +1119,9 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
                       key={item.val}
                       disabled={isFeedbackState}
                       onClick={() => handleAnswerSubmitted(item.val)}
-                      className={`min-h-[58px] px-5 py-3 rounded-xl border text-center font-bold text-sm sm:text-base transition-all shadow-xs active:scale-98 ${btnStyle}`}
+                      aria-pressed={isSelected}
+                      aria-label={item.label}
+                      className={`min-h-[58px] px-5 py-3 rounded-xl border text-center font-bold text-sm sm:text-base transition-all shadow-xs active:scale-98 focus-visible:ring-2 focus-visible:ring-crimson-500 focus-visible:outline-hidden ${btnStyle}`}
                     >
                       {item.label}
                     </button>
@@ -1100,15 +1136,19 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
             <div className="space-y-4">
               <div className="flex items-center justify-between text-xs font-medium text-slate-500 dark:text-slate-400 pb-1">
                 <span>Conecta cada cláusula izquierda con su resultado derecho:</span>
-                <span className="font-mono font-bold text-crimson-600 dark:text-crimson-400">
+                <span
+                  role="status"
+                  aria-live="polite"
+                  className="font-mono font-bold text-crimson-600 dark:text-crimson-400"
+                >
                   {matchedPairs.length} / {currentQuestion.pairs.length} parejas
                 </span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Left Column */}
-                <div className="space-y-2.5">
-                  <div className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 px-1">
+                <div className="space-y-2.5" role="group" aria-label="Condición o antecedente">
+                  <div className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 px-1">
                     Condición / Antecedente
                   </div>
                   {shuffledLeft.map((item) => {
@@ -1132,11 +1172,14 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
                         key={item.id}
                         disabled={isMatched || isFeedbackState}
                         onClick={() => handleSelectLeft(item.id)}
-                        className={`w-full min-h-[54px] p-3 rounded-xl border text-left text-xs sm:text-sm transition-all shadow-2xs active:scale-98 flex items-center justify-between gap-2 ${cardStyle}`}
+                        aria-pressed={isSelected}
+                        aria-disabled={isMatched}
+                        aria-label={`${item.text}${isMatched ? ' (Emparejado correctamente)' : isSelected ? ' (Seleccionado)' : ''}`}
+                        className={`w-full min-h-[54px] p-3 rounded-xl border text-left text-xs sm:text-sm transition-all shadow-2xs active:scale-98 flex items-center justify-between gap-2 focus-visible:ring-2 focus-visible:ring-crimson-500 focus-visible:outline-hidden ${cardStyle}`}
                       >
                         <span>{item.text}</span>
                         {isMatched && (
-                          <CheckCircle2 className="w-4 h-4 text-success-600 dark:text-success-400 shrink-0" />
+                          <CheckCircle2 className="w-4 h-4 text-success-600 dark:text-success-400 shrink-0" aria-hidden="true" />
                         )}
                       </button>
                     );
@@ -1144,8 +1187,8 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
                 </div>
 
                 {/* Right Column */}
-                <div className="space-y-2.5">
-                  <div className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 px-1">
+                <div className="space-y-2.5" role="group" aria-label="Resultado o consecuencia">
+                  <div className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 px-1">
                     Resultado / Consecuencia
                   </div>
                   {shuffledRight.map((item) => {
@@ -1169,11 +1212,14 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
                         key={item.id}
                         disabled={isMatched || isFeedbackState}
                         onClick={() => handleSelectRight(item.id)}
-                        className={`w-full min-h-[54px] p-3 rounded-xl border text-left text-xs sm:text-sm transition-all shadow-2xs active:scale-98 flex items-center justify-between gap-2 ${cardStyle}`}
+                        aria-pressed={isSelected}
+                        aria-disabled={isMatched}
+                        aria-label={`${item.text}${isMatched ? ' (Emparejado correctamente)' : isSelected ? ' (Seleccionado)' : ''}`}
+                        className={`w-full min-h-[54px] p-3 rounded-xl border text-left text-xs sm:text-sm transition-all shadow-2xs active:scale-98 flex items-center justify-between gap-2 focus-visible:ring-2 focus-visible:ring-crimson-500 focus-visible:outline-hidden ${cardStyle}`}
                       >
                         <span>{item.text}</span>
                         {isMatched && (
-                          <CheckCircle2 className="w-4 h-4 text-success-600 dark:text-success-400 shrink-0" />
+                          <CheckCircle2 className="w-4 h-4 text-success-600 dark:text-success-400 shrink-0" aria-hidden="true" />
                         )}
                       </button>
                     );
@@ -1187,7 +1233,12 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
           {currentQuestion.type === 'sentence-builder' && (
             <div className="space-y-5">
               {/* Dropzone container */}
-              <div className="p-4 sm:p-5 rounded-xl border-2 border-dashed border-slate-300 dark:border-navy-600 bg-ice-100/40 dark:bg-navy-900/40 min-h-[90px] flex flex-wrap items-center gap-2">
+              <div
+                role="region"
+                aria-label="Oración en construcción"
+                aria-live="polite"
+                className="p-4 sm:p-5 rounded-xl border-2 border-dashed border-slate-300 dark:border-navy-600 bg-ice-100/40 dark:bg-navy-900/40 min-h-[90px] flex flex-wrap items-center gap-2"
+              >
                 {builderPlaced.length === 0 ? (
                   <span className="text-xs sm:text-sm text-slate-400 dark:text-slate-500 italic">
                     Toca los bloques de abajo en orden sintáctico para construir la oración...
@@ -1198,19 +1249,20 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
                       key={token.id}
                       disabled={isFeedbackState}
                       onClick={() => handleReturnToken(token)}
-                      className="px-3.5 py-2 rounded-lg bg-navy-600 hover:bg-navy-700 text-white dark:bg-ice-200 dark:text-navy-900 dark:hover:bg-ice-300 font-semibold text-xs sm:text-sm shadow-xs transition-all active:scale-95 flex items-center gap-1.5"
+                      aria-label={`Quitar palabra "${token.text}" de la oración`}
+                      className="px-3.5 py-2 rounded-lg bg-navy-600 hover:bg-navy-700 text-white dark:bg-ice-200 dark:text-navy-900 dark:hover:bg-ice-300 font-semibold text-xs sm:text-sm shadow-xs transition-all active:scale-95 flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-crimson-500 focus-visible:outline-hidden"
                       title="Toca para devolver al banco de palabras"
                     >
                       <span>{token.text}</span>
-                      <span className="text-xs opacity-60">✕</span>
+                      <span className="text-xs opacity-60" aria-hidden="true">✕</span>
                     </button>
                   ))
                 )}
               </div>
 
               {/* Token bank */}
-              <div className="space-y-2 pt-1">
-                <div className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+              <div className="space-y-2 pt-1" role="group" aria-label="Banco de palabras disponibles">
+                <div className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                   Bloques disponibles:
                 </div>
                 <div className="flex flex-wrap gap-2.5">
@@ -1219,7 +1271,8 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
                       key={token.id}
                       disabled={isFeedbackState}
                       onClick={() => handlePlaceToken(token)}
-                      className="min-h-[44px] px-4 py-2.5 rounded-xl border border-slate-300 dark:border-navy-600 bg-white dark:bg-navy-900 text-slate-800 dark:text-ice-300 font-medium text-xs sm:text-sm hover:border-crimson-500 hover:bg-crimson-50/20 active:scale-95 transition-all shadow-xs"
+                      aria-label={`Colocar palabra "${token.text}"`}
+                      className="min-h-[44px] px-4 py-2.5 rounded-xl border border-slate-300 dark:border-navy-600 bg-white dark:bg-navy-900 text-slate-800 dark:text-ice-300 font-medium text-xs sm:text-sm hover:border-crimson-500 hover:bg-crimson-50/20 active:scale-95 transition-all shadow-xs focus-visible:ring-2 focus-visible:ring-crimson-500 focus-visible:outline-hidden"
                     >
                       {token.text}
                     </button>
@@ -1234,10 +1287,10 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
             <div className="space-y-5">
               {/* Segmented sentence banner */}
               <div className="p-5 rounded-xl border border-slate-200 dark:border-navy-700 bg-ice-100/50 dark:bg-navy-900/40">
-                <div className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
+                <div className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">
                   Toca el fragmento que contenga un error:
                 </div>
-                <div className="flex flex-wrap gap-2.5">
+                <div className="flex flex-wrap gap-2.5" role="group" aria-label="Fragmentos de la oración">
                   {currentQuestion.segments.map((segment) => {
                     const isSelected = selectedAnswer === segment.text;
                     const isThisTheError = segment.isError;
@@ -1262,11 +1315,13 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
                         key={segment.id}
                         disabled={isFeedbackState}
                         onClick={() => handleSelectBugSegment(segment.id)}
-                        className={`min-h-[46px] px-4 py-2 rounded-xl border font-semibold text-sm sm:text-base transition-all shadow-xs active:scale-95 flex items-center gap-2 ${segStyle}`}
+                        aria-pressed={isSelected}
+                        aria-label={`Fragmento: "${segment.text}"${isFeedbackState && isThisTheError ? ' (Fragmento con error)' : ''}`}
+                        className={`min-h-[46px] px-4 py-2 rounded-xl border font-semibold text-sm sm:text-base transition-all shadow-xs active:scale-95 flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-crimson-500 focus-visible:outline-hidden ${segStyle}`}
                       >
                         <span>{segment.text}</span>
                         {isFeedbackState && isThisTheError && (
-                          <CheckCircle2 className="w-4 h-4 text-success-600 dark:text-success-400 shrink-0" />
+                          <CheckCircle2 className="w-4 h-4 text-success-600 dark:text-success-400 shrink-0" aria-hidden="true" />
                         )}
                       </button>
                     );
@@ -1299,7 +1354,9 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
                     <button
                       disabled={isFeedbackState}
                       onClick={handleSelectBugNoError}
-                      className={`w-full min-h-[48px] px-5 py-3 rounded-xl border font-bold text-xs sm:text-sm transition-all shadow-xs active:scale-98 flex items-center justify-center gap-2 ${btnStyle}`}
+                      aria-pressed={isSelected}
+                      aria-label="La oración es correcta (Sin error gramatical)"
+                      className={`w-full min-h-[48px] px-5 py-3 rounded-xl border font-bold text-xs sm:text-sm transition-all shadow-xs active:scale-98 flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-crimson-500 focus-visible:outline-hidden ${btnStyle}`}
                     >
                       <span>✓ La oración es correcta (Sin error gramatical)</span>
                     </button>
@@ -1346,15 +1403,17 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
                       key={evt.choice}
                       disabled={isFeedbackState}
                       onClick={() => handleSelectTimelineEvent(evt.choice)}
-                      className={`min-h-[72px] p-4 rounded-xl border text-left transition-all shadow-xs active:scale-98 flex flex-col justify-between gap-2 ${cardStyle}`}
+                      aria-pressed={isSelected}
+                      aria-label={`${evt.label}: ${evt.text}${isFeedbackState && isCorrect ? ' (Ocurrió primero en la línea temporal)' : ''}`}
+                      className={`min-h-[72px] p-4 rounded-xl border text-left transition-all shadow-xs active:scale-98 flex flex-col justify-between gap-2 focus-visible:ring-2 focus-visible:ring-crimson-500 focus-visible:outline-hidden ${cardStyle}`}
                     >
                       <div className="flex items-center justify-between w-full">
-                        <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                        <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                           {evt.label}
                         </span>
                         {isFeedbackState && isCorrect && (
                           <span className="text-xs font-bold text-success-600 dark:text-success-400 inline-flex items-center gap-1">
-                            <CheckCircle2 className="w-3.5 h-3.5" /> Ocurrió Primero
+                            <CheckCircle2 className="w-3.5 h-3.5" aria-hidden="true" /> Ocurrió Primero
                           </span>
                         )}
                       </div>
@@ -1371,7 +1430,12 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
 
         {/* FEEDBACK BANNER (During 5 seconds) */}
         {isFeedbackState && (
-          <div className="mt-6 pt-4 border-t border-slate-200 dark:border-navy-700 space-y-3 animate-slide-fade">
+          <div
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+            className="mt-6 pt-4 border-t border-slate-200 dark:border-navy-700 space-y-3 animate-slide-fade"
+          >
             <div
               className={`p-4 rounded-xl border flex items-start gap-3 ${
                 lastAnswerWasCorrect
@@ -1380,9 +1444,9 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
               }`}
             >
               {lastAnswerWasCorrect ? (
-                <CheckCircle2 className="w-5 h-5 text-success-600 dark:text-success-400 shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-5 h-5 text-success-600 dark:text-success-400 shrink-0 mt-0.5" aria-hidden="true" />
               ) : (
-                <XCircle className="w-5 h-5 text-crimson-600 dark:text-crimson-400 shrink-0 mt-0.5" />
+                <XCircle className="w-5 h-5 text-crimson-600 dark:text-crimson-400 shrink-0 mt-0.5" aria-hidden="true" />
               )}
               <div className="space-y-1 text-xs sm:text-sm">
                 <p className="font-bold">
@@ -1398,13 +1462,14 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
 
             {/* Auto-advance progress + manual Skip button */}
             <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 pt-1">
-              <span>Siguiente slide en {feedbackCountdown}s...</span>
+              <span aria-live="off">Siguiente slide en {feedbackCountdown}s...</span>
               <button
                 onClick={advanceToNextSlide}
-                className="font-semibold text-crimson-600 dark:text-crimson-400 hover:underline flex items-center gap-1 min-h-[36px] px-2"
+                aria-label="Avanzar de inmediato a la siguiente slide"
+                className="font-semibold text-crimson-600 dark:text-crimson-400 hover:underline flex items-center gap-1 min-h-[36px] px-2 focus-visible:ring-2 focus-visible:ring-crimson-500 focus-visible:outline-hidden"
               >
                 <span>Continuar ahora</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
               </button>
             </div>
           </div>
