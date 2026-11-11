@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import { topicGroups } from '../data/topics';
-import { BookOpen, ChevronDown, ChevronRight, CheckCircle2 } from 'lucide-react';
+import { BookOpen, ChevronDown, ChevronRight, CheckCircle2, ChevronUp } from 'lucide-react';
 import { KatexMath } from './KatexMath';
 
 export const TopicList: React.FC = () => {
   const [selectedSubject, setSelectedSubject] = useState<'all' | 'ingles' | 'algebra' | 'geoestadistica'>('all');
   const [openCategories, setOpenCategories] = useState<Record<string, boolean>>({
     'Sesión 1 (Hoy - 10 Noviembre)': true,
-    'Sistemas Numéricos y Radicales': true,
-    'Estadística y Probabilidad': true,
-    'Cuerpos Redondos (Geometría del Espacio)': true,
   });
 
   const toggleCategory = (catName: string) => {
@@ -19,35 +16,66 @@ export const TopicList: React.FC = () => {
     }));
   };
 
+  const handleExpandAll = () => {
+    const allOpen: Record<string, boolean> = {};
+    topicGroups.forEach((g) => g.topics.forEach((t) => { allOpen[t.category] = true; }));
+    setOpenCategories(allOpen);
+  };
+
+  const handleCollapseAll = () => {
+    setOpenCategories({});
+  };
+
   const filteredGroups = selectedSubject === 'all'
     ? topicGroups
     : topicGroups.filter((g) => g.id === selectedSubject);
 
   return (
     <div className="space-y-6">
-      {/* Subject filter tabs */}
-      <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 dark:border-navy-700 pb-3">
-        <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mr-2">
-          Filtrar Temario:
-        </span>
-        {[
-          { id: 'all', label: 'Todos los Temarios' },
-          { id: 'ingles', label: 'Inglés' },
-          { id: 'algebra', label: 'Álgebra' },
-          { id: 'geoestadistica', label: 'Geoestadística & Cuerpos Redondos' },
-        ].map((tab) => (
+      {/* Subject filter & density controls */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-navy-700 pb-3">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mr-1">
+            Filtrar:
+          </span>
+          {[
+            { id: 'all', label: 'Todos los Temarios' },
+            { id: 'ingles', label: 'Inglés' },
+            { id: 'algebra', label: 'Álgebra' },
+            { id: 'geoestadistica', label: 'Geoestadística' },
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setSelectedSubject(tab.id as any)}
+              className={`min-h-[36px] px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
+                selectedSubject === tab.id
+                  ? 'bg-navy-600 text-white dark:bg-crimson-600 dark:text-white shadow-xs'
+                  : 'bg-ice-200 hover:bg-ice-400 text-slate-700 dark:bg-navy-800 dark:hover:bg-navy-700 dark:text-slate-300'
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Global accordion controls */}
+        <div className="flex items-center gap-2 text-xs">
           <button
-            key={tab.id}
-            onClick={() => setSelectedSubject(tab.id as any)}
-            className={`min-h-[36px] px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
-              selectedSubject === tab.id
-                ? 'bg-navy-600 text-white dark:bg-crimson-600 dark:text-white shadow-xs'
-                : 'bg-ice-200 hover:bg-ice-400 text-slate-700 dark:bg-navy-800 dark:hover:bg-navy-700 dark:text-slate-300'
-            }`}
+            onClick={handleExpandAll}
+            className="text-slate-600 dark:text-slate-400 hover:text-navy-600 dark:hover:text-ice-300 font-medium px-2 py-1 rounded hover:bg-ice-200 dark:hover:bg-navy-800 transition-colors flex items-center gap-1"
           >
-            {tab.label}
+            <ChevronDown className="w-3.5 h-3.5" />
+            <span>Expandir todo</span>
           </button>
-        ))}
+          <span className="text-slate-300 dark:text-navy-700">•</span>
+          <button
+            onClick={handleCollapseAll}
+            className="text-slate-600 dark:text-slate-400 hover:text-navy-600 dark:hover:text-ice-300 font-medium px-2 py-1 rounded hover:bg-ice-200 dark:hover:bg-navy-800 transition-colors flex items-center gap-1"
+          >
+            <ChevronUp className="w-3.5 h-3.5" />
+            <span>Colapsar todo</span>
+          </button>
+        </div>
       </div>
 
       {/* Cards for each subject */}
@@ -71,7 +99,7 @@ export const TopicList: React.FC = () => {
                   </p>
                 </div>
               </div>
-              <span className="self-start sm:self-auto text-[11px] font-medium px-2.5 py-1 rounded-full bg-navy-50 dark:bg-navy-900 text-navy-600 dark:text-slate-300 border border-slate-200 dark:border-navy-700">
+              <span className="self-start sm:self-auto text-[11px] font-semibold px-2.5 py-1 rounded-full bg-navy-50 dark:bg-navy-900 text-navy-600 dark:text-slate-300 border border-slate-200 dark:border-navy-700">
                 {group.badge}
               </span>
             </div>
@@ -79,16 +107,20 @@ export const TopicList: React.FC = () => {
             {/* Sub-categories */}
             <div className="space-y-3">
               {group.topics.map((cat) => {
-                const isOpen = openCategories[cat.category] ?? true;
+                const isOpen = !!openCategories[cat.category];
                 return (
                   <div
                     key={cat.category}
-                    className="border border-slate-200 dark:border-navy-700 rounded-lg overflow-hidden bg-ice-100/60 dark:bg-navy-900/40"
+                    className="border border-slate-200 dark:border-navy-700 rounded-lg overflow-hidden bg-ice-100/50 dark:bg-navy-900/40"
                   >
                     <button
                       onClick={() => toggleCategory(cat.category)}
                       aria-expanded={isOpen}
-                      className="w-full px-4 py-2.5 flex items-center justify-between text-left hover:bg-ice-200/60 dark:hover:bg-navy-800/60 transition-colors"
+                      className={`w-full px-4 py-2.5 flex items-center justify-between text-left transition-colors ${
+                        isOpen
+                          ? 'bg-ice-200/70 dark:bg-navy-800/80'
+                          : 'hover:bg-ice-200/50 dark:hover:bg-navy-800/50'
+                      }`}
                     >
                       <span className="font-semibold text-xs sm:text-sm text-navy-600 dark:text-ice-300">
                         {cat.category}
@@ -106,7 +138,7 @@ export const TopicList: React.FC = () => {
                     </button>
 
                     {isOpen && (
-                      <div className="px-4 py-3 border-t border-slate-200 dark:border-navy-700 bg-white/70 dark:bg-navy-800/60 space-y-2">
+                      <div className="px-4 py-3 border-t border-slate-200 dark:border-navy-700 bg-white/70 dark:bg-navy-800/60 space-y-2 animate-slide-fade">
                         <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
                           {cat.items.map((item, i) => (
                             <li

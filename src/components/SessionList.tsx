@@ -99,7 +99,13 @@ export const SessionList: React.FC<SessionListProps> = ({ onSelectSession }) => 
                       : 'bg-ice-200 hover:bg-ice-400 text-navy-600 dark:bg-navy-700 dark:hover:bg-navy-600 dark:text-ice-300 border border-slate-200 dark:border-navy-600'
                   }`}
                 >
-                  <span>{isActive ? 'Entrar a la Práctica de Hoy' : 'Ver Temas y Ejercicios'}</span>
+                  <span>
+                    {isActive
+                      ? 'Entrar a la Práctica de Hoy'
+                      : isUpcoming
+                      ? 'Abrir Práctica (Sesión 2)'
+                      : 'Ver Temario de Sesión 3'}
+                  </span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
