@@ -60,3 +60,27 @@ export interface DragSlotExercise {
   correctAnswers: Record<string, string>;
   explanation: string;
 }
+
+// Timed / Speed Quiz Types (Prepared for Quices Contrarreloj feature)
+export interface TimedQuestion {
+  id: string;
+  subject: SubjectId;
+  topicCategory: string;
+  question: string;
+  options: string[];
+  correctIndex: number;
+  timeLimitSeconds: number; // e.g. 15, 20 or 30 seconds
+  explanation: string;
+  points: number;
+}
+
+export interface TimedQuizSessionState {
+  currentQuestionIndex: number;
+  score: number;
+  streak: number;
+  maxStreak: number;
+  timeRemainingSeconds: number;
+  isCompleted: boolean;
+  userAnswers: Record<string, number>;
+}
+

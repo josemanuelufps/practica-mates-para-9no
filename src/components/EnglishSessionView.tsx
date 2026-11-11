@@ -71,11 +71,13 @@ export const EnglishSessionView: React.FC<EnglishSessionViewProps> = ({
           </p>
         </div>
 
-        {/* Navigation sub-tabs with generous touch area */}
-        <div className="flex flex-wrap items-center gap-2 mt-6 pt-5 border-t border-slate-200 dark:border-navy-700">
+        {/* Navigation sub-tabs with generous touch area and full tablist ARIA */}
+        <div role="tablist" aria-label="Subsecciones de la sesión de inglés" className="flex flex-wrap items-center gap-2 mt-6 pt-5 border-t border-slate-200 dark:border-navy-700">
           <button
+            role="tab"
+            aria-selected={activeSubTab === 'past-perfect'}
             onClick={() => setActiveSubTab('past-perfect')}
-            className={`min-h-[44px] px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
+            className={`min-h-[44px] px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-crimson-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-navy-950 ${
               activeSubTab === 'past-perfect'
                 ? 'bg-crimson-600 text-white dark:bg-crimson-500 dark:text-white shadow-xs'
                 : 'bg-ice-200 hover:bg-ice-400 text-slate-700 dark:bg-navy-900 dark:hover:bg-navy-700 dark:text-slate-300'
@@ -86,8 +88,10 @@ export const EnglishSessionView: React.FC<EnglishSessionViewProps> = ({
           </button>
 
           <button
+            role="tab"
+            aria-selected={activeSubTab === 'conditionals'}
             onClick={() => setActiveSubTab('conditionals')}
-            className={`min-h-[44px] px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
+            className={`min-h-[44px] px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-crimson-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-navy-950 ${
               activeSubTab === 'conditionals'
                 ? 'bg-crimson-600 text-white dark:bg-crimson-500 dark:text-white shadow-xs'
                 : 'bg-ice-200 hover:bg-ice-400 text-slate-700 dark:bg-navy-900 dark:hover:bg-navy-700 dark:text-slate-300'
@@ -98,8 +102,10 @@ export const EnglishSessionView: React.FC<EnglishSessionViewProps> = ({
           </button>
 
           <button
+            role="tab"
+            aria-selected={activeSubTab === 'drag-drop'}
             onClick={() => setActiveSubTab('drag-drop')}
-            className={`min-h-[44px] px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
+            className={`min-h-[44px] px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-crimson-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-navy-950 ${
               activeSubTab === 'drag-drop'
                 ? 'bg-crimson-600 text-white dark:bg-crimson-500 dark:text-white shadow-xs'
                 : 'bg-ice-200 hover:bg-ice-400 text-slate-700 dark:bg-navy-900 dark:hover:bg-navy-700 dark:text-slate-300'
@@ -110,8 +116,10 @@ export const EnglishSessionView: React.FC<EnglishSessionViewProps> = ({
           </button>
 
           <button
+            role="tab"
+            aria-selected={activeSubTab === 'second-third'}
             onClick={() => setActiveSubTab('second-third')}
-            className={`min-h-[44px] px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
+            className={`min-h-[44px] px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-crimson-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-navy-950 ${
               activeSubTab === 'second-third'
                 ? 'bg-crimson-600 text-white dark:bg-crimson-500 dark:text-white shadow-xs'
                 : 'bg-ice-200 hover:bg-ice-400 text-slate-700 dark:bg-navy-900 dark:hover:bg-navy-700 dark:text-slate-300'

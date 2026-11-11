@@ -35,6 +35,7 @@ A diferencia de guías estáticas en PDF o plataformas complejas con registro ob
   * Ejercicios de rellenar espacios (Fill in the blanks) con normalización de respuestas.
   * Banco de palabras interactivo con doble modalidad: Drag & Drop nativo y Click-to-slot accesible para pantallas táctiles.
   * Quizzes de selección múltiple con feedback de color instantáneo, solución correcta y justificación concisa.
+  * Modo de Quices Contrarreloj (desafío con límite de tiempo por pregunta para afianzar agilidad mental y velocidad de respuesta).
   * Soporte de fórmulas matemáticas con KaTeX (cilindro, cono, esfera, funciones y sistemas de ecuaciones).
   * Selector persistente de Modo Claro / Modo Oscuro.
 * **Restricciones:**
