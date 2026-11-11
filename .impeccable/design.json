@@ -1,0 +1,248 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-10T21:03:30Z",
+  "title": "Design System: Apoyo Académico 9°",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Slate Navy",
+        "canonical": "#2B2D42",
+        "tonalRamp": [
+          "#0E0F17",
+          "#151622",
+          "#1C1D2C",
+          "#232537",
+          "#2B2D42",
+          "#3D415C",
+          "#646B84",
+          "#9DA2B3",
+          "#C7CAD4",
+          "#E4E6EB",
+          "#F4F5F7"
+        ]
+      },
+      "accent": {
+        "role": "accent",
+        "displayName": "Imperial Crimson",
+        "canonical": "#EF233C",
+        "tonalRamp": [
+          "#3D000B",
+          "#660213",
+          "#8C021A",
+          "#B50322",
+          "#D90429",
+          "#EF233C",
+          "#EF5E6F",
+          "#F49DA7",
+          "#F9CCD2",
+          "#FCE4E7",
+          "#FDF2F4"
+        ]
+      },
+      "slate": {
+        "role": "neutral",
+        "displayName": "Cool Slate Grey",
+        "canonical": "#8D99AE",
+        "tonalRamp": [
+          "#20242B",
+          "#363C47",
+          "#4F5868",
+          "#6C778B",
+          "#8D99AE",
+          "#A4AFBF",
+          "#C5CDD7",
+          "#E2E6EA",
+          "#F0F2F5",
+          "#F8F9FA"
+        ]
+      },
+      "neutral-bg": {
+        "role": "neutral",
+        "displayName": "Ice Canvas",
+        "canonical": "#EDF2F4",
+        "tonalRamp": [
+          "#CFD7DB",
+          "#DFE5E8",
+          "#EDF2F4",
+          "#F4F7F8",
+          "#FBFDFD",
+          "#FFFFFF"
+        ]
+      },
+      "success": {
+        "role": "feedback",
+        "displayName": "Success Emerald",
+        "canonical": "#16A34A",
+        "tonalRamp": [
+          "#052E16",
+          "#14532D",
+          "#166534",
+          "#15803D",
+          "#16A34A",
+          "#22C55E",
+          "#BBF7D0",
+          "#DCFCE7",
+          "#F0FDF4"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display (Jakarta 800)",
+        "purpose": "Hero headline y títulos principales de sesión con text-wrap: balance."
+      },
+      "headline": {
+        "displayName": "Headline (Jakarta 700)",
+        "purpose": "Títulos de tarjetas, secciones y modales."
+      },
+      "title": {
+        "displayName": "Title (Jakarta 600)",
+        "purpose": "Enunciados de preguntas y encabezados de ejercicios."
+      },
+      "body": {
+        "displayName": "Body (Jakarta 400/500)",
+        "purpose": "Párrafos de lectura y explicaciones pedagógicas limitadas a 45-75ch."
+      },
+      "label": {
+        "displayName": "Label / Mono (JetBrains 600)",
+        "purpose": "Cronómetros, números tabulares, KaTeX y estructuras gramaticales."
+      }
+    },
+    "shadows": [
+      {
+        "name": "subtle",
+        "value": "0 2px 8px -1px rgba(43, 45, 66, 0.06), 0 1px 3px -1px rgba(43, 45, 66, 0.03)",
+        "purpose": "Elevación base de tarjetas en modo claro."
+      },
+      {
+        "name": "subtle-dark",
+        "value": "0 2px 10px -1px rgba(0, 0, 0, 0.45), 0 1px 4px -1px rgba(0, 0, 0, 0.3)",
+        "purpose": "Elevación base de tarjetas en modo oscuro sobre lienzo carbón."
+      }
+    ],
+    "motion": [
+      {
+        "name": "snap-in",
+        "value": "180ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Encaje elástico de fichas de palabras en slots receptores."
+      },
+      {
+        "name": "slide-fade",
+        "value": "200ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Transición entre diapositivas y cambios de vista."
+      },
+      {
+        "name": "pop-in",
+        "value": "220ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Aparición de badges, resultados y botones al completarse una ronda."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Crimson Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Botón principal de acción y comienzo de sesiones (área de toque >= 44px).",
+      "html": "<button class=\"ds-btn-primary\"><svg class=\"ds-btn-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polygon points=\"13 2 3 14 12 14 11 22 21 10 12 10 13 2\"></polygon></svg><span>Empezar Quiz Contrarreloj</span></button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 20px; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 14px; font-weight: 700; color: #ffffff; background-color: #EF233C; border: none; border-radius: 12px; box-shadow: 0 1px 2px rgba(43,45,66,0.1); cursor: pointer; transition: all 150ms ease; } .ds-btn-primary:hover { background-color: #D90429; } .ds-btn-primary:active { transform: scale(0.98); } .ds-btn-icon { width: 16px; height: 16px; }"
+    },
+    {
+      "name": "Secondary Navy Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Botón estructurado para acciones secundarias o módulos temáticos.",
+      "html": "<button class=\"ds-btn-secondary\"><span>Abrir Módulo de Inglés</span><svg class=\"ds-btn-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"></line><polyline points=\"12 5 19 12 12 19\"></polyline></svg></button>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 18px; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 14px; font-weight: 600; color: #ffffff; background-color: #2B2D42; border: none; border-radius: 12px; cursor: pointer; transition: all 150ms ease; } .ds-btn-secondary:hover { background-color: #1C1D2C; } .ds-btn-secondary:active { transform: scale(0.98); } .ds-btn-icon { width: 14px; height: 14px; }"
+    },
+    {
+      "name": "Word Bank Tactile Chip",
+      "kind": "chip",
+      "refersTo": "chip-word",
+      "description": "Ficha de palabra del banco interactivo con soporte drag-and-drop y tap.",
+      "html": "<button class=\"ds-chip-word\"><span class=\"ds-chip-text\">had studied</span></button>",
+      "css": ".ds-chip-word { display: inline-flex; align-items: center; min-height: 40px; padding: 8px 16px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; font-weight: 600; color: #2B2D42; background-color: #ffffff; border: 1px solid #C5CDD7; border-radius: 10px; box-shadow: 0 1px 3px rgba(43,45,66,0.06); cursor: pointer; transition: all 150ms ease; } .ds-chip-word:hover { border-color: #EF233C; transform: translateY(-1px); } .ds-chip-word:active { transform: scale(0.96); }"
+    },
+    {
+      "name": "Tactile Word Slot",
+      "kind": "custom",
+      "refersTo": "slot-receptor",
+      "description": "Espacio contenedor para encajar palabras con snap-in elástico.",
+      "html": "<div class=\"ds-slot-receptor\"><span class=\"ds-slot-content\">[ had studied ]</span></div>",
+      "css": ".ds-slot-receptor { display: inline-flex; align-items: center; justify-content: center; min-height: 38px; min-width: 110px; padding: 4px 12px; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; color: #B50322; background-color: rgba(253, 242, 244, 0.7); border: 2px dashed #EF5E6F; border-radius: 8px; animation: ds-snap 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards; } @keyframes ds-snap { 0% { transform: scale(0.94); } 60% { transform: scale(1.03); } 100% { transform: scale(1); } }"
+    },
+    {
+      "name": "Timer Numeric Badge",
+      "kind": "chip",
+      "refersTo": "badge-timer",
+      "description": "Pastilla de cuenta regresiva en quices contrarreloj con números tabulares.",
+      "html": "<div class=\"ds-badge-timer\"><svg class=\"ds-timer-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"></circle><polyline points=\"12 6 12 12 16 14\"></polyline></svg><span>18s</span></div>",
+      "css": ".ds-badge-timer { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; color: #2B2D42; background-color: #EDF2F4; border: 1px solid #DFE5E8; border-radius: 9999px; } .ds-timer-icon { width: 14px; height: 14px; color: #EF233C; }"
+    },
+    {
+      "name": "Binary Classify Box",
+      "kind": "card",
+      "refersTo": "card-classify",
+      "description": "Caja interactiva de clasificación binaria (Zero vs First, etc.) en quices.",
+      "html": "<button class=\"ds-classify-box\"><span class=\"ds-classify-title\">Zero Conditional</span><span class=\"ds-classify-desc\">Hecho general o científico</span></button>",
+      "css": ".ds-classify-box { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 64px; width: 100%; padding: 12px 16px; font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; border: 1px solid #DFE5E8; border-radius: 12px; cursor: pointer; transition: all 150ms ease; } .ds-classify-box:hover { border-color: #EF233C; background-color: #FDF2F4; } .ds-classify-box:active { transform: scale(0.98); } .ds-classify-title { font-size: 14px; font-weight: 700; color: #2B2D42; } .ds-classify-desc { font-size: 11px; color: #6C778B; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Editorial Study Sanctuary",
+    "overview": "Inspirado en la tipografía editorial contemporánea, la sobriedad académica de alto rendimiento y los cuadernos de trabajo universitario. Sustituye las paletas infantiles o genéricas por un entorno visual de serenidad, alta legibilidad y contraste nítido, diseñado para sesiones de estudio concentrado donde el estudiante razona con claridad sin fatiga visual. El sistema se estructura sobre la tensión armónica entre el azul pizarra profundo (#2B2D42), el blanco hielo sin deslumbramiento (#EDF2F4) y un acento carmesí imperial vivo (#EF233C / #D90429).",
+    "keyCharacteristics": [
+      "Contraste AAA Garantizado: Relaciones de contraste superiores a 11.4:1 en modo claro y 14.2:1 en modo oscuro.",
+      "Rigor Tipográfico Dual: Plus Jakarta Sans para prosa humanista y JetBrains Mono con números tabulares para estructuras gramaticales y KaTeX.",
+      "Micro-interacción Táctil: Snap-in elástico en slots de palabras, respuesta háptica visual (active:scale-98) y temporizador pulsante.",
+      "Cero Fricción Cognitiva: Longitud de línea restringida (45-75ch), títulos balanceados sin viudas y explicaciones didácticas integradas."
+    ],
+    "rules": [
+      {
+        "name": "The 10% Accent Rule",
+        "body": "El carmesí (#EF233C) se reserva estrictamente para el elemento de mayor valor en la pantalla (la sesión activa, el botón de continuar, el tiempo crítico o el botón de acción principal). Jamás se utiliza como fondo masivo de página o bloques decorativos grandes.",
+        "section": "colors"
+      },
+      {
+        "name": "The Pure Black Ban",
+        "body": "Nunca se utiliza negro puro (#000000) para fondos ni tipografía. En modo oscuro, el fondo es carbón pizarra (#0E0F17), conservando los reflejos fríos de la paleta.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tabular Numerics Rule",
+        "body": "Todo número que represente conteo, tiempo, fecha o puntuación debe renderizarse con números tabulares (font-variant-numeric: tabular-nums) para evitar oscilaciones de ancho en animaciones de cronómetro y badges.",
+        "section": "typography"
+      },
+      {
+        "name": "The Dark Mode Leading Compensation Rule",
+        "body": "En modo oscuro el interlineado del texto general aumenta a 1.65 y el espaciado entre letras se relaja a -0.004em para contrarrestar la irradiación óptica del texto luminoso sobre fondo carbón.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-By-Default Rule",
+        "body": "Las superficies descansan completamente planas. Las sombras son micro-bordes atmosféricos que separan la tarjeta del lienzo; la jerarquía se establece por contraste tonal y bordes de 1px, jamás por sombras difusas pesadas.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do mantener el área de interacción táctil en >= 44px para todos los botones, fichas y opciones de quiz en móvil.",
+      "Do aplicar text-wrap: balance en encabezados y text-wrap: pretty en explicaciones didácticas.",
+      "Do emplear números tabulares (tabular-nums) en cronómetros, contadores y fórmulas KaTeX.",
+      "Do reservar el carmesí (#EF233C) para llamadas a la acción primarias y estados de urgencia/atención.",
+      "Do incluir retroalimentación pedagógica inmediata con su justificación en español tras cada respuesta."
+    ],
+    "donts": [
+      "Don't utilizar negro puro (#000000) ni blanco puro (#FFFFFF) plano como fondos generales de la aplicación.",
+      "Don't mostrar la categoría o tema pedagógico interno durante las diapositivas de quices contrarreloj (evitar spoilers).",
+      "Don't permitir que las líneas de texto superen los 75ch de longitud en explicaciones teóricas.",
+      "Don't usar sombras proyectadas pesadas, resplandores de neón ni gradientes estridentes sobre texto.",
+      "Don't bloquear el avance del estudiante: el temporizador de retroalimentación de 5s siempre debe tener un botón para continuar de inmediato."
+    ]
+  }
+}
