@@ -57,13 +57,25 @@ Inspirado en la tipografía editorial moderna, publicaciones académicas contemp
 
 ## Typography & Hierarchy
 
-* **Primary Typeface:** `Plus Jakarta Sans` (claridad geométrica óptima para estudio).
-* **Code / Grammar & Data Typeface:** `JetBrains Mono` (para estructuras `had + V3`, fórmulas y variables).
-* **Text Wrapping:** `text-wrap: balance` en encabezados y `text-wrap: pretty` en explicaciones.
+* **Primary Typeface:** `Plus Jakarta Sans` (claridad geométrica humanista para máxima concentración de lectura).
+* **Code / Grammar & Data Typeface:** `JetBrains Mono` (para estructuras `had + V3`, marcadores temporales, conectores y fórmulas KaTeX).
+* **OpenType Features Activas:** `cv02`, `cv03`, `cv04`, `cv11`, `tnum` (números tabulares) y `zero` (cero barrado en mono).
+* **Line Height & Leading:**
+  * Cuerpo de texto en modo claro: `line-height: 1.6`.
+  * Compensación en modo oscuro: `line-height: 1.65` (evita empaste tipográfico).
+* **Tracking & Espaciado entre caracteres:**
+  * Modo claro: `-0.011em` para ritmo compacto y nítido.
+  * Compensación en modo oscuro: `-0.004em` (apertura calculada para neutralizar la irradiación óptica de luz clara sobre fondo oscuro).
+* **Line Wrapping & Balance:**
+  * `text-wrap: balance` aplicado en todos los encabezados (H1–H4) para eliminar líneas viudas y palabras huérfanas.
+  * `text-wrap: pretty` en todos los párrafos pedagógicos y explicaciones de quizzes para garantizar un salto armónico de líneas.
 * **Escala y Pesos:**
-  * H1: 2rem / 32px (sm: 2.25rem / 36px), peso 800 (extrabold).
-  * H2: 1.25rem / 20px (sm: 1.5rem / 24px), peso 700 (bold).
-  * H3: 1rem / 16px (sm: 1.125rem / 18px), peso 600 (semibold).
+  * **H1:** 2rem / 32px (sm: 2.25rem / 36px), peso 800 (extrabold), tracking `-0.03em`, line-height `1.15`.
+  * **H2:** 1.25rem / 20px (sm: 1.5rem / 24px), peso 700 (bold), tracking `-0.025em`, line-height `1.25`.
+  * **H3:** 1rem / 16px (sm: 1.125rem / 18px), peso 600 (semibold), tracking `-0.018em`, line-height `1.35`.
+  * **Body:** 0.875rem / 14px (sm: 1rem / 16px), peso 400 (regular) y 500 (medium).
+  * **Mono / Badges:** 0.75rem / 12px (text-[11px] / text-xs), peso 600 (semibold), tabular-nums.
+* **Medida de Lectura (Measure):** Longitud de línea confinada estrictamente a `45–75ch` (`max-w-prose`) para prevenir el cansancio visual durante el repaso de inglés y álgebra.
 
 ---
 

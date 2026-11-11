@@ -64,7 +64,7 @@ export const EnglishSessionView: React.FC<EnglishSessionViewProps> = ({
               ? 'Módulo de Inglés - Sesión 1: Past Perfect & Zero/First Conditional'
               : 'Módulo de Inglés - Sesión 2: Second & Third Conditional'}
           </h1>
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-2 leading-relaxed max-w-prose">
             {sessionDay === 1
               ? 'Aprende a ubicar acciones anteriores en el pasado con el Past Perfect y domina las relaciones lógicas de causa-efecto con el Zero y First Conditional mediante explicaciones breves y ejercicios interactivos.'
               : 'Domina las situaciones hipotéticas del presente (Second Conditional) y los pasados imposibles o arrepentimientos (Third Conditional).'}

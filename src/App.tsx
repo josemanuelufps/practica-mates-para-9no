@@ -66,7 +66,7 @@ export function App() {
                   Repaso y Acompañamiento Académico
                 </h1>
 
-                <p className="mt-3 text-sm sm:text-base text-slate-700 dark:text-slate-400 leading-relaxed">
+                <p className="mt-3 text-sm sm:text-base text-slate-700 dark:text-slate-400 leading-relaxed max-w-prose">
                   Espacio de práctica interactiva diseñado para afianzar los conceptos fundamentales de{' '}
                   <strong className="text-navy-600 dark:text-ice-300 font-semibold">
                     Álgebra, Geoestadística e Inglés
