@@ -1,5 +1,5 @@
 import React from 'react';
-import { Moon, Sun, BookOpen, Calendar, Sparkles, Zap } from 'lucide-react';
+import { Moon, Sun, BookOpen, Sparkles, Zap } from 'lucide-react';
 
 interface NavbarProps {
   darkMode: boolean;
@@ -21,11 +21,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const handleNavSession1 = () => {
     setActiveTab('sesion-1');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleNavSession2 = () => {
-    setActiveTab('sesion-2');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -97,21 +92,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             <Zap className="w-3.5 h-3.5 text-crimson-500 dark:text-crimson-400" />
             <span className="font-semibold hidden sm:inline">Contrarreloj</span>
             <span className="font-semibold sm:hidden">Quiz</span>
-            <span className="text-xs uppercase font-bold px-1.5 py-0.5 bg-crimson-100 dark:bg-crimson-900/60 text-crimson-700 dark:text-crimson-200 rounded">
-              20s
-            </span>
-          </button>
-
-          <button
-            onClick={handleNavSession2}
-            className={`hidden md:flex min-h-[38px] px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-colors items-center gap-1.5 ${
-              activeTab === 'sesion-2'
-                ? 'bg-navy-600 text-white dark:bg-navy-700 dark:text-ice-300 shadow-xs'
-                : 'text-slate-600 hover:text-navy-600 dark:text-slate-400 dark:hover:text-ice-300 hover:bg-ice-200 dark:hover:bg-navy-800'
-            }`}
-          >
-            <Calendar className="w-3.5 h-3.5" />
-            <span>Sesión 2</span>
           </button>
 
           <div className="h-4 w-px bg-slate-300 dark:bg-navy-700 mx-0.5 sm:mx-1" />

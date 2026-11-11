@@ -106,10 +106,7 @@ export function App() {
                       className="min-h-[44px] px-5 py-2.5 rounded-xl bg-navy-600 hover:bg-navy-700 text-white dark:bg-navy-700 dark:hover:bg-navy-600 dark:text-ice-300 font-semibold text-xs sm:text-sm flex items-center justify-center sm:justify-start gap-2 shadow-xs transition-all active:scale-98 w-full sm:w-auto"
                     >
                       <Zap className="w-4 h-4 text-crimson-400 shrink-0" />
-                      <span>Quices Contrarreloj (20s)</span>
-                      <span className="text-xs uppercase font-bold px-1.5 py-0.5 bg-crimson-600 text-white rounded shrink-0">
-                        Nuevo
-                      </span>
+                      <span>Quices Contrarreloj</span>
                     </button>
 
                     <button
