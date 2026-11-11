@@ -37,6 +37,19 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
   const [lastAnswerWasCorrect, setLastAnswerWasCorrect] = useState<boolean>(false);
   const [results, setResults] = useState<TimedQuizAttemptResult[]>([]);
 
+  // Minigame specific states (reset per question mount)
+  // 1. Match Pairs
+  const [shuffledLeft, setShuffledLeft] = useState<{ id: string; text: string }[]>([]);
+  const [shuffledRight, setShuffledRight] = useState<{ id: string; text: string }[]>([]);
+  const [selectedLeft, setSelectedLeft] = useState<string | null>(null);
+  const [selectedRight, setSelectedRight] = useState<string | null>(null);
+  const [matchedPairs, setMatchedPairs] = useState<string[]>([]);
+  const [mismatchError, setMismatchError] = useState<boolean>(false);
+
+  // 2. Sentence Builder
+  const [builderAvailable, setBuilderAvailable] = useState<{ id: string; text: string }[]>([]);
+  const [builderPlaced, setBuilderPlaced] = useState<{ id: string; text: string }[]>([]);
+
   // Timers refs
   const slideTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const feedbackTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -55,6 +68,26 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
   };
 
   const currentQuestion = activeDeck[currentIndex];
+
+  // Reset minigame states when new question mounts
+  useEffect(() => {
+    if (!currentQuestion) return;
+
+    setSelectedLeft(null);
+    setSelectedRight(null);
+    setMatchedPairs([]);
+    setMismatchError(false);
+
+    if (currentQuestion.type === 'match-pairs') {
+      const leftItems = currentQuestion.pairs.map((p) => ({ id: p.id, text: p.left }));
+      const rightItems = currentQuestion.pairs.map((p) => ({ id: p.id, text: p.right }));
+      setShuffledLeft([...leftItems].sort(() => 0.5 - Math.random()));
+      setShuffledRight([...rightItems].sort(() => 0.5 - Math.random()));
+    } else if (currentQuestion.type === 'sentence-builder') {
+      setBuilderAvailable([...currentQuestion.tokens].sort(() => 0.5 - Math.random()));
+      setBuilderPlaced([]);
+    }
+  }, [currentIndex, currentQuestion]);
 
   // Clean all timers
   const clearAllTimers = () => {
@@ -89,8 +122,12 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
     };
   }, [gameState, currentIndex]);
 
-  // Answer handler
-  const handleAnswerSubmitted = (answer: string) => {
+  // Unified answer handler supporting all minigame types
+  const handleAnswerSubmitted = (
+    answer: string,
+    explicitIsCorrect?: boolean,
+    explicitCorrectAnswerStr?: string
+  ) => {
     if (gameState !== 'active' || !currentQuestion) return;
 
     clearAllTimers();
@@ -98,7 +135,10 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
     let isCorrect = false;
     let correctAnswerStr = '';
 
-    if (currentQuestion.type === 'multiple-choice') {
+    if (explicitIsCorrect !== undefined) {
+      isCorrect = explicitIsCorrect;
+      correctAnswerStr = explicitCorrectAnswerStr || answer;
+    } else if (currentQuestion.type === 'multiple-choice') {
       correctAnswerStr = currentQuestion.options[currentQuestion.correctIndex];
       isCorrect = answer === correctAnswerStr;
     } else if (currentQuestion.type === 'binary-classify') {
@@ -113,6 +153,9 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
     } else if (currentQuestion.type === 'correct-incorrect') {
       correctAnswerStr = currentQuestion.isCorrect ? 'Correcto' : 'Incorrecto';
       isCorrect = (answer === 'true') === currentQuestion.isCorrect;
+    } else if (currentQuestion.type === 'timeline-sorter') {
+      correctAnswerStr = currentQuestion.firstEvent === 'A' ? currentQuestion.eventA : currentQuestion.eventB;
+      isCorrect = answer === currentQuestion.firstEvent;
     }
 
     const timeSpent = TIME_LIMIT_PER_SLIDE - timeRemaining;
@@ -145,6 +188,139 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
         return prev - 1;
       });
     }, 1000);
+  };
+
+  // Match Pairs handlers
+  const handleSelectLeft = (id: string) => {
+    if (gameState !== 'active' || matchedPairs.includes(id) || mismatchError) return;
+
+    if (selectedLeft === id) {
+      setSelectedLeft(null);
+      return;
+    }
+
+    setSelectedLeft(id);
+
+    if (selectedRight) {
+      if (id === selectedRight) {
+        const newMatched = [...matchedPairs, id];
+        setMatchedPairs(newMatched);
+        setSelectedLeft(null);
+        setSelectedRight(null);
+
+        if (currentQuestion && currentQuestion.type === 'match-pairs' && newMatched.length === currentQuestion.pairs.length) {
+          handleAnswerSubmitted('3 de 3 parejas conectadas', true, 'Todas las parejas conectadas correctamente');
+        }
+      } else {
+        setMismatchError(true);
+        setTimeout(() => {
+          setSelectedLeft(null);
+          setSelectedRight(null);
+          setMismatchError(false);
+        }, 500);
+      }
+    }
+  };
+
+  const handleSelectRight = (id: string) => {
+    if (gameState !== 'active' || matchedPairs.includes(id) || mismatchError) return;
+
+    if (selectedRight === id) {
+      setSelectedRight(null);
+      return;
+    }
+
+    setSelectedRight(id);
+
+    if (selectedLeft) {
+      if (selectedLeft === id) {
+        const newMatched = [...matchedPairs, id];
+        setMatchedPairs(newMatched);
+        setSelectedLeft(null);
+        setSelectedRight(null);
+
+        if (currentQuestion && currentQuestion.type === 'match-pairs' && newMatched.length === currentQuestion.pairs.length) {
+          handleAnswerSubmitted('3 de 3 parejas conectadas', true, 'Todas las parejas conectadas correctamente');
+        }
+      } else {
+        setMismatchError(true);
+        setTimeout(() => {
+          setSelectedLeft(null);
+          setSelectedRight(null);
+          setMismatchError(false);
+        }, 500);
+      }
+    }
+  };
+
+  // Sentence Builder handlers
+  const handlePlaceToken = (token: { id: string; text: string }) => {
+    if (gameState !== 'active' || currentQuestion?.type !== 'sentence-builder') return;
+
+    const newAvailable = builderAvailable.filter((t) => t.id !== token.id);
+    const newPlaced = [...builderPlaced, token];
+
+    setBuilderAvailable(newAvailable);
+    setBuilderPlaced(newPlaced);
+
+    if (newPlaced.length === currentQuestion.tokens.length) {
+      const isCorrect = newPlaced.map((t) => t.id).join(',') === currentQuestion.correctSequence.join(',');
+      const fullPlacedSentence = newPlaced.map((t) => t.text).join(' ');
+      handleAnswerSubmitted(fullPlacedSentence, isCorrect, currentQuestion.fullSentence);
+    }
+  };
+
+  const handleReturnToken = (token: { id: string; text: string }) => {
+    if (gameState !== 'active') return;
+
+    const newPlaced = builderPlaced.filter((t) => t.id !== token.id);
+    const newAvailable = [...builderAvailable, token];
+
+    setBuilderPlaced(newPlaced);
+    setBuilderAvailable(newAvailable);
+  };
+
+  // Bug Hunter handlers
+  const handleSelectBugSegment = (segmentId: string) => {
+    if (gameState !== 'active' || currentQuestion?.type !== 'bug-hunter') return;
+
+    const segment = currentQuestion.segments.find((s) => s.id === segmentId);
+    if (!segment) return;
+
+    const isCorrect = segment.isError;
+    const errorSegment = currentQuestion.segments.find((s) => s.isError);
+    const correctStr = currentQuestion.hasNoError
+      ? 'Sin error gramatical'
+      : errorSegment
+      ? `Error en "${errorSegment.text}" → Corregido: ${errorSegment.correction || errorSegment.text}`
+      : 'Error identificado';
+
+    handleAnswerSubmitted(segment.text, isCorrect, correctStr);
+  };
+
+  const handleSelectBugNoError = () => {
+    if (gameState !== 'active' || currentQuestion?.type !== 'bug-hunter') return;
+
+    const isCorrect = currentQuestion.hasNoError;
+    const errorSegment = currentQuestion.segments.find((s) => s.isError);
+    const correctStr = currentQuestion.hasNoError
+      ? 'Sin error gramatical'
+      : errorSegment
+      ? `Error en "${errorSegment.text}" → Corregido: ${errorSegment.correction || errorSegment.text}`
+      : 'Tiene un error gramatical';
+
+    handleAnswerSubmitted('Sin error gramatical', isCorrect, correctStr);
+  };
+
+  // Timeline Sorter handler
+  const handleSelectTimelineEvent = (choice: 'A' | 'B') => {
+    if (gameState !== 'active' || currentQuestion?.type !== 'timeline-sorter') return;
+
+    const isCorrect = choice === currentQuestion.firstEvent;
+    const userChoiceText = choice === 'A' ? currentQuestion.eventA : currentQuestion.eventB;
+    const correctChoiceText = currentQuestion.firstEvent === 'A' ? currentQuestion.eventA : currentQuestion.eventB;
+
+    handleAnswerSubmitted(userChoiceText, isCorrect, `Ocurrió 1º: ${correctChoiceText}`);
   };
 
   const advanceToNextSlide = () => {
@@ -208,7 +384,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
 
           <p className="mt-3 text-sm text-slate-700 dark:text-slate-400 leading-relaxed max-w-prose">
             Pon a prueba tu agilidad mental y dominio de los temas de inglés: Past Perfect, Zero, First, Second y Third Conditional.
-            Cada ronda toma 10 preguntas aleatorias de nuestro banco de 100 ejercicios.
+            Cada ronda toma 10 preguntas aleatorias de nuestro banco de 200 ejercicios con 8 mecánicas dinámicas (Opción múltiple, Clasificación rápida, Match Pairs, Sentence Builder, Bug Hunter, Timeline Sorter y más).
           </p>
 
           {/* Rules overview */}
@@ -225,7 +401,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
               <Sparkles className="w-4 h-4 text-crimson-600 dark:text-crimson-400 mb-1.5" />
               <div className="font-bold text-sm text-navy-600 dark:text-ice-300">10 Preguntas</div>
               <div className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
-                Seleccionadas al azar del pool de 100 slides.
+                Seleccionadas al azar del pool de 200 slides.
               </div>
             </div>
 
@@ -660,6 +836,279 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
                       className={`min-h-[58px] px-5 py-3 rounded-xl border text-center font-bold text-sm sm:text-base transition-all shadow-xs active:scale-98 ${btnStyle}`}
                     >
                       {item.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* TYPE 5: MATCH PAIRS */}
+          {currentQuestion.type === 'match-pairs' && (
+            <div className="space-y-4">
+              <div className="flex items-center justify-between text-xs font-medium text-slate-500 dark:text-slate-400 pb-1">
+                <span>Conecta cada cláusula izquierda con su resultado derecho:</span>
+                <span className="font-mono font-bold text-crimson-600 dark:text-crimson-400">
+                  {matchedPairs.length} / {currentQuestion.pairs.length} parejas
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Left Column */}
+                <div className="space-y-2.5">
+                  <div className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 px-1">
+                    Condición / Antecedente
+                  </div>
+                  {shuffledLeft.map((item) => {
+                    const isMatched = matchedPairs.includes(item.id);
+                    const isSelected = selectedLeft === item.id;
+
+                    let cardStyle =
+                      'border-slate-300 dark:border-navy-600 bg-white dark:bg-navy-900 text-slate-800 dark:text-ice-300 hover:border-crimson-400';
+
+                    if (isMatched) {
+                      cardStyle =
+                        'border-success-500 bg-success-50 dark:bg-success-950/60 text-success-900 dark:text-success-100 font-bold opacity-90';
+                    } else if (isSelected) {
+                      cardStyle = mismatchError
+                        ? 'border-crimson-500 bg-crimson-100 dark:bg-crimson-950/80 text-crimson-900 dark:text-crimson-100 ring-2 ring-crimson-500'
+                        : 'border-crimson-500 bg-crimson-50 dark:bg-crimson-950/50 text-crimson-900 dark:text-crimson-200 ring-2 ring-crimson-400 font-semibold';
+                    }
+
+                    return (
+                      <button
+                        key={item.id}
+                        disabled={isMatched || isFeedbackState}
+                        onClick={() => handleSelectLeft(item.id)}
+                        className={`w-full min-h-[54px] p-3 rounded-xl border text-left text-xs sm:text-sm transition-all shadow-2xs active:scale-98 flex items-center justify-between gap-2 ${cardStyle}`}
+                      >
+                        <span>{item.text}</span>
+                        {isMatched && (
+                          <CheckCircle2 className="w-4 h-4 text-success-600 dark:text-success-400 shrink-0" />
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Right Column */}
+                <div className="space-y-2.5">
+                  <div className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 px-1">
+                    Resultado / Consecuencia
+                  </div>
+                  {shuffledRight.map((item) => {
+                    const isMatched = matchedPairs.includes(item.id);
+                    const isSelected = selectedRight === item.id;
+
+                    let cardStyle =
+                      'border-slate-300 dark:border-navy-600 bg-white dark:bg-navy-900 text-slate-800 dark:text-ice-300 hover:border-crimson-400';
+
+                    if (isMatched) {
+                      cardStyle =
+                        'border-success-500 bg-success-50 dark:bg-success-950/60 text-success-900 dark:text-success-100 font-bold opacity-90';
+                    } else if (isSelected) {
+                      cardStyle = mismatchError
+                        ? 'border-crimson-500 bg-crimson-100 dark:bg-crimson-950/80 text-crimson-900 dark:text-crimson-100 ring-2 ring-crimson-500'
+                        : 'border-crimson-500 bg-crimson-50 dark:bg-crimson-950/50 text-crimson-900 dark:text-crimson-200 ring-2 ring-crimson-400 font-semibold';
+                    }
+
+                    return (
+                      <button
+                        key={item.id}
+                        disabled={isMatched || isFeedbackState}
+                        onClick={() => handleSelectRight(item.id)}
+                        className={`w-full min-h-[54px] p-3 rounded-xl border text-left text-xs sm:text-sm transition-all shadow-2xs active:scale-98 flex items-center justify-between gap-2 ${cardStyle}`}
+                      >
+                        <span>{item.text}</span>
+                        {isMatched && (
+                          <CheckCircle2 className="w-4 h-4 text-success-600 dark:text-success-400 shrink-0" />
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TYPE 6: SENTENCE BUILDER */}
+          {currentQuestion.type === 'sentence-builder' && (
+            <div className="space-y-5">
+              {/* Dropzone container */}
+              <div className="p-4 sm:p-5 rounded-xl border-2 border-dashed border-slate-300 dark:border-navy-600 bg-ice-100/40 dark:bg-navy-900/40 min-h-[90px] flex flex-wrap items-center gap-2">
+                {builderPlaced.length === 0 ? (
+                  <span className="text-xs sm:text-sm text-slate-400 dark:text-slate-500 italic">
+                    Toca los bloques de abajo en orden sintáctico para construir la oración...
+                  </span>
+                ) : (
+                  builderPlaced.map((token) => (
+                    <button
+                      key={token.id}
+                      disabled={isFeedbackState}
+                      onClick={() => handleReturnToken(token)}
+                      className="px-3.5 py-2 rounded-lg bg-navy-600 hover:bg-navy-700 text-white dark:bg-ice-200 dark:text-navy-900 dark:hover:bg-ice-300 font-semibold text-xs sm:text-sm shadow-xs transition-all active:scale-95 flex items-center gap-1.5"
+                      title="Toca para devolver al banco de palabras"
+                    >
+                      <span>{token.text}</span>
+                      <span className="text-xs opacity-60">✕</span>
+                    </button>
+                  ))
+                )}
+              </div>
+
+              {/* Token bank */}
+              <div className="space-y-2 pt-1">
+                <div className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                  Bloques disponibles:
+                </div>
+                <div className="flex flex-wrap gap-2.5">
+                  {builderAvailable.map((token) => (
+                    <button
+                      key={token.id}
+                      disabled={isFeedbackState}
+                      onClick={() => handlePlaceToken(token)}
+                      className="min-h-[44px] px-4 py-2.5 rounded-xl border border-slate-300 dark:border-navy-600 bg-white dark:bg-navy-900 text-slate-800 dark:text-ice-300 font-medium text-xs sm:text-sm hover:border-crimson-500 hover:bg-crimson-50/20 active:scale-95 transition-all shadow-xs"
+                    >
+                      {token.text}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TYPE 7: BUG HUNTER */}
+          {currentQuestion.type === 'bug-hunter' && (
+            <div className="space-y-5">
+              {/* Segmented sentence banner */}
+              <div className="p-5 rounded-xl border border-slate-200 dark:border-navy-700 bg-ice-100/50 dark:bg-navy-900/40">
+                <div className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
+                  Toca el fragmento que contenga un error:
+                </div>
+                <div className="flex flex-wrap gap-2.5">
+                  {currentQuestion.segments.map((segment) => {
+                    const isSelected = selectedAnswer === segment.text;
+                    const isThisTheError = segment.isError;
+
+                    let segStyle =
+                      'border-slate-300 dark:border-navy-600 bg-white dark:bg-navy-900 text-slate-800 dark:text-ice-300 hover:border-crimson-500 hover:bg-crimson-50/20';
+
+                    if (isFeedbackState) {
+                      if (isThisTheError) {
+                        segStyle =
+                          'border-success-500 bg-success-50 dark:bg-success-950/60 text-success-900 dark:text-success-100 font-bold ring-2 ring-success-500/40';
+                      } else if (isSelected && !lastAnswerWasCorrect) {
+                        segStyle =
+                          'border-crimson-500 bg-crimson-50 dark:bg-crimson-950/60 text-crimson-900 dark:text-crimson-100 font-bold ring-2 ring-crimson-400/40';
+                      } else {
+                        segStyle = 'opacity-40 border-slate-200 dark:border-navy-800 text-slate-400';
+                      }
+                    }
+
+                    return (
+                      <button
+                        key={segment.id}
+                        disabled={isFeedbackState}
+                        onClick={() => handleSelectBugSegment(segment.id)}
+                        className={`min-h-[46px] px-4 py-2 rounded-xl border font-semibold text-sm sm:text-base transition-all shadow-xs active:scale-95 flex items-center gap-2 ${segStyle}`}
+                      >
+                        <span>{segment.text}</span>
+                        {isFeedbackState && isThisTheError && (
+                          <CheckCircle2 className="w-4 h-4 text-success-600 dark:text-success-400 shrink-0" />
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Alternative: Sin error button */}
+              <div className="pt-2">
+                {(() => {
+                  const isSelected = selectedAnswer === 'Sin error gramatical';
+                  const isCorrectNoError = currentQuestion.hasNoError;
+
+                  let btnStyle =
+                    'border-slate-300 dark:border-navy-600 bg-white dark:bg-navy-900 text-slate-700 dark:text-slate-300 hover:border-crimson-500';
+
+                  if (isFeedbackState) {
+                    if (isCorrectNoError) {
+                      btnStyle =
+                        'border-success-500 bg-success-50 dark:bg-success-950/60 text-success-900 dark:text-success-100 font-bold ring-2 ring-success-500/40';
+                    } else if (isSelected && !lastAnswerWasCorrect) {
+                      btnStyle =
+                        'border-crimson-500 bg-crimson-50 dark:bg-crimson-950/60 text-crimson-900 dark:text-crimson-100 font-bold ring-2 ring-crimson-400/40';
+                    } else {
+                      btnStyle = 'opacity-40 border-slate-200 dark:border-navy-800 text-slate-400';
+                    }
+                  }
+
+                  return (
+                    <button
+                      disabled={isFeedbackState}
+                      onClick={handleSelectBugNoError}
+                      className={`w-full min-h-[48px] px-5 py-3 rounded-xl border font-bold text-xs sm:text-sm transition-all shadow-xs active:scale-98 flex items-center justify-center gap-2 ${btnStyle}`}
+                    >
+                      <span>✓ La oración es correcta (Sin error gramatical)</span>
+                    </button>
+                  );
+                })()}
+              </div>
+            </div>
+          )}
+
+          {/* TYPE 8: TIMELINE SORTER */}
+          {currentQuestion.type === 'timeline-sorter' && (
+            <div className="space-y-5">
+              {/* Sentence Context */}
+              <div className="p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-navy-700 bg-ice-100/50 dark:bg-navy-900/40 text-base sm:text-lg font-semibold text-navy-600 dark:text-ice-300 text-center leading-relaxed">
+                "{currentQuestion.sentenceContext}"
+              </div>
+
+              {/* Two large cards: Event A vs Event B */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                {[
+                  { choice: 'A' as const, text: currentQuestion.eventA, label: 'Acción A' },
+                  { choice: 'B' as const, text: currentQuestion.eventB, label: 'Acción B' },
+                ].map((evt) => {
+                  const isCorrect = currentQuestion.firstEvent === evt.choice;
+                  const isSelected = selectedAnswer === evt.text;
+
+                  let cardStyle =
+                    'border-slate-300 dark:border-navy-600 bg-white dark:bg-navy-900 text-slate-800 dark:text-ice-300 hover:border-crimson-500 hover:bg-crimson-50/20';
+
+                  if (isFeedbackState) {
+                    if (isCorrect) {
+                      cardStyle =
+                        'border-success-500 bg-success-50 dark:bg-success-950/60 text-success-900 dark:text-success-100 font-bold ring-2 ring-success-500/40';
+                    } else if (isSelected && !lastAnswerWasCorrect) {
+                      cardStyle =
+                        'border-crimson-500 bg-crimson-50 dark:bg-crimson-950/60 text-crimson-900 dark:text-crimson-100 font-bold ring-2 ring-crimson-400/40';
+                    } else {
+                      cardStyle = 'opacity-40 border-slate-200 dark:border-navy-800 text-slate-400';
+                    }
+                  }
+
+                  return (
+                    <button
+                      key={evt.choice}
+                      disabled={isFeedbackState}
+                      onClick={() => handleSelectTimelineEvent(evt.choice)}
+                      className={`min-h-[72px] p-4 rounded-xl border text-left transition-all shadow-xs active:scale-98 flex flex-col justify-between gap-2 ${cardStyle}`}
+                    >
+                      <div className="flex items-center justify-between w-full">
+                        <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                          {evt.label}
+                        </span>
+                        {isFeedbackState && isCorrect && (
+                          <span className="text-xs font-bold text-success-600 dark:text-success-400 inline-flex items-center gap-1">
+                            <CheckCircle2 className="w-3.5 h-3.5" /> Ocurrió Primero
+                          </span>
+                        )}
+                      </div>
+                      <div className="font-semibold text-sm sm:text-base leading-snug">
+                        {evt.text}
+                      </div>
                     </button>
                   );
                 })}

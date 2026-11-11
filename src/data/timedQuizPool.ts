@@ -1,6 +1,7 @@
 import { TimedQuestion } from '../types/timedQuiz';
+import { newTimedQuizPool } from './timedQuizNewPool';
 
-export const timedQuizPool: TimedQuestion[] = [
+const baseTimedQuizPool: TimedQuestion[] = [
   // ==========================================
   // PAST PERFECT (1-20)
   // ==========================================
@@ -1068,4 +1069,9 @@ export const timedQuizPool: TimedQuestion[] = [
     correctIndex: 0,
     explanation: 'Second Conditional formal: If I were a superhero, I would save people.'
   }
+];
+
+export const timedQuizPool: TimedQuestion[] = [
+  ...baseTimedQuizPool,
+  ...newTimedQuizPool
 ];
