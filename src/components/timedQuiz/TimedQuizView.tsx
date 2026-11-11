@@ -12,15 +12,16 @@ import {
   Zap,
   Clock,
   ArrowLeft,
-  Award
+  Award,
+  SlidersHorizontal
 } from 'lucide-react';
 
 interface TimedQuizViewProps {
   onBackToLanding: () => void;
 }
 
-const TOTAL_QUESTIONS_PER_ROUND = 10;
-const TIME_LIMIT_PER_SLIDE = 20; // 20 seconds
+const DEFAULT_QUESTIONS_COUNT = 10;
+const DEFAULT_TIME_PER_QUESTION = 20;
 const FEEDBACK_DELAY_SECONDS = 5; // 5 seconds review
 
 // In-memory module cache so the 200 questions are only fetched once per browser session
@@ -65,9 +66,13 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
   const [isLoadingBank, setIsLoadingBank] = useState<boolean>(!cachedQuizPool);
   const [loadError, setLoadError] = useState<string | null>(null);
 
+  // User custom parameters for round
+  const [timePerQuestion, setTimePerQuestion] = useState<number>(DEFAULT_TIME_PER_QUESTION);
+  const [questionsCount, setQuestionsCount] = useState<number>(DEFAULT_QUESTIONS_COUNT);
+
   const [activeDeck, setActiveDeck] = useState<TimedQuestion[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [timeRemaining, setTimeRemaining] = useState<number>(TIME_LIMIT_PER_SLIDE);
+  const [timeRemaining, setTimeRemaining] = useState<number>(DEFAULT_TIME_PER_QUESTION);
   const [feedbackCountdown, setFeedbackCountdown] = useState<number>(FEEDBACK_DELAY_SECONDS);
 
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
@@ -124,17 +129,17 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
     }
   }, []);
 
-  // Shuffle and pick 10 random questions from loaded pool
+  // Shuffle and pick questions from loaded pool based on user options
   const startNewQuiz = () => {
     if (quizPool.length === 0) return;
     const shuffled = fisherYatesShuffle(quizPool);
-    const selectedTen = shuffled.slice(0, TOTAL_QUESTIONS_PER_ROUND);
+    const selected = shuffled.slice(0, questionsCount);
 
-    setActiveDeck(selectedTen);
+    setActiveDeck(selected);
     setCurrentIndex(0);
     setResults([]);
     setSelectedAnswer(null);
-    setTimeRemaining(TIME_LIMIT_PER_SLIDE);
+    setTimeRemaining(timePerQuestion);
     setGameState('active');
   };
 
@@ -176,7 +181,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
   useEffect(() => {
     if (gameState !== 'active') return;
 
-    setTimeRemaining(TIME_LIMIT_PER_SLIDE);
+    setTimeRemaining(timePerQuestion);
 
     slideTimerRef.current = setInterval(() => {
       setTimeRemaining((prev) => {
@@ -193,7 +198,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
     return () => {
       if (slideTimerRef.current) clearInterval(slideTimerRef.current);
     };
-  }, [gameState, currentIndex]);
+  }, [gameState, currentIndex, timePerQuestion]);
 
   // Unified answer handler supporting all minigame types
   const handleAnswerSubmitted = (
@@ -231,7 +236,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
       isCorrect = answer === currentQuestion.firstEvent;
     }
 
-    const timeSpent = TIME_LIMIT_PER_SLIDE - timeRemaining;
+    const timeSpent = timePerQuestion - timeRemaining;
 
     const attemptResult: TimedQuizAttemptResult = {
       questionId: currentQuestion.id,
@@ -400,7 +405,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
     clearAllTimers();
     setSelectedAnswer(null);
 
-    if (currentIndex + 1 < TOTAL_QUESTIONS_PER_ROUND) {
+    if (currentIndex + 1 < activeDeck.length) {
       setCurrentIndex((prev) => prev + 1);
       setGameState('active');
     } else {
@@ -408,7 +413,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
       setGameState('summary');
       const allResults = results; // latest added
       const totalCorrect = allResults.filter((r) => r.isCorrect).length;
-      if (totalCorrect === TOTAL_QUESTIONS_PER_ROUND) {
+      if (totalCorrect === activeDeck.length && activeDeck.length > 0) {
         fireMasteryCelebration();
       }
     }
@@ -514,19 +519,18 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
           </div>
 
           <h1 className="text-2xl sm:text-3xl font-extrabold text-navy-600 dark:text-ice-300 tracking-tight leading-tight">
-            Quices Contrarreloj (20 Segundos por Pregunta)
+            Quices Contrarreloj
           </h1>
 
           <p className="mt-3 text-sm text-slate-700 dark:text-slate-400 leading-relaxed max-w-prose">
-            Pon a prueba tu agilidad mental y dominio de los temas de inglés: Past Perfect, Zero, First, Second y Third Conditional.
-            Cada ronda toma 10 preguntas aleatorias de nuestro banco de 200 ejercicios con 8 mecánicas dinámicas (Opción múltiple, Clasificación rápida, Match Pairs, Sentence Builder, Bug Hunter, Timeline Sorter y más).
+            Pon a prueba tu agilidad mental y dominio de los temas de inglés con 8 mecánicas dinámicas (Opción múltiple, Clasificación rápida, Match Pairs, Sentence Builder, Bug Hunter, Timeline Sorter y más).
           </p>
 
-          {/* Rules overview */}
+          {/* Live Overview Cards */}
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div className="p-4 rounded-xl border border-slate-200 dark:border-navy-700 bg-ice-100/60 dark:bg-navy-900/50">
               <Clock className="w-4 h-4 text-crimson-600 dark:text-crimson-400 mb-1.5" />
-              <div className="font-bold text-sm text-navy-600 dark:text-ice-300">20 Segundos</div>
+              <div className="font-bold text-sm text-navy-600 dark:text-ice-300">{timePerQuestion} Segundos</div>
               <div className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
                 Tiempo límite por slide para leer y responder.
               </div>
@@ -534,7 +538,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
 
             <div className="p-4 rounded-xl border border-slate-200 dark:border-navy-700 bg-ice-100/60 dark:bg-navy-900/50">
               <Sparkles className="w-4 h-4 text-crimson-600 dark:text-crimson-400 mb-1.5" />
-              <div className="font-bold text-sm text-navy-600 dark:text-ice-300">10 Preguntas</div>
+              <div className="font-bold text-sm text-navy-600 dark:text-ice-300">{questionsCount} Preguntas</div>
               <div className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
                 Seleccionadas al azar del pool de 200 slides.
               </div>
@@ -549,13 +553,125 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
             </div>
           </div>
 
+          {/* Options / Customization Card */}
+          <div className="mt-6 border border-slate-200 dark:border-navy-700 rounded-2xl p-5 bg-ice-100/40 dark:bg-navy-900/40 space-y-5">
+            <div className="flex items-center justify-between gap-2 border-b border-slate-200 dark:border-navy-700/80 pb-3">
+              <div className="flex items-center gap-2 text-navy-600 dark:text-ice-300 font-bold text-sm">
+                <SlidersHorizontal className="w-4 h-4 text-crimson-600 dark:text-crimson-400" />
+                <span>Configuración de la Ronda</span>
+              </div>
+              <span className="text-xs text-slate-500 dark:text-slate-400">
+                Ajusta la dificultad a tu gusto
+              </span>
+            </div>
+
+            {/* Quick Difficulty Presets */}
+            <div className="space-y-2">
+              <div className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                Modos predeterminados:
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                {[
+                  { label: 'Fácil / Guiado', desc: '25s • 8 preguntas', time: 25, count: 8 },
+                  { label: 'Estándar', desc: '20s • 10 preguntas', time: 20, count: 10 },
+                  { label: 'Desafío Rápido', desc: '15s • 15 preguntas', time: 15, count: 15 },
+                ].map((preset) => {
+                  const isActive = timePerQuestion === preset.time && questionsCount === preset.count;
+                  return (
+                    <button
+                      key={preset.label}
+                      type="button"
+                      onClick={() => {
+                        setTimePerQuestion(preset.time);
+                        setQuestionsCount(preset.count);
+                      }}
+                      className={`p-3 rounded-xl border text-left transition-all active:scale-98 ${
+                        isActive
+                          ? 'border-crimson-500 bg-crimson-50 dark:bg-crimson-950/60 ring-2 ring-crimson-400/50 shadow-xs'
+                          : 'border-slate-300 dark:border-navy-700 bg-white dark:bg-navy-900 hover:border-crimson-300'
+                      }`}
+                    >
+                      <div className={`text-xs font-bold ${isActive ? 'text-crimson-700 dark:text-crimson-300' : 'text-navy-600 dark:text-ice-300'}`}>
+                        {preset.label}
+                      </div>
+                      <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                        {preset.desc}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Granular Adjustments */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1 border-t border-slate-200/80 dark:border-navy-700/60">
+              {/* Time per slide */}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
+                  <span className="flex items-center gap-1.5">
+                    <Clock className="w-3.5 h-3.5 text-crimson-600 dark:text-crimson-400" />
+                    <span>Tiempo por pregunta:</span>
+                  </span>
+                  <span className="font-mono font-bold text-crimson-600 dark:text-crimson-400">
+                    {timePerQuestion}s
+                  </span>
+                </div>
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  {[10, 15, 20, 25, 30].map((sec) => (
+                    <button
+                      key={sec}
+                      type="button"
+                      onClick={() => setTimePerQuestion(sec)}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all min-h-[36px] ${
+                        timePerQuestion === sec
+                          ? 'bg-crimson-600 text-white shadow-2xs'
+                          : 'border border-slate-300 dark:border-navy-700 bg-white dark:bg-navy-900 text-slate-700 dark:text-slate-300 hover:border-crimson-400'
+                      }`}
+                    >
+                      {sec}s
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Questions count */}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
+                  <span className="flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5 text-crimson-600 dark:text-crimson-400" />
+                    <span>Cantidad de preguntas:</span>
+                  </span>
+                  <span className="font-mono font-bold text-crimson-600 dark:text-crimson-400">
+                    {questionsCount} preguntas
+                  </span>
+                </div>
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  {[5, 8, 10, 15, 20].map((num) => (
+                    <button
+                      key={num}
+                      type="button"
+                      onClick={() => setQuestionsCount(num)}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all min-h-[36px] ${
+                        questionsCount === num
+                          ? 'bg-crimson-600 text-white shadow-2xs'
+                          : 'border border-slate-300 dark:border-navy-700 bg-white dark:bg-navy-900 text-slate-700 dark:text-slate-300 hover:border-crimson-400'
+                      }`}
+                    >
+                      {num}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <button
               onClick={startNewQuiz}
               className="min-h-[48px] px-6 py-3 rounded-xl bg-crimson-600 hover:bg-crimson-500 text-white dark:bg-crimson-500 dark:hover:bg-crimson-400 font-bold text-sm flex items-center gap-2 shadow-xs transition-all active:scale-95"
             >
               <Zap className="w-4 h-4" />
-              <span>Empezar Quiz Contrarreloj</span>
+              <span>Empezar Quiz ({timePerQuestion}s • {questionsCount} Preguntas)</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 
@@ -569,12 +685,13 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
   }
 
   // =========================================================================
-  // RENDER: SUMMARY VIEW (Results after 10 questions)
+  // RENDER: SUMMARY VIEW (Results after completing round)
   // =========================================================================
   if (gameState === 'summary') {
+    const totalRounds = activeDeck.length || results.length || questionsCount;
     const totalCorrect = results.filter((r) => r.isCorrect).length;
-    const totalFailed = TOTAL_QUESTIONS_PER_ROUND - totalCorrect;
-    const percentage = Math.round((totalCorrect / TOTAL_QUESTIONS_PER_ROUND) * 100);
+    const totalFailed = totalRounds - totalCorrect;
+    const percentage = totalRounds > 0 ? Math.round((totalCorrect / totalRounds) * 100) : 0;
 
     // Group stats by topic category for internal dev / tutor visibility
     const topicStats: Record<string, { correct: number; total: number }> = {};
@@ -597,17 +714,17 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
           </div>
 
           <h2 className="text-2xl sm:text-3xl font-extrabold text-navy-600 dark:text-ice-300">
-            {totalCorrect === 10
-              ? '¡Desempeño Impecable! 10 de 10'
-              : totalCorrect >= 7
+            {totalCorrect === totalRounds
+              ? `¡Desempeño Impecable! ${totalCorrect} de ${totalRounds}`
+              : totalCorrect >= Math.ceil(totalRounds * 0.7)
               ? '¡Excelente Trabajo de Velocidad!'
-              : totalCorrect >= 5
+              : totalCorrect >= Math.ceil(totalRounds * 0.5)
               ? 'Buen Intento • Sigue Afianzando'
               : 'Buen Entrenamiento • Repasemos las Claves'}
           </h2>
 
           <p className="text-sm text-slate-600 dark:text-slate-400 mt-2 max-w-prose mx-auto">
-            Completaste las 10 preguntas contrarreloj. A continuación tienes tu resumen y desglose por temas:
+            Completaste las {totalRounds} preguntas contrarreloj ({timePerQuestion}s por slide). A continuación tienes tu resumen y desglose:
           </p>
 
           <div className="mt-6 flex items-center justify-center gap-6">
@@ -646,7 +763,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
               className="min-h-[48px] px-6 py-3 rounded-xl bg-crimson-600 hover:bg-crimson-500 text-white dark:bg-crimson-500 dark:hover:bg-crimson-400 font-bold text-sm flex items-center gap-2 shadow-xs transition-all active:scale-95"
             >
               <RotateCcw className="w-4 h-4" />
-              <span>Jugar otra ronda (10 Nuevas)</span>
+              <span>Jugar otra ronda ({questionsCount} Preguntas • {timePerQuestion}s)</span>
             </button>
 
             <button
@@ -766,11 +883,11 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
         <div className="flex items-center justify-between gap-3 mb-3">
           <div className="flex items-center gap-2">
             <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-navy-50 dark:bg-navy-900 text-navy-600 dark:text-slate-300 border border-slate-200 dark:border-navy-700">
-              Pregunta {currentIndex + 1} de {TOTAL_QUESTIONS_PER_ROUND}
+              Pregunta {currentIndex + 1} de {activeDeck.length || questionsCount}
             </span>
           </div>
 
-          {/* 20-second Countdown badge */}
+          {/* Dynamic Countdown badge */}
           <div
             className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold transition-colors ${
               isTimeCritical
@@ -789,7 +906,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
             className={`h-full transition-all duration-1000 ease-linear ${
               isTimeCritical ? 'bg-crimson-600' : 'bg-navy-600 dark:bg-crimson-500'
             }`}
-            style={{ width: `${(timeRemaining / TIME_LIMIT_PER_SLIDE) * 100}%` }}
+            style={{ width: `${(timeRemaining / timePerQuestion) * 100}%` }}
           />
         </div>
       </div>
