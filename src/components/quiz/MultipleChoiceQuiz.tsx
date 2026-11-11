@@ -67,7 +67,7 @@ export const MultipleChoiceQuiz: React.FC<MultipleChoiceQuizProps> = ({
                   {item.question}
                 </div>
                 {item.category && (
-                  <span className="self-start sm:self-auto shrink-0 text-[11px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-navy-50 dark:bg-navy-900 text-navy-600 dark:text-slate-300 border border-slate-200 dark:border-navy-700">
+                  <span className="self-start sm:self-auto shrink-0 text-xs font-mono uppercase px-2.5 py-0.5 rounded-full bg-navy-50 dark:bg-navy-900 text-navy-600 dark:text-slate-300 border border-slate-200 dark:border-navy-700">
                     {item.category.split(' - ')[0]}
                   </span>
                 )}

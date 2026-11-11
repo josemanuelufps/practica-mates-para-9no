@@ -143,14 +143,14 @@ export const EnglishSessionView: React.FC<EnglishSessionViewProps> = ({
               <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-center">
                 {/* Step 1: Past Perfect */}
                 <div className="w-full sm:flex-1 p-4 rounded-xl border-2 border-crimson-500 bg-crimson-50/80 dark:bg-crimson-950/40 text-navy-600 dark:text-ice-300">
-                  <span className="text-[10px] font-mono uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-crimson-100 dark:bg-crimson-900/60 text-crimson-700 dark:text-crimson-200">
+                  <span className="text-xs font-mono uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-crimson-100 dark:bg-crimson-900/60 text-crimson-700 dark:text-crimson-200">
                     Ocurrió Primero
                   </span>
                   <div className="font-bold text-sm sm:text-base mt-2">Past Perfect</div>
                   <div className="font-mono text-xs mt-1 text-crimson-600 dark:text-crimson-300 font-semibold">
                     had + [Past Participle]
                   </div>
-                  <div className="text-[11px] text-slate-600 dark:text-slate-400 mt-1.5 italic">
+                  <div className="text-xs text-slate-600 dark:text-slate-400 mt-1.5 italic">
                     "Sara had lost her keys..."
                   </div>
                 </div>
@@ -163,14 +163,14 @@ export const EnglishSessionView: React.FC<EnglishSessionViewProps> = ({
 
                 {/* Step 2: Past Simple */}
                 <div className="w-full sm:flex-1 p-4 rounded-xl border border-slate-300 dark:border-navy-700 bg-white dark:bg-navy-800 text-navy-600 dark:text-ice-300">
-                  <span className="text-[10px] font-mono uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-ice-200 dark:bg-navy-700 text-slate-700 dark:text-slate-300">
+                  <span className="text-xs font-mono uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-ice-200 dark:bg-navy-700 text-slate-700 dark:text-slate-300">
                     Ocurrió Después
                   </span>
                   <div className="font-bold text-sm sm:text-base mt-2">Past Simple</div>
                   <div className="font-mono text-xs mt-1 text-slate-700 dark:text-slate-300 font-semibold">
                     [Verbo en Pasado -ed / Irreg.]
                   </div>
-                  <div className="text-[11px] text-slate-600 dark:text-slate-400 mt-1.5 italic">
+                  <div className="text-xs text-slate-600 dark:text-slate-400 mt-1.5 italic">
                     "...before she arrived home."
                   </div>
                 </div>
@@ -184,7 +184,7 @@ export const EnglishSessionView: React.FC<EnglishSessionViewProps> = ({
                 {/* Step 3: Now */}
                 <div className="w-full sm:w-28 p-3.5 rounded-xl border border-slate-200 dark:border-navy-700 bg-ice-200/60 dark:bg-navy-900/40 text-slate-500 dark:text-slate-400 text-xs font-semibold">
                   <span>Presente</span>
-                  <span className="block text-[11px] font-normal text-slate-400 mt-0.5">Ahora (Now)</span>
+                  <span className="block text-xs font-normal text-slate-400 mt-0.5">Ahora (Now)</span>
                 </div>
               </div>
 

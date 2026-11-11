@@ -17,25 +17,25 @@ colors:
   error-bg: "#fdf2f4"
 typography:
   display:
-    fontFamily: "Plus Jakarta Sans, system-ui, sans-serif"
+    fontFamily: "Outfit, system-ui, sans-serif"
     fontSize: "2.25rem"
     fontWeight: 800
     lineHeight: 1.15
     letterSpacing: "-0.03em"
   headline:
-    fontFamily: "Plus Jakarta Sans, system-ui, sans-serif"
+    fontFamily: "Outfit, system-ui, sans-serif"
     fontSize: "1.5rem"
     fontWeight: 700
     lineHeight: 1.25
     letterSpacing: "-0.025em"
   title:
-    fontFamily: "Plus Jakarta Sans, system-ui, sans-serif"
+    fontFamily: "Outfit, system-ui, sans-serif"
     fontSize: "1.125rem"
     fontWeight: 600
     lineHeight: 1.35
     letterSpacing: "-0.018em"
   body:
-    fontFamily: "Plus Jakarta Sans, system-ui, sans-serif"
+    fontFamily: "Outfit, system-ui, sans-serif"
     fontSize: "0.9375rem"
     fontWeight: 400
     lineHeight: 1.6
@@ -93,7 +93,7 @@ El sistema se estructura sobre la tensión armónica entre el azul pizarra profu
 
 **Key Characteristics:**
 - **Contraste AAA Garantizado:** Relaciones de contraste superiores a 11.4:1 en modo claro y 14.2:1 en modo oscuro.
-- **Rigor Tipográfico Dual:** `Plus Jakarta Sans` para prosa humanista y `JetBrains Mono` con números tabulares (`tnum`) para estructuras gramaticales, KaTeX y cronómetros.
+- **Rigor Tipográfico Dual:** `Outfit` para prosa humanista y `JetBrains Mono` con números tabulares (`tnum`) para estructuras gramaticales, KaTeX y cronómetros.
 - **Micro-interacción Táctil:** Snap-in elástico en slots de palabras, respuesta háptica visual (`active:scale-98`) y temporizador pulsante.
 - **Cero Fricción Cognitiva:** Longitud de línea restringida (`45-75ch`), títulos balanceados sin viudas y explicaciones pedagógicas integradas.
 
@@ -127,10 +127,10 @@ Paleta editorial estructurada en tonalidades frías de pizarra y carbón, contra
 
 ## Typography
 
-**Display & Body Font:** `Plus Jakarta Sans` (geométrica con terminaciones humanistas y legibilidad impecable en pantalla).  
+**Display & Body Font:** `Outfit` (geométrica con terminaciones humanistas y legibilidad impecable en pantalla).  
 **Code & Data Font:** `JetBrains Mono` (monoespaciada con ligaduras técnicas, cero barrado y números tabulares obligatorios).
 
-**Character:** Pareja sobria y precisa: la calidez geométrica de Jakarta Sans guía la lectura, mientras la rigidez matemática de JetBrains Mono ancla las fórmulas de KaTeX, las estructuras gramaticales en inglés (`had + V3`) y los cronómetros.
+**Character:** Pareja sobria y precisa: la calidez geométrica de Outfit guía la lectura, mientras la rigidez matemática de JetBrains Mono ancla las fórmulas de KaTeX, las estructuras gramaticales en inglés (`had + V3`) y los cronómetros.
 
 ### Hierarchy
 - **Display** (Extrabold 800, 2.25rem / 36px, `line-height: 1.15`, `letter-spacing: -0.03em`): Título principal del Hero en Landing y encabezados mayores de sesión. Aplica `text-wrap: balance`.

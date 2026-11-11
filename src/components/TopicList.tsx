@@ -99,7 +99,7 @@ export const TopicList: React.FC = () => {
                   </p>
                 </div>
               </div>
-              <span className="self-start sm:self-auto text-[11px] font-semibold px-2.5 py-1 rounded-full bg-navy-50 dark:bg-navy-900 text-navy-600 dark:text-slate-300 border border-slate-200 dark:border-navy-700">
+              <span className="self-start sm:self-auto text-xs font-semibold px-2.5 py-1 rounded-full bg-navy-50 dark:bg-navy-900 text-navy-600 dark:text-slate-300 border border-slate-200 dark:border-navy-700">
                 {group.badge}
               </span>
             </div>
@@ -126,7 +126,7 @@ export const TopicList: React.FC = () => {
                         {cat.category}
                       </span>
                       <div className="flex items-center gap-2">
-                        <span className="text-[11px] text-slate-500 font-mono">
+                        <span className="text-xs text-slate-500 font-mono">
                           {cat.items.length} temas
                         </span>
                         {isOpen ? (

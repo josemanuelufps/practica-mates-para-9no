@@ -103,7 +103,7 @@ export const WordBankSlotQuiz: React.FC<WordBankSlotQuizProps> = ({ exercise }) 
 
       {/* Word bank pool */}
       <div className="mb-6 p-4 rounded-xl border border-dashed border-slate-300 dark:border-navy-600 bg-ice-100/70 dark:bg-navy-900/40">
-        <div className="text-[11px] font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2.5 font-semibold">
+        <div className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2.5 font-semibold">
           Banco de palabras disponibles:
         </div>
         <div className="flex flex-wrap gap-2.5 min-h-[44px] items-center">
@@ -183,7 +183,7 @@ export const WordBankSlotQuiz: React.FC<WordBankSlotQuizProps> = ({ exercise }) 
                       ))}
                   </span>
                 ) : (
-                  <span className="text-[11px] text-slate-400 dark:text-slate-500 italic">
+                  <span className="text-xs text-slate-400 dark:text-slate-500 italic">
                     [Soltar aquí]
                   </span>
                 )}

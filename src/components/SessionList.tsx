@@ -27,7 +27,7 @@ export const SessionList: React.FC<SessionListProps> = ({ onSelectSession }) => 
           return (
             <div
               key={session.id}
-              className={`rounded-xl border p-5 flex flex-col justify-between transition-all ${
+              className={`rounded-xl border p-4 sm:p-5 flex flex-col justify-between transition-all ${
                 isActive
                   ? 'border-crimson-400 dark:border-crimson-500/80 bg-white dark:bg-navy-800 shadow-subtle dark:shadow-subtle-dark ring-1 ring-crimson-300/40 dark:ring-crimson-500/30'
                   : 'border-slate-200 dark:border-navy-700 bg-white dark:bg-navy-800/80 shadow-subtle dark:shadow-subtle-dark hover:border-slate-400 dark:hover:border-navy-600'
@@ -70,7 +70,7 @@ export const SessionList: React.FC<SessionListProps> = ({ onSelectSession }) => 
 
                 {/* Key topics bullets */}
                 <div className="space-y-1.5 mb-5 border-t border-slate-200 dark:border-navy-700 pt-3">
-                  <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 block">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 block">
                     Puntos clave:
                   </span>
                   <ul className="text-xs text-slate-700 dark:text-slate-300 space-y-1">
@@ -81,7 +81,7 @@ export const SessionList: React.FC<SessionListProps> = ({ onSelectSession }) => 
                       </li>
                     ))}
                     {session.keyTopics.length > 3 && (
-                      <li className="text-[11px] text-slate-400 dark:text-slate-500 italic">
+                      <li className="text-xs text-slate-400 dark:text-slate-500 italic">
                         + {session.keyTopics.length - 3} puntos adicionales
                       </li>
                     )}

@@ -430,7 +430,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
                       </span>
                     </div>
                   )}
-                  <p className="text-slate-600 dark:text-slate-400 italic text-[11px] pt-1">
+                  <p className="text-slate-600 dark:text-slate-400 italic text-xs pt-1">
                     {res.explanation}
                   </p>
                 </div>
