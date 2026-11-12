@@ -13,7 +13,8 @@ import {
   Clock,
   ArrowLeft,
   Award,
-  SlidersHorizontal
+  SlidersHorizontal,
+  X
 } from 'lucide-react';
 
 interface TimedQuizViewProps {
@@ -151,6 +152,15 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
     setSelectedAnswer(null);
     setTimeRemaining(getQuestionTimeLimit(selected[0]));
     setGameState('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleExitQuiz = () => {
+    if (window.confirm('¿Deseas salir de la ronda actual y volver a las opciones?')) {
+      clearAllTimers();
+      setGameState('intro');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   const currentQuestion = activeDeck[currentIndex];
@@ -424,9 +434,11 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
     if (currentIndex + 1 < activeDeck.length) {
       setCurrentIndex((prev) => prev + 1);
       setGameState('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       // Quiz Finished
       setGameState('summary');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       const allResults = results; // latest added
       const totalCorrect = allResults.filter((r) => r.isCorrect).length;
       if (totalCorrect === activeDeck.length && activeDeck.length > 0) {
@@ -900,37 +912,49 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
   const isFeedbackState = gameState === 'feedback';
 
   return (
-    <div className="space-y-6 max-w-3xl mx-auto animate-slide-fade">
-      {/* Top Header & Timer Bar */}
-      <div className="border border-slate-200 dark:border-navy-700 rounded-2xl p-5 bg-white dark:bg-navy-800 shadow-subtle dark:shadow-subtle-dark">
-        <div className="flex items-center justify-between gap-3 mb-3">
+    <div className="animate-slide-fade">
+      {/* Sticky Docked Bar under Navbar */}
+      <div className="sticky top-16 z-40 -mx-4 sm:-mx-6 -mt-6 sm:-mt-8 mb-6 bg-white/95 dark:bg-navy-900/95 backdrop-blur-md border-b sm:border-x sm:rounded-b-2xl border-slate-200 dark:border-navy-700 shadow-subtle dark:shadow-subtle-dark transition-all">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-3">
+          {/* Left: Exit button & Question counter */}
           <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={handleExitQuiz}
+              aria-label="Salir de la ronda y volver a opciones"
+              title="Salir de la ronda"
+              className="p-1.5 -ml-1 rounded-lg text-slate-400 hover:text-crimson-600 dark:hover:text-crimson-400 hover:bg-slate-100 dark:hover:bg-navy-800 transition-colors focus-visible:ring-2 focus-visible:ring-crimson-500 focus-visible:outline-hidden"
+            >
+              <X className="w-4 h-4" aria-hidden="true" />
+            </button>
             <span
-              className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-navy-50 dark:bg-navy-900 text-navy-600 dark:text-slate-300 border border-slate-200 dark:border-navy-700"
+              className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-navy-50 dark:bg-navy-950 text-navy-600 dark:text-slate-300 border border-slate-200 dark:border-navy-700"
               aria-label={`Pregunta número ${currentIndex + 1} de un total de ${activeDeck.length || questionsCount}`}
             >
               Pregunta {currentIndex + 1} de {activeDeck.length || questionsCount}
             </span>
           </div>
 
-          {/* Dynamic Countdown badge */}
-          <div
-            role="timer"
-            aria-live="off"
-            aria-label={`Tiempo restante: ${timeRemaining} segundos`}
-            className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono tabular-nums font-bold transition-colors ${
-              isTimeCritical
-                ? 'bg-crimson-600 text-white animate-pulse'
-                : 'bg-ice-200 dark:bg-navy-900 text-navy-600 dark:text-ice-300 border border-slate-200 dark:border-navy-700'
-            }`}
-          >
-            <Timer className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>{timeRemaining}s</span>
-            {currentQuestion?.type === 'sentence-builder' && (
-              <span className="text-xs font-sans font-semibold text-crimson-700 dark:text-crimson-300 bg-crimson-100 dark:bg-crimson-900/60 px-2 py-0.5 rounded-full border border-crimson-200 dark:border-crimson-800">
-                +5s lectura
-              </span>
-            )}
+          {/* Right: Dynamic Countdown badge */}
+          <div className="flex items-center gap-2">
+            <div
+              role="timer"
+              aria-live="off"
+              aria-label={`Tiempo restante: ${timeRemaining} segundos`}
+              className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono tabular-nums font-bold transition-colors ${
+                isTimeCritical
+                  ? 'bg-crimson-600 text-white animate-pulse'
+                  : 'bg-ice-200 dark:bg-navy-950 text-navy-600 dark:text-ice-300 border border-slate-200 dark:border-navy-700'
+              }`}
+            >
+              <Timer className="w-3.5 h-3.5" aria-hidden="true" />
+              <span>{timeRemaining}s</span>
+              {currentQuestion?.type === 'sentence-builder' && (
+                <span className="text-xs font-sans font-semibold text-crimson-700 dark:text-crimson-300 bg-crimson-100 dark:bg-crimson-900/60 px-2 py-0.5 rounded-full border border-crimson-200 dark:border-crimson-800">
+                  +5s<span className="hidden sm:inline"> lectura</span>
+                </span>
+              )}
+            </div>
           </div>
 
           {/* Critical countdown announcement for screen readers */}
@@ -939,14 +963,14 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
           </div>
         </div>
 
-        {/* Linear progress bar */}
+        {/* Linear progress bar attached to bottom edge */}
         <div
           role="progressbar"
           aria-valuenow={Math.round((timeRemaining / currentSlideTimeLimit) * 100)}
           aria-valuemin={0}
           aria-valuemax={100}
           aria-label="Tiempo restante de la diapositiva actual"
-          className="w-full bg-ice-200 dark:bg-navy-900 h-2 rounded-full overflow-hidden"
+          className="w-full bg-ice-200 dark:bg-navy-950 h-1.5 sm:h-2 overflow-hidden sm:rounded-b-2xl"
         >
           <div
             className={`h-full transition-all duration-1000 ease-linear ${
@@ -957,10 +981,11 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
         </div>
       </div>
 
-      {/* Main Slide Card */}
-      <div className="border border-slate-200 dark:border-navy-700 rounded-2xl p-6 sm:p-8 bg-white dark:bg-navy-800 shadow-subtle dark:shadow-subtle-dark min-h-[360px] flex flex-col justify-between">
-        <div>
-          {/* Prompt */}
+      {/* Main Slide Card Container */}
+      <div className="max-w-3xl mx-auto space-y-6">
+        <div className="border border-slate-200 dark:border-navy-700 rounded-2xl p-6 sm:p-8 bg-white dark:bg-navy-800 shadow-subtle dark:shadow-subtle-dark min-h-[360px] flex flex-col justify-between">
+          <div>
+            {/* Prompt */}
           <h2 className="text-base sm:text-lg font-bold text-navy-600 dark:text-ice-300 mb-6 leading-snug">
             {currentQuestion.prompt}
           </h2>
@@ -1505,5 +1530,6 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
         )}
       </div>
     </div>
+  </div>
   );
 };

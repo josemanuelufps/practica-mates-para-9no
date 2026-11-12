@@ -187,8 +187,10 @@ Todos los componentes siguen la filosofía **táctil, segura y reactiva**, garan
 - **Slot Receptor:** Fondo `bg-crimson-50/40 dark:bg-crimson-950/40`, borde discontinuo carmesí. Al depositar la palabra, se dispara animación elástica `snap-in` (180ms cubic-bezier).
 
 ### Timed Quiz Slide (Quices Contrarreloj)
-- **Barra de Tiempo:** Barra lineal continua de 8px de altura con transición linear de 1s. Fondo `ice-200 dark:navy-900`, relleno `navy-600 dark:crimson-500` que cambia a `crimson-600` parpadeante en $\le 5$s.
-- **Badge Numérico de Cuenta Regresiva:** Pastilla monoespaciada `rounded-full` con icono de temporizador que pulsa (`animate-pulse`) en rojo crítico cuando quedan 5 segundos o menos.
+- **HUD Acoplado Superior (Sticky Top-16):** Durante la ronda activa, la barra de progreso, el indicador de pregunta y el temporizador se acoplan de forma persistente (`sticky top-16 z-40`) inmediatamente debajo de la cabecera de navegación con efecto cristal (`backdrop-blur-md`). Garantiza visibilidad total del tiempo y del progreso al hacer scroll en teléfonos móviles o con zoom alto en PC sin invadir el área de lectura.
+- **Barra de Tiempo:** Barra lineal continua integrada en el borde inferior del HUD con transición lineal de 1s. Fondo `ice-200 dark:navy-950`, relleno `navy-600 dark:crimson-500` que cambia a `crimson-600` parpadeante en $\le 5$s.
+- **Badge Numérico de Cuenta Regresiva:** Pastilla monoespaciada `rounded-full` con icono de temporizador que pulsa (`animate-pulse`) en rojo crítico cuando quedan 5 segundos o menos. Incluye etiqueta contextual `+5s` en preguntas de construcción sintáctica.
+- **Control de Abandono Seguro:** Botón `X` accesible en la barra acoplada para salir limpiamente al menú de opciones con confirmación.
 - **Mecánicas Dinámicas:** Opciones múltiples, clasificación binaria, completado rápido, emparejamiento de cláusulas (Match Pairs), constructor sintáctico (Sentence Builder), detector de errores (Bug Hunter) y orden cronológico (Timeline Sorter).
 
 ### Feedback Banner (5 Segundos)
