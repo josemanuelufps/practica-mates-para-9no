@@ -135,10 +135,7 @@ export function App() {
                 <div className="lg:col-span-5 mt-2 lg:mt-0">
                   <div className="p-4 sm:p-5 rounded-xl border border-crimson-200/80 dark:border-crimson-900/60 bg-crimson-50/40 dark:bg-navy-900/70 shadow-2xs">
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-crimson-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-crimson-600"></span>
-                      </span>
+                      <Sparkles className="w-3.5 h-3.5 text-crimson-600 dark:text-crimson-400 shrink-0" />
                       <span className="text-xs font-mono uppercase font-bold tracking-wider text-crimson-700 dark:text-crimson-300">
                         Eje Prioritario de Estudio
                       </span>
