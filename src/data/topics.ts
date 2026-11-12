@@ -2,36 +2,10 @@ import { TopicGroup } from '../types';
 
 export const topicGroups: TopicGroup[] = [
   {
-    id: 'ingles',
-    title: 'Inglés Gramatical',
-    badge: 'Prioridad Sesiones 1 & 2',
-    description: 'Estructuras temporales pasadas y condicionales (Zero, First, Second & Third Conditional).',
-    topics: [
-      {
-        category: 'Sesión 1 (Hoy - 10 Noviembre)',
-        items: [
-          'Past Perfect: Fill in the blanks (had + past participle)',
-          'Past Perfect: Complete sentences (relación temporal con Past Simple: before, after, by the time)',
-          'Zero Conditional: Complete sentences (verdades universales, hechos científicos: If + Present, Present)',
-          'First Conditional: Complete sentences (situaciones reales/probables futuras: If + Present, will + Verb)',
-          'Discriminación de uso: Fill in the blanks choosing Zero or First Conditional',
-        ],
-      },
-      {
-        category: 'Sesión 2 (Mañana - 11 Noviembre)',
-        items: [
-          'Second Conditional: Fill in the blanks (hipotéticos en presente/futuro: If + Past Simple, would + Verb)',
-          'Third Conditional: Fill in the blanks (arrepentimientos/pasados imposibles: If + Past Perfect, would have + V3)',
-          'Discriminación de uso: Fill in the blanks choosing Second or Third Conditional',
-        ],
-      },
-    ],
-  },
-  {
-    id: 'algebra',
-    title: 'Álgebra de 9° Grado',
-    badge: 'Sesiones 2 & 3',
-    description: 'Aritmética avanzada de radicales, funciones, geometría analítica y sistemas de ecuaciones.',
+    id: 'matematicas',
+    title: 'Matemáticas (Álgebra y Funciones)',
+    badge: 'Eje Principal',
+    description: 'Aritmética avanzada de radicales, factorización, sistemas de ecuaciones lineales y geometría analítica.',
     topics: [
       {
         category: 'Sistemas Numéricos y Radicales',
@@ -76,9 +50,9 @@ export const topicGroups: TopicGroup[] = [
   },
   {
     id: 'geoestadistica',
-    title: 'Geoestadística y Geometría',
-    badge: 'Sesión 3',
-    description: 'Análisis de datos, probabilidad y geometría espacial de cuerpos redondos.',
+    title: 'Geoestadística y Cuerpos Redondos',
+    badge: 'Eje Complementario',
+    description: 'Análisis de datos, medidas de dispersión, probabilidad clásica y geometría espacial.',
     topics: [
       {
         category: 'Estadística y Probabilidad',
@@ -96,6 +70,32 @@ export const topicGroups: TopicGroup[] = [
           'El Cilindro: área lateral, área total y volumen (V = π · r² · h)',
           'El Cono: generatriz, área lateral, total y volumen (V = 1/3 · π · r² · h)',
           'La Esfera: área superficial (4πr²) y volumen (4/3 · π · r³)',
+        ],
+      },
+    ],
+  },
+  {
+    id: 'ingles',
+    title: 'Inglés Gramatical',
+    badge: 'Módulo Interactivo',
+    description: 'Estructuras temporales pasadas y condicionales (Zero, First, Second & Third Conditional).',
+    topics: [
+      {
+        category: 'Módulo 1: Past Perfect, Zero & First Conditional',
+        items: [
+          'Past Perfect: Fill in the blanks (had + past participle)',
+          'Past Perfect: Complete sentences (relación temporal con Past Simple: before, after, by the time)',
+          'Zero Conditional: Complete sentences (verdades universales, hechos científicos: If + Present, Present)',
+          'First Conditional: Complete sentences (situaciones reales/probables futuras: If + Present, will + Verb)',
+          'Discriminación de uso: Fill in the blanks choosing Zero or First Conditional',
+        ],
+      },
+      {
+        category: 'Módulo 2: Second & Third Conditional',
+        items: [
+          'Second Conditional: Fill in the blanks (hipotéticos en presente/futuro: If + Past Simple, would + Verb)',
+          'Third Conditional: Fill in the blanks (arrepentimientos/pasados imposibles: If + Past Perfect, would have + V3)',
+          'Discriminación de uso: Fill in the blanks choosing Second or Third Conditional',
         ],
       },
     ],

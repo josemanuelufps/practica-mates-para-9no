@@ -4,9 +4,10 @@ import { BookOpen, ChevronDown, ChevronRight, CheckCircle2, ChevronUp } from 'lu
 import { KatexMath } from './KatexMath';
 
 export const TopicList: React.FC = () => {
-  const [selectedSubject, setSelectedSubject] = useState<'all' | 'ingles' | 'algebra' | 'geoestadistica'>('all');
+  const [selectedSubject, setSelectedSubject] = useState<'all' | 'matematicas' | 'geoestadistica' | 'ingles'>('all');
   const [openCategories, setOpenCategories] = useState<Record<string, boolean>>({
-    'Sesión 1 (Hoy - 10 Noviembre)': true,
+    'Sistemas Numéricos y Radicales': true,
+    'Sistemas de Ecuaciones Lineales 2x2': true,
   });
 
   const toggleCategory = (catName: string) => {
@@ -40,9 +41,9 @@ export const TopicList: React.FC = () => {
           </span>
           {[
             { id: 'all', label: 'Todos los Temarios' },
-            { id: 'ingles', label: 'Inglés' },
-            { id: 'algebra', label: 'Álgebra' },
+            { id: 'matematicas', label: 'Matemáticas' },
             { id: 'geoestadistica', label: 'Geoestadística' },
+            { id: 'ingles', label: 'Inglés' },
           ].map((tab) => (
             <button
               key={tab.id}

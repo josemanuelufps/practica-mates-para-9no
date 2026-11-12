@@ -4,8 +4,8 @@ import { Moon, Sun, BookOpen, Sparkles, Zap } from 'lucide-react';
 interface NavbarProps {
   darkMode: boolean;
   setDarkMode: (val: boolean) => void;
-  activeTab: 'landing' | 'sesion-1' | 'sesion-2' | 'quices-contrarreloj';
-  setActiveTab: (tab: 'landing' | 'sesion-1' | 'sesion-2' | 'quices-contrarreloj') => void;
+  activeTab: 'landing' | 'sesiones' | 'quices-contrarreloj';
+  setActiveTab: (tab: 'landing' | 'sesiones' | 'quices-contrarreloj') => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -19,8 +19,8 @@ export const Navbar: React.FC<NavbarProps> = ({
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleNavSession1 = () => {
-    setActiveTab('sesion-1');
+  const handleNavSessions = () => {
+    setActiveTab('sesiones');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -66,19 +66,15 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           <button
-            onClick={handleNavSession1}
+            onClick={handleNavSessions}
             className={`min-h-[38px] px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-colors flex items-center gap-1.5 ${
-              activeTab === 'sesion-1'
+              activeTab === 'sesiones'
                 ? 'bg-crimson-600 text-white dark:bg-crimson-500 dark:text-white shadow-xs'
                 : 'text-slate-600 hover:text-crimson-600 dark:text-slate-400 dark:hover:text-crimson-400 hover:bg-ice-200 dark:hover:bg-navy-800'
             }`}
           >
             <Sparkles className="w-3.5 h-3.5 text-crimson-500 dark:text-crimson-300" />
-            <span className="font-semibold hidden sm:inline">Sesión Hoy</span>
-            <span className="font-semibold sm:hidden">Hoy</span>
-            <span className="hidden md:inline text-xs uppercase font-bold px-1.5 py-0.5 bg-crimson-100 dark:bg-crimson-900/60 text-crimson-700 dark:text-crimson-200 rounded">
-              10 Nov
-            </span>
+            <span className="font-semibold">Sesiones</span>
           </button>
 
           <button

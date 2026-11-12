@@ -51,7 +51,7 @@ export const EnglishSessionView: React.FC<EnglishSessionViewProps> = ({
         <div className="flex items-center gap-2">
           <span className="text-xs font-semibold px-3 py-1 rounded-full bg-crimson-50 dark:bg-crimson-900/40 text-crimson-700 dark:text-crimson-300 border border-crimson-200 dark:border-crimson-800 flex items-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5 text-crimson-500" />
-            {sessionDay === 1 ? 'Sesión 1 (10 de Noviembre)' : 'Sesión 2 (11 de Noviembre)'}
+            {sessionDay === 1 ? 'Módulo 1: Past Perfect & Condicionales' : 'Módulo 2: Second & Third Conditional'}
           </span>
         </div>
       </div>
@@ -369,7 +369,7 @@ export const EnglishSessionView: React.FC<EnglishSessionViewProps> = ({
           <div className="p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-navy-700 bg-white dark:bg-navy-800 shadow-subtle dark:shadow-subtle-dark">
             <div className="flex items-center gap-2 mb-2.5">
               <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-crimson-100 dark:bg-crimson-900/40 text-crimson-700 dark:text-crimson-300">
-                Material para Mañana (11 de Noviembre)
+                Módulo 2: Condicionales Avanzados
               </span>
             </div>
             <h2 className="text-lg sm:text-xl font-bold text-navy-600 dark:text-ice-300 mb-2">

@@ -1,4 +1,4 @@
-export type SubjectId = 'algebra' | 'geoestadistica' | 'ingles';
+export type SubjectId = 'matematicas' | 'geoestadistica' | 'ingles' | 'algebra';
 
 export interface SubTopic {
   title: string;
@@ -20,10 +20,10 @@ export interface TopicGroup {
 export interface SessionInfo {
   id: string;
   number: number;
-  date: string;
+  date?: string;
   title: string;
   status: 'active' | 'upcoming' | 'planned';
-  focus: 'ingles' | 'algebra' | 'geoestadistica' | 'mixto';
+  focus: 'matematicas' | 'geoestadistica' | 'ingles' | 'algebra' | 'mixto';
   duration: string;
   summary: string;
   keyTopics: string[];

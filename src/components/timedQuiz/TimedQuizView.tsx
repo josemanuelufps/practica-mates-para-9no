@@ -14,7 +14,11 @@ import {
   ArrowLeft,
   Award,
   SlidersHorizontal,
-  X
+  X,
+  Calculator,
+  BarChart3,
+  BookOpen,
+  AlertCircle
 } from 'lucide-react';
 
 interface TimedQuizViewProps {
@@ -68,6 +72,18 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
   const [loadError, setLoadError] = useState<string | null>(null);
 
   // User custom parameters for round
+  const [selectedSubject, setSelectedSubject] = useState<'ingles' | 'matematicas' | 'geoestadistica'>('ingles');
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const toastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const triggerSubjectToast = (subjectName: string) => {
+    if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+    setToastMessage(`El banco de preguntas para ${subjectName} se encuentra en preparación pedagógica. Por ahora puedes practicar con el banco de Inglés.`);
+    toastTimerRef.current = setTimeout(() => {
+      setToastMessage(null);
+    }, 4500);
+  };
+
   const [timePerQuestion, setTimePerQuestion] = useState<number>(DEFAULT_TIME_PER_QUESTION);
   const [questionsCount, setQuestionsCount] = useState<number>(DEFAULT_QUESTIONS_COUNT);
 
@@ -611,8 +627,88 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
                 <span>Configuración de la Ronda</span>
               </div>
               <span className="text-xs text-slate-500 dark:text-slate-400">
-                Ajusta la dificultad a tu gusto
+                Ajusta la materia y la dificultad
               </span>
+            </div>
+
+            {/* Subject Selector */}
+            <div className="space-y-2.5">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                  Materia del Quiz:
+                </span>
+                <span className="text-xs text-slate-500 dark:text-slate-400">
+                  Banco activo: Inglés
+                </span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                {/* Inglés */}
+                <button
+                  type="button"
+                  onClick={() => setSelectedSubject('ingles')}
+                  aria-pressed={selectedSubject === 'ingles'}
+                  className={`p-3 rounded-xl border text-left transition-all active:scale-98 focus-visible:ring-2 focus-visible:ring-crimson-500 focus-visible:outline-hidden ${
+                    selectedSubject === 'ingles'
+                      ? 'border-sky-500 bg-sky-50/80 dark:bg-sky-950/50 ring-2 ring-sky-400/50 shadow-xs'
+                      : 'border-slate-300 dark:border-navy-700 bg-white dark:bg-navy-900 hover:border-sky-300'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-1">
+                    <div className="flex items-center gap-1.5 font-bold text-xs text-navy-600 dark:text-ice-300">
+                      <BookOpen className="w-3.5 h-3.5 text-sky-500 shrink-0" />
+                      <span>Inglés Gramatical</span>
+                    </div>
+                    <span className="text-xs font-bold px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950/70 dark:text-emerald-300">
+                      Disponible
+                    </span>
+                  </div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400">
+                    281 preguntas • Past Perfect y Condicionales
+                  </div>
+                </button>
+
+                {/* Matemáticas */}
+                <button
+                  type="button"
+                  onClick={() => triggerSubjectToast('Matemáticas')}
+                  aria-label="Matemáticas (En preparación pedagógica)"
+                  className="p-3 rounded-xl border border-slate-300 dark:border-navy-700 bg-white/70 dark:bg-navy-900/60 hover:border-amber-400 dark:hover:border-amber-600 text-left transition-all active:scale-98 relative group"
+                >
+                  <div className="flex items-center justify-between mb-1">
+                    <div className="flex items-center gap-1.5 font-bold text-xs text-slate-700 dark:text-slate-300 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+                      <Calculator className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                      <span>Matemáticas</span>
+                    </div>
+                    <span className="text-xs font-bold px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950/70 dark:text-amber-300">
+                      En preparación
+                    </span>
+                  </div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400">
+                    Radicales, Sistemas 2x2, Funciones
+                  </div>
+                </button>
+
+                {/* Geoestadística */}
+                <button
+                  type="button"
+                  onClick={() => triggerSubjectToast('Geoestadística')}
+                  aria-label="Geoestadística (En preparación pedagógica)"
+                  className="p-3 rounded-xl border border-slate-300 dark:border-navy-700 bg-white/70 dark:bg-navy-900/60 hover:border-amber-400 dark:hover:border-amber-600 text-left transition-all active:scale-98 relative group"
+                >
+                  <div className="flex items-center justify-between mb-1">
+                    <div className="flex items-center gap-1.5 font-bold text-xs text-slate-700 dark:text-slate-300 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+                      <BarChart3 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                      <span>Geoestadística</span>
+                    </div>
+                    <span className="text-xs font-bold px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950/70 dark:text-amber-300">
+                      En preparación
+                    </span>
+                  </div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400">
+                    Dispersión, Probabilidad, Cuerpos
+                  </div>
+                </button>
+              </div>
             </div>
 
             {/* Quick Difficulty Presets */}
@@ -727,7 +823,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
               className="min-h-[48px] px-6 py-3 rounded-xl bg-crimson-600 hover:bg-crimson-500 text-white dark:bg-crimson-500 dark:hover:bg-crimson-400 font-bold text-sm flex items-center gap-2 shadow-xs transition-all active:scale-95"
             >
               <Zap className="w-4 h-4" />
-              <span>Empezar Quiz ({timePerQuestion}s • {questionsCount} Preguntas)</span>
+              <span>Empezar Quiz de Inglés ({timePerQuestion}s • {questionsCount} Preguntas)</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 
@@ -735,6 +831,28 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
               Intentos ilimitados • Práctica 100% libre
             </span>
           </div>
+
+          {/* Floating Sonner/Toast for in-progress subject notice */}
+          {toastMessage && (
+            <div
+              role="alert"
+              aria-live="polite"
+              className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 max-w-sm w-full p-4 rounded-xl border border-amber-300 dark:border-amber-700 bg-white dark:bg-navy-900 text-slate-800 dark:text-slate-100 shadow-xl flex items-start gap-3 animate-slide-fade"
+            >
+              <AlertCircle className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
+              <div className="flex-1 text-xs sm:text-sm leading-snug">
+                {toastMessage}
+              </div>
+              <button
+                type="button"
+                onClick={() => setToastMessage(null)}
+                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1 -mr-1 -mt-1 rounded-md"
+                aria-label="Cerrar notificación"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          )}
         </div>
       </div>
     );

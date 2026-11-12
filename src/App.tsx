@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { SessionList } from './components/SessionList';
 import { TopicList } from './components/TopicList';
-import { EnglishSessionView } from './components/EnglishSessionView';
+import { SessionsView } from './components/SessionsView';
 import { TimedQuizView } from './components/timedQuiz/TimedQuizView';
 import { Sparkles, ArrowRight, BookOpen, Layers, CheckCircle2, Zap } from 'lucide-react';
 
@@ -13,7 +13,8 @@ export function App() {
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
 
-  const [activeTab, setActiveTab] = useState<'landing' | 'sesion-1' | 'sesion-2' | 'quices-contrarreloj'>('landing');
+  const [activeTab, setActiveTab] = useState<'landing' | 'sesiones' | 'quices-contrarreloj'>('landing');
+  const [sessionsSubject, setSessionsSubject] = useState<'matematicas' | 'geoestadistica' | 'ingles'>('matematicas');
 
   // Ensure fresh page load always starts at top and cleans up any lingering hash
   useEffect(() => {
@@ -34,18 +35,21 @@ export function App() {
   }, [darkMode]);
 
   const handleSelectSession = (sessionId: string) => {
-    if (sessionId === 'sesion-1') {
-      setActiveTab('sesion-1');
+    if (sessionId === 'matematicas') {
+      setSessionsSubject('matematicas');
+      setActiveTab('sesiones');
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (sessionId === 'sesion-2') {
-      setActiveTab('sesion-2');
+    } else if (sessionId === 'geoestadistica') {
+      setSessionsSubject('geoestadistica');
+      setActiveTab('sesiones');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (sessionId === 'ingles') {
+      setSessionsSubject('ingles');
+      setActiveTab('sesiones');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      setActiveTab('landing');
-      setTimeout(() => {
-        const el = document.getElementById('temarios-section');
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 50);
+      setActiveTab('sesiones');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -70,7 +74,7 @@ export function App() {
                 <div className="lg:col-span-7">
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-navy-50 dark:bg-navy-900 text-navy-600 dark:text-slate-300 border border-slate-200 dark:border-navy-700 mb-3 sm:mb-4">
                     <BookOpen className="w-3.5 h-3.5 text-crimson-600 dark:text-crimson-400 shrink-0" />
-                    <span>Guía & Práctica Libre de 9° Grado</span>
+                    <span>Guía de Estudio & Práctica de 9° Grado</span>
                   </div>
 
                   <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-navy-600 dark:text-ice-300 leading-tight">
@@ -78,23 +82,28 @@ export function App() {
                   </h1>
 
                   <p className="mt-2.5 sm:mt-3 text-sm sm:text-base text-slate-700 dark:text-slate-400 leading-relaxed max-w-prose">
-                    Espacio de práctica interactiva diseñado para afianzar los conceptos fundamentales de{' '}
+                    Espacio de estudio integral centrado en{' '}
                     <strong className="text-navy-600 dark:text-ice-300 font-semibold">
-                      Álgebra, Geoestadística e Inglés
+                      Matemáticas
                     </strong>
-                    . Ejercicios con retroalimentación inmediata, justificaciones paso a paso y banco de palabras táctil.
+                    , con cobertura complementaria de{' '}
+                    <strong className="text-navy-600 dark:text-ice-300 font-semibold">
+                      Geoestadística e Inglés
+                    </strong>
+                    . Fórmulas de examen, retroalimentación inmediata, justificaciones paso a paso y quices contrarreloj.
                   </p>
 
                   <div className="mt-5 sm:mt-7 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3">
                     <button
                       onClick={() => {
-                        setActiveTab('sesion-1');
+                        setSessionsSubject('matematicas');
+                        setActiveTab('sesiones');
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                       }}
                       className="min-h-[44px] px-5 py-2.5 rounded-xl bg-crimson-600 hover:bg-crimson-500 text-white dark:bg-crimson-500 dark:hover:bg-crimson-400 dark:text-white font-semibold text-xs sm:text-sm flex items-center justify-center sm:justify-start gap-2 shadow-xs transition-all active:scale-98 w-full sm:w-auto"
                     >
                       <Sparkles className="w-4 h-4 text-crimson-200 shrink-0" />
-                      <span>Empezar Sesión de Hoy (10 Nov)</span>
+                      <span>Ver Sesiones de Repaso</span>
                       <ArrowRight className="w-4 h-4 shrink-0" />
                     </button>
 
@@ -122,7 +131,7 @@ export function App() {
                   </div>
                 </div>
 
-                {/* Right: Quick-access active session feature card */}
+                {/* Right: Quick-access feature card focusing on Mathematics */}
                 <div className="lg:col-span-5 mt-2 lg:mt-0">
                   <div className="p-4 sm:p-5 rounded-xl border border-crimson-200/80 dark:border-crimson-900/60 bg-crimson-50/40 dark:bg-navy-900/70 shadow-2xs">
                     <div className="flex items-center gap-2 mb-2">
@@ -131,40 +140,41 @@ export function App() {
                         <span className="relative inline-flex rounded-full h-2 w-2 bg-crimson-600"></span>
                       </span>
                       <span className="text-xs font-mono uppercase font-bold tracking-wider text-crimson-700 dark:text-crimson-300">
-                        Práctica Activa de Hoy
+                        Eje Prioritario de Estudio
                       </span>
                     </div>
 
                     <h2 className="text-base font-bold text-navy-600 dark:text-ice-300 leading-snug">
-                      Sesión 1: Past Perfect & Condicionales
+                      Matemáticas: Álgebra & Sistemas 2x2
                     </h2>
                     <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 mb-3.5">
-                      10 de Noviembre • Módulo de Inglés interactivo listo para resolver en clase o individualmente.
+                      Repaso modular con operaciones de radicales, racionalización, factorización y resolución analítica de sistemas de ecuaciones.
                     </p>
 
                     <ul className="space-y-1.5 text-xs text-slate-700 dark:text-slate-300 mb-4 border-t border-crimson-100 dark:border-navy-800 pt-3">
                       <li className="flex items-center gap-2">
                         <CheckCircle2 className="w-3.5 h-3.5 text-crimson-600 dark:text-crimson-400 shrink-0" />
-                        <span>Línea temporal visual del Past Perfect</span>
+                        <span>Operaciones con radicales y racionalización</span>
                       </li>
                       <li className="flex items-center gap-2">
                         <CheckCircle2 className="w-3.5 h-3.5 text-crimson-600 dark:text-crimson-400 shrink-0" />
-                        <span>Quizzes interactivos con justificación</span>
+                        <span>Sistemas 2x2: Igualación, Reducción, Sustitución, Cramer</span>
                       </li>
                       <li className="flex items-center gap-2">
                         <CheckCircle2 className="w-3.5 h-3.5 text-crimson-600 dark:text-crimson-400 shrink-0" />
-                        <span>Banco de palabras táctil (Click-to-slot)</span>
+                        <span>Geoestadística e Inglés organizados</span>
                       </li>
                     </ul>
 
                     <button
                       onClick={() => {
-                        setActiveTab('sesion-1');
+                        setSessionsSubject('matematicas');
+                        setActiveTab('sesiones');
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                       }}
                       className="w-full min-h-[40px] px-3.5 py-2 rounded-lg bg-navy-600 hover:bg-navy-700 text-white dark:bg-crimson-600 dark:hover:bg-crimson-500 font-semibold text-xs flex items-center justify-center gap-1.5 transition-all shadow-xs active:scale-98"
                     >
-                      <span>Abrir Módulo de Inglés</span>
+                      <span>Explorar Sesión de Matemáticas</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                   </div>
@@ -194,23 +204,16 @@ export function App() {
           </div>
         )}
 
-        {/* Dedicated English Session 1 View */}
-        {activeTab === 'sesion-1' && (
-          <EnglishSessionView
-            sessionDay={1}
+        {/* Dedicated Unified Sessions View (Math, Geo, English) */}
+        {activeTab === 'sesiones' && (
+          <SessionsView
+            initialSubject={sessionsSubject}
             onBackToLanding={() => {
               setActiveTab('landing');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-          />
-        )}
-
-        {/* Dedicated English Session 2 View */}
-        {activeTab === 'sesion-2' && (
-          <EnglishSessionView
-            sessionDay={2}
-            onBackToLanding={() => {
-              setActiveTab('landing');
+            onOpenTimedQuiz={() => {
+              setActiveTab('quices-contrarreloj');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           />
