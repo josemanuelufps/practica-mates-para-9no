@@ -163,6 +163,12 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
     }
   };
 
+  const handleGoToQuizConfig = () => {
+    clearAllTimers();
+    setGameState('intro');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const currentQuestion = activeDeck[currentIndex];
 
   // Reset minigame states when new question mounts
@@ -801,10 +807,19 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
             </button>
 
             <button
-              onClick={onBackToLanding}
-              className="min-h-[48px] px-5 py-3 rounded-xl border border-slate-300 dark:border-navy-700 hover:bg-ice-200 dark:hover:bg-navy-700 text-slate-700 dark:text-slate-300 font-semibold text-sm transition-colors"
+              onClick={handleGoToQuizConfig}
+              className="min-h-[48px] px-5 py-3 rounded-xl bg-navy-600 hover:bg-navy-700 text-white dark:bg-navy-700 dark:hover:bg-navy-600 dark:text-ice-300 font-bold text-sm flex items-center gap-2 shadow-xs transition-all active:scale-95"
             >
-              Volver al Temario & Sesiones
+              <SlidersHorizontal className="w-4 h-4" />
+              <span>Configurar nuevo quiz</span>
+            </button>
+
+            <button
+              onClick={onBackToLanding}
+              className="min-h-[48px] px-5 py-3 rounded-xl border border-slate-300 dark:border-navy-700 hover:bg-ice-200 dark:hover:bg-navy-700 text-slate-700 dark:text-slate-300 font-semibold text-sm transition-colors flex items-center gap-1.5 active:scale-95"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span>Volver al Inicio</span>
             </button>
           </div>
         </div>
@@ -899,6 +914,33 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Bottom Actions after review list */}
+        <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+          <button
+            onClick={startNewQuiz}
+            className="min-h-[44px] px-5 py-2.5 rounded-xl bg-crimson-600 hover:bg-crimson-500 text-white dark:bg-crimson-500 dark:hover:bg-crimson-400 font-bold text-sm flex items-center gap-2 shadow-xs transition-all active:scale-95"
+          >
+            <RotateCcw className="w-4 h-4" />
+            <span>Jugar otra ronda</span>
+          </button>
+
+          <button
+            onClick={handleGoToQuizConfig}
+            className="min-h-[44px] px-5 py-2.5 rounded-xl bg-navy-600 hover:bg-navy-700 text-white dark:bg-navy-700 dark:hover:bg-navy-600 dark:text-ice-300 font-bold text-sm flex items-center gap-2 shadow-xs transition-all active:scale-95"
+          >
+            <SlidersHorizontal className="w-4 h-4" />
+            <span>Configurar nuevo quiz</span>
+          </button>
+
+          <button
+            onClick={onBackToLanding}
+            className="min-h-[44px] px-4 py-2.5 rounded-xl border border-slate-300 dark:border-navy-700 hover:bg-ice-200 dark:hover:bg-navy-700 text-slate-700 dark:text-slate-300 font-semibold text-sm transition-colors flex items-center gap-1.5 active:scale-95"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span>Volver al Inicio</span>
+          </button>
         </div>
       </div>
     );
