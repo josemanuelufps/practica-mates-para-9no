@@ -96,8 +96,8 @@ export default {
         },
         'shake-soft': {
           '0%, 100%': { transform: 'translateX(0)' },
-          '20%, 60%': { transform: 'translateX(-3px)' },
-          '40%, 80%': { transform: 'translateX(3px)' },
+          '20%, 60%': { transform: 'translateX(-4px)' },
+          '40%, 80%': { transform: 'translateX(4px)' },
         },
       },
       animation: {

@@ -1,4 +1,132 @@
 /**
+ * Rapid celebratory confetti burst for correct answers during quizzes.
+ * Launches dual-cannon confetti from screen sides toward the center.
+ * Respects prefers-reduced-motion and automatically removes canvas.
+ */
+export function fireCorrectAnswerConfetti(isStreak: boolean = false) {
+  if (typeof window === 'undefined') return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  const canvas = document.createElement('canvas');
+  canvas.style.position = 'fixed';
+  canvas.style.top = '0';
+  canvas.style.left = '0';
+  canvas.style.width = '100vw';
+  canvas.style.height = '100vh';
+  canvas.style.pointerEvents = 'none';
+  canvas.style.zIndex = '9999';
+  document.body.appendChild(canvas);
+
+  const ctx = canvas.getContext('2d');
+  if (!ctx) {
+    canvas.remove();
+    return;
+  }
+
+  const width = (canvas.width = window.innerWidth);
+  const height = (canvas.height = window.innerHeight);
+
+  // Palette: Emerald (#16A34A, #22C55E), Crimson (#EF233C), Gold (#F59E0B), Navy (#2B2D42), Ice (#EDF2F4)
+  const colors = isStreak
+    ? ['#F59E0B', '#FBBF24', '#22C55E', '#16A34A', '#EF233C', '#FFFFFF']
+    : ['#22C55E', '#16A34A', '#EF233C', '#2B2D42', '#F59E0B', '#EDF2F4'];
+
+  interface ConfettiBit {
+    x: number;
+    y: number;
+    vx: number;
+    vy: number;
+    size: number;
+    color: string;
+    rotation: number;
+    vRot: number;
+    opacity: number;
+    isStar: boolean;
+  }
+
+  const bits: ConfettiBit[] = [];
+  const countPerSide = isStreak ? 24 : 18;
+
+  // Left cannon (launches upwards & rightwards)
+  for (let i = 0; i < countPerSide; i++) {
+    bits.push({
+      x: width * 0.1,
+      y: height * 0.75,
+      vx: Math.random() * 9 + 4,
+      vy: -Math.random() * 11 - 6,
+      size: Math.random() * 7 + 4,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      rotation: Math.random() * 360,
+      vRot: (Math.random() - 0.5) * 14,
+      opacity: 1,
+      isStar: isStreak && Math.random() > 0.6,
+    });
+  }
+
+  // Right cannon (launches upwards & leftwards)
+  for (let i = 0; i < countPerSide; i++) {
+    bits.push({
+      x: width * 0.9,
+      y: height * 0.75,
+      vx: -(Math.random() * 9 + 4),
+      vy: -Math.random() * 11 - 6,
+      size: Math.random() * 7 + 4,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      rotation: Math.random() * 360,
+      vRot: (Math.random() - 0.5) * 14,
+      opacity: 1,
+      isStar: isStreak && Math.random() > 0.6,
+    });
+  }
+
+  const startTime = performance.now();
+  const duration = 1400; // 1.4 seconds fast burst
+
+  function animate(now: number) {
+    if (!ctx) return;
+    const elapsed = now - startTime;
+    if (elapsed > duration) {
+      canvas.remove();
+      return;
+    }
+
+    ctx.clearRect(0, 0, width, height);
+
+    for (const b of bits) {
+      b.x += b.vx;
+      b.y += b.vy;
+      b.vy += 0.36; // gravity
+      b.vx *= 0.975; // drag
+      b.rotation += b.vRot;
+      b.opacity = Math.max(0, 1 - elapsed / duration);
+
+      ctx.save();
+      ctx.translate(b.x, b.y);
+      ctx.rotate((b.rotation * Math.PI) / 180);
+      ctx.globalAlpha = b.opacity;
+      ctx.fillStyle = b.color;
+
+      if (b.isStar) {
+        ctx.beginPath();
+        ctx.arc(0, 0, b.size * 0.5, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        ctx.fillRect(-b.size / 2, -b.size / 2, b.size, b.size * 0.6);
+      }
+
+      ctx.restore();
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  requestAnimationFrame(animate);
+}
+
+/**
  * Zero-dependency, lightweight canvas celebration for mastery moments.
  * Respects prefers-reduced-motion and cleans up automatically.
  */

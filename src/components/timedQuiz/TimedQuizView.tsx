@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { TimedQuestion, TimedQuizAttemptResult, TimedTopicCategory } from '../../types/timedQuiz';
-import { fireMasteryCelebration } from '../../utils/confetti';
+import { fireMasteryCelebration, fireCorrectAnswerConfetti } from '../../utils/confetti';
 import {
   Timer,
   Sparkles,
@@ -97,6 +97,9 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
   const [shuffledMCOptions, setShuffledMCOptions] = useState<string[]>([]);
   const [shuffledQuickSlotOptions, setShuffledQuickSlotOptions] = useState<string[]>([]);
 
+  // Winning streak of consecutive correct answers in active round
+  const [streak, setStreak] = useState<number>(0);
+
   // Timers refs
   const slideTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const feedbackTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -150,6 +153,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
     setCurrentIndex(0);
     setResults([]);
     setSelectedAnswer(null);
+    setStreak(0);
     setTimeRemaining(getQuestionTimeLimit(selected[0]));
     setGameState('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -158,6 +162,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
   const handleExitQuiz = () => {
     if (window.confirm('¿Deseas salir de la ronda actual y volver a las opciones?')) {
       clearAllTimers();
+      setStreak(0);
       setGameState('intro');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -165,6 +170,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
 
   const handleGoToQuizConfig = () => {
     clearAllTimers();
+    setStreak(0);
     setGameState('intro');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -286,6 +292,16 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
     setLastAnswerWasCorrect(isCorrect);
     setGameState('feedback');
     setFeedbackCountdown(FEEDBACK_DELAY_SECONDS);
+
+    if (isCorrect) {
+      setStreak((prev) => {
+        const nextStreak = prev + 1;
+        fireCorrectAnswerConfetti(nextStreak >= 3);
+        return nextStreak;
+      });
+    } else {
+      setStreak(0);
+    }
 
     // Feedback countdown timer (5 seconds)
     feedbackTimerRef.current = setInterval(() => {
@@ -977,6 +993,18 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
             </span>
           </div>
 
+          {/* Center: Winning streak badge */}
+          {streak >= 2 && (
+            <div
+              role="status"
+              aria-label={`Racha de ${streak} aciertos seguidos`}
+              className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-amber-500 text-white shadow-xs animate-pop-in shrink-0"
+            >
+              <span>🔥</span>
+              <span>{streak} seguidas</span>
+            </div>
+          )}
+
           {/* Right: Dynamic Countdown badge */}
           <div className="flex items-center gap-2">
             <div
@@ -1049,9 +1077,9 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
 
                   if (isFeedbackState) {
                     if (isCorrectOption) {
-                      btnStyle = 'border-success-500 bg-success-50 dark:bg-success-950/60 text-success-900 dark:text-success-100 font-bold ring-2 ring-success-500/40';
+                      btnStyle = 'border-success-500 bg-success-50 dark:bg-success-950/60 text-success-900 dark:text-success-100 font-bold ring-2 ring-success-500/40 animate-pop-in';
                     } else if (isOptionSelected && !lastAnswerWasCorrect) {
-                      btnStyle = 'border-crimson-500 bg-crimson-50 dark:bg-crimson-950/60 text-crimson-900 dark:text-crimson-100 font-bold ring-2 ring-crimson-400/40';
+                      btnStyle = 'border-crimson-500 bg-crimson-50 dark:bg-crimson-950/60 text-crimson-900 dark:text-crimson-100 font-bold ring-2 ring-crimson-400/40 animate-shake-soft';
                     } else {
                       btnStyle = 'opacity-40 border-slate-200 dark:border-navy-800 text-slate-400';
                     }
@@ -1100,9 +1128,9 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
 
                   if (isFeedbackState) {
                     if (isCorrect) {
-                      btnStyle = 'border-success-500 bg-success-50 dark:bg-success-950/60 text-success-900 dark:text-success-100 font-bold ring-2 ring-success-500/40';
+                      btnStyle = 'border-success-500 bg-success-50 dark:bg-success-950/60 text-success-900 dark:text-success-100 font-bold ring-2 ring-success-500/40 animate-pop-in';
                     } else if (isSelected && !lastAnswerWasCorrect) {
-                      btnStyle = 'border-crimson-500 bg-crimson-50 dark:bg-crimson-950/60 text-crimson-900 dark:text-crimson-100 font-bold ring-2 ring-crimson-400/40';
+                      btnStyle = 'border-crimson-500 bg-crimson-50 dark:bg-crimson-950/60 text-crimson-900 dark:text-crimson-100 font-bold ring-2 ring-crimson-400/40 animate-shake-soft';
                     } else {
                       btnStyle = 'opacity-40 border-slate-200 dark:border-navy-800 text-slate-400';
                     }
@@ -1150,9 +1178,9 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
 
                   if (isFeedbackState) {
                     if (isCorrect) {
-                      btnStyle = 'border-success-500 bg-success-50 dark:bg-success-950/60 text-success-900 dark:text-success-100 font-bold ring-2 ring-success-500/40';
+                      btnStyle = 'border-success-500 bg-success-50 dark:bg-success-950/60 text-success-900 dark:text-success-100 font-bold ring-2 ring-success-500/40 animate-pop-in';
                     } else if (isSelected && !lastAnswerWasCorrect) {
-                      btnStyle = 'border-crimson-500 bg-crimson-50 dark:bg-crimson-950/60 text-crimson-900 dark:text-crimson-100 font-bold';
+                      btnStyle = 'border-crimson-500 bg-crimson-50 dark:bg-crimson-950/60 text-crimson-900 dark:text-crimson-100 font-bold ring-2 ring-crimson-400/40 animate-shake-soft';
                     } else {
                       btnStyle = 'opacity-40 border-slate-200 dark:border-navy-800 text-slate-400';
                     }
@@ -1195,9 +1223,9 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
 
                   if (isFeedbackState) {
                     if (isOptionCorrect) {
-                      btnStyle = 'border-success-500 bg-success-50 dark:bg-success-950/60 text-success-900 dark:text-success-100 font-bold ring-2 ring-success-500/40';
+                      btnStyle = 'border-success-500 bg-success-50 dark:bg-success-950/60 text-success-900 dark:text-success-100 font-bold ring-2 ring-success-500/40 animate-pop-in';
                     } else if (isSelected && !lastAnswerWasCorrect) {
-                      btnStyle = 'border-crimson-500 bg-crimson-50 dark:bg-crimson-950/60 text-crimson-900 dark:text-crimson-100 font-bold';
+                      btnStyle = 'border-crimson-500 bg-crimson-50 dark:bg-crimson-950/60 text-crimson-900 dark:text-crimson-100 font-bold ring-2 ring-crimson-400/40 animate-shake-soft';
                     } else {
                       btnStyle = 'opacity-40 border-slate-200 dark:border-navy-800 text-slate-400';
                     }
@@ -1249,10 +1277,10 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
 
                     if (isMatched) {
                       cardStyle =
-                        'border-success-500 bg-success-50 dark:bg-success-950/60 text-success-900 dark:text-success-100 font-bold opacity-90';
+                        'border-success-500 bg-success-50 dark:bg-success-950/60 text-success-900 dark:text-success-100 font-bold opacity-90 animate-pop-in';
                     } else if (isSelected) {
                       cardStyle = mismatchError
-                        ? 'border-crimson-500 bg-crimson-100 dark:bg-crimson-950/80 text-crimson-900 dark:text-crimson-100 ring-2 ring-crimson-500'
+                        ? 'border-crimson-500 bg-crimson-100 dark:bg-crimson-950/80 text-crimson-900 dark:text-crimson-100 ring-2 ring-crimson-500 animate-shake-soft'
                         : 'border-crimson-500 bg-crimson-50 dark:bg-crimson-950/50 text-crimson-900 dark:text-crimson-200 ring-2 ring-crimson-400 font-semibold';
                     }
 
@@ -1289,10 +1317,10 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
 
                     if (isMatched) {
                       cardStyle =
-                        'border-success-500 bg-success-50 dark:bg-success-950/60 text-success-900 dark:text-success-100 font-bold opacity-90';
+                        'border-success-500 bg-success-50 dark:bg-success-950/60 text-success-900 dark:text-success-100 font-bold opacity-90 animate-pop-in';
                     } else if (isSelected) {
                       cardStyle = mismatchError
-                        ? 'border-crimson-500 bg-crimson-100 dark:bg-crimson-950/80 text-crimson-900 dark:text-crimson-100 ring-2 ring-crimson-500'
+                        ? 'border-crimson-500 bg-crimson-100 dark:bg-crimson-950/80 text-crimson-900 dark:text-crimson-100 ring-2 ring-crimson-500 animate-shake-soft'
                         : 'border-crimson-500 bg-crimson-50 dark:bg-crimson-950/50 text-crimson-900 dark:text-crimson-200 ring-2 ring-crimson-400 font-semibold';
                     }
 
@@ -1333,7 +1361,13 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
                 role="region"
                 aria-label="Oración en construcción"
                 aria-live="polite"
-                className="p-4 sm:p-5 rounded-xl border-2 border-dashed border-slate-300 dark:border-navy-600 bg-ice-100/40 dark:bg-navy-900/40 min-h-[90px] flex flex-wrap items-center gap-2"
+                className={`p-4 sm:p-5 rounded-xl border-2 border-dashed min-h-[90px] flex flex-wrap items-center gap-2 transition-all ${
+                  isFeedbackState
+                    ? lastAnswerWasCorrect
+                      ? 'border-success-500 bg-success-50/50 dark:bg-success-950/40 ring-2 ring-success-500/30 animate-pop-in'
+                      : 'border-crimson-500 bg-crimson-50/50 dark:bg-crimson-950/40 ring-2 ring-crimson-500/30 animate-shake-soft'
+                    : 'border-slate-300 dark:border-navy-600 bg-ice-100/40 dark:bg-navy-900/40'
+                }`}
               >
                 {builderPlaced.length === 0 ? (
                   <span className="text-xs sm:text-sm text-slate-400 dark:text-slate-500 italic">
@@ -1346,7 +1380,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
                       disabled={isFeedbackState}
                       onClick={() => handleReturnToken(token)}
                       aria-label={`Quitar palabra "${token.text}" de la oración`}
-                      className="px-3.5 py-2 rounded-lg bg-navy-600 hover:bg-navy-700 text-white dark:bg-ice-200 dark:text-navy-900 dark:hover:bg-ice-300 font-semibold text-xs sm:text-sm shadow-xs transition-all active:scale-95 flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-crimson-500 focus-visible:outline-hidden"
+                      className="px-3.5 py-2 rounded-lg bg-navy-600 hover:bg-navy-700 text-white dark:bg-ice-200 dark:text-navy-900 dark:hover:bg-ice-300 font-semibold text-xs sm:text-sm shadow-xs transition-all active:scale-95 flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-crimson-500 focus-visible:outline-hidden animate-snap-in"
                       title="Toca para devolver al banco de palabras"
                     >
                       <span>{token.text}</span>
@@ -1397,10 +1431,10 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
                     if (isFeedbackState) {
                       if (isThisTheError) {
                         segStyle =
-                          'border-success-500 bg-success-50 dark:bg-success-950/60 text-success-900 dark:text-success-100 font-bold ring-2 ring-success-500/40';
+                          'border-success-500 bg-success-50 dark:bg-success-950/60 text-success-900 dark:text-success-100 font-bold ring-2 ring-success-500/40 animate-pop-in';
                       } else if (isSelected && !lastAnswerWasCorrect) {
                         segStyle =
-                          'border-crimson-500 bg-crimson-50 dark:bg-crimson-950/60 text-crimson-900 dark:text-crimson-100 font-bold ring-2 ring-crimson-400/40';
+                          'border-crimson-500 bg-crimson-50 dark:bg-crimson-950/60 text-crimson-900 dark:text-crimson-100 font-bold ring-2 ring-crimson-400/40 animate-shake-soft';
                       } else {
                         segStyle = 'opacity-40 border-slate-200 dark:border-navy-800 text-slate-400';
                       }
@@ -1437,10 +1471,10 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
                   if (isFeedbackState) {
                     if (isCorrectNoError) {
                       btnStyle =
-                        'border-success-500 bg-success-50 dark:bg-success-950/60 text-success-900 dark:text-success-100 font-bold ring-2 ring-success-500/40';
+                        'border-success-500 bg-success-50 dark:bg-success-950/60 text-success-900 dark:text-success-100 font-bold ring-2 ring-success-500/40 animate-pop-in';
                     } else if (isSelected && !lastAnswerWasCorrect) {
                       btnStyle =
-                        'border-crimson-500 bg-crimson-50 dark:bg-crimson-950/60 text-crimson-900 dark:text-crimson-100 font-bold ring-2 ring-crimson-400/40';
+                        'border-crimson-500 bg-crimson-50 dark:bg-crimson-950/60 text-crimson-900 dark:text-crimson-100 font-bold ring-2 ring-crimson-400/40 animate-shake-soft';
                     } else {
                       btnStyle = 'opacity-40 border-slate-200 dark:border-navy-800 text-slate-400';
                     }
@@ -1485,10 +1519,10 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
                   if (isFeedbackState) {
                     if (isCorrect) {
                       cardStyle =
-                        'border-success-500 bg-success-50 dark:bg-success-950/60 text-success-900 dark:text-success-100 font-bold ring-2 ring-success-500/40';
+                        'border-success-500 bg-success-50 dark:bg-success-950/60 text-success-900 dark:text-success-100 font-bold ring-2 ring-success-500/40 animate-pop-in';
                     } else if (isSelected && !lastAnswerWasCorrect) {
                       cardStyle =
-                        'border-crimson-500 bg-crimson-50 dark:bg-crimson-950/60 text-crimson-900 dark:text-crimson-100 font-bold ring-2 ring-crimson-400/40';
+                        'border-crimson-500 bg-crimson-50 dark:bg-crimson-950/60 text-crimson-900 dark:text-crimson-100 font-bold ring-2 ring-crimson-400/40 animate-shake-soft';
                     } else {
                       cardStyle = 'opacity-40 border-slate-200 dark:border-navy-800 text-slate-400';
                     }
@@ -1530,28 +1564,37 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
             role="alert"
             aria-live="assertive"
             aria-atomic="true"
-            className="mt-6 pt-4 border-t border-slate-200 dark:border-navy-700 space-y-3 animate-slide-fade"
+            className={`mt-6 pt-4 border-t border-slate-200 dark:border-navy-700 space-y-3 ${
+              lastAnswerWasCorrect ? 'animate-pop-in' : 'animate-shake-soft'
+            }`}
           >
             <div
-              className={`p-4 rounded-xl border flex items-start gap-3 ${
+              className={`p-4 rounded-xl border flex items-start gap-3 transition-all ${
                 lastAnswerWasCorrect
-                  ? 'bg-success-50 dark:bg-success-950/40 border-success-200 dark:border-success-800 text-success-900 dark:text-success-200'
-                  : 'bg-crimson-50 dark:bg-crimson-950/40 border-crimson-200 dark:border-crimson-900 text-crimson-900 dark:text-crimson-200'
+                  ? 'bg-success-50 dark:bg-success-950/40 border-success-200 dark:border-success-800 text-success-900 dark:text-success-200 ring-2 ring-success-500/20'
+                  : 'bg-crimson-50 dark:bg-crimson-950/40 border-crimson-200 dark:border-crimson-900 text-crimson-900 dark:text-crimson-200 ring-2 ring-crimson-500/20'
               }`}
             >
               {lastAnswerWasCorrect ? (
-                <CheckCircle2 className="w-5 h-5 text-success-600 dark:text-success-400 shrink-0 mt-0.5" aria-hidden="true" />
+                <CheckCircle2 className="w-5 h-5 text-success-600 dark:text-success-400 shrink-0 mt-0.5 animate-pop-in" aria-hidden="true" />
               ) : (
-                <XCircle className="w-5 h-5 text-crimson-600 dark:text-crimson-400 shrink-0 mt-0.5" aria-hidden="true" />
+                <XCircle className="w-5 h-5 text-crimson-600 dark:text-crimson-400 shrink-0 mt-0.5 animate-shake-soft" aria-hidden="true" />
               )}
               <div className="space-y-1 text-xs sm:text-sm">
-                <p className="font-bold">
-                  {lastAnswerWasCorrect
-                    ? '¡Respuesta Correcta!'
-                    : selectedAnswer === '__TIMEOUT__'
-                    ? '¡Tiempo agotado!'
-                    : 'Respuesta incorrecta'}
-                </p>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <p className="font-bold text-sm sm:text-base">
+                    {lastAnswerWasCorrect
+                      ? '¡Respuesta Correcta!'
+                      : selectedAnswer === '__TIMEOUT__'
+                      ? '¡Tiempo agotado!'
+                      : 'Respuesta incorrecta'}
+                  </p>
+                  {lastAnswerWasCorrect && streak >= 2 && (
+                    <span className="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-amber-500 text-white animate-pop-in flex items-center gap-1 shadow-2xs">
+                      🔥 ¡{streak} seguidas!
+                    </span>
+                  )}
+                </div>
                 <p className="leading-relaxed opacity-90">{currentQuestion.explanation}</p>
               </div>
             </div>
