@@ -92,9 +92,19 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
   const [builderAvailable, setBuilderAvailable] = useState<{ id: string; text: string }[]>([]);
   const [builderPlaced, setBuilderPlaced] = useState<{ id: string; text: string }[]>([]);
 
+  // 3. Dynamic options shuffle for multiple-choice & quick-slot (never predictable order)
+  const [shuffledMCOptions, setShuffledMCOptions] = useState<string[]>([]);
+  const [shuffledQuickSlotOptions, setShuffledQuickSlotOptions] = useState<string[]>([]);
+
   // Timers refs
   const slideTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const feedbackTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // Helper: Sentence-builder gets +5 bonus seconds to allow cognitive reading before syntax arrangement
+  const getQuestionTimeLimit = (question?: TimedQuestion) => {
+    if (!question) return timePerQuestion;
+    return timePerQuestion + (question.type === 'sentence-builder' ? 5 : 0);
+  };
 
   // Fetch JSON question bank on mount if not already cached
   const fetchQuestionBank = async () => {
@@ -139,7 +149,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
     setCurrentIndex(0);
     setResults([]);
     setSelectedAnswer(null);
-    setTimeRemaining(timePerQuestion);
+    setTimeRemaining(getQuestionTimeLimit(selected[0]));
     setGameState('active');
   };
 
@@ -164,6 +174,10 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
         shuffleSentenceTokens(currentQuestion.tokens, currentQuestion.correctSequence)
       );
       setBuilderPlaced([]);
+    } else if (currentQuestion.type === 'multiple-choice') {
+      setShuffledMCOptions(fisherYatesShuffle(currentQuestion.options));
+    } else if (currentQuestion.type === 'quick-slot') {
+      setShuffledQuickSlotOptions(fisherYatesShuffle(currentQuestion.options));
     }
   }, [currentIndex, currentQuestion]);
 
@@ -179,9 +193,10 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
 
   // Timer loop during active slide
   useEffect(() => {
-    if (gameState !== 'active') return;
+    if (gameState !== 'active' || !currentQuestion) return;
 
-    setTimeRemaining(timePerQuestion);
+    const currentSlideTimeLimit = getQuestionTimeLimit(currentQuestion);
+    setTimeRemaining(currentSlideTimeLimit);
 
     slideTimerRef.current = setInterval(() => {
       setTimeRemaining((prev) => {
@@ -198,7 +213,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
     return () => {
       if (slideTimerRef.current) clearInterval(slideTimerRef.current);
     };
-  }, [gameState, currentIndex, timePerQuestion]);
+  }, [gameState, currentIndex, timePerQuestion, currentQuestion]);
 
   // Unified answer handler supporting all minigame types
   const handleAnswerSubmitted = (
@@ -236,7 +251,8 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
       isCorrect = answer === currentQuestion.firstEvent;
     }
 
-    const timeSpent = timePerQuestion - timeRemaining;
+    const currentSlideTimeLimit = getQuestionTimeLimit(currentQuestion);
+    const timeSpent = currentSlideTimeLimit - timeRemaining;
 
     const attemptResult: TimedQuizAttemptResult = {
       questionId: currentQuestion.id,
@@ -452,7 +468,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
             Cargando banco de preguntas...
           </h2>
           <p className="text-xs text-slate-500 dark:text-slate-400 max-w-prose mx-auto">
-            Descargando las 200 slides interactivas desde el archivo de datos JSON independiente (timedQuizBank.json).
+            Descargando las {quizPool.length || 280} slides interactivas desde el archivo de datos JSON independiente (timedQuizBank.json).
           </p>
         </div>
       </div>
@@ -532,7 +548,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
               <Clock className="w-4 h-4 text-crimson-600 dark:text-crimson-400 mb-1.5" />
               <div className="font-bold text-sm text-navy-600 dark:text-ice-300">{timePerQuestion} Segundos</div>
               <div className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
-                Tiempo límite por slide para leer y responder.
+                Tiempo límite por slide (+5s en construcción de oraciones).
               </div>
             </div>
 
@@ -540,7 +556,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
               <Sparkles className="w-4 h-4 text-crimson-600 dark:text-crimson-400 mb-1.5" />
               <div className="font-bold text-sm text-navy-600 dark:text-ice-300">{questionsCount} Preguntas</div>
               <div className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
-                Seleccionadas al azar del pool de 200 slides.
+                Seleccionadas al azar del pool de {quizPool.length || 280} slides.
               </div>
             </div>
 
@@ -879,6 +895,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
   // =========================================================================
   // RENDER: ACTIVE / FEEDBACK SLIDE
   // =========================================================================
+  const currentSlideTimeLimit = getQuestionTimeLimit(currentQuestion);
   const isTimeCritical = timeRemaining <= 5;
   const isFeedbackState = gameState === 'feedback';
 
@@ -909,6 +926,11 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
           >
             <Timer className="w-3.5 h-3.5" aria-hidden="true" />
             <span>{timeRemaining}s</span>
+            {currentQuestion?.type === 'sentence-builder' && (
+              <span className="text-xs font-sans font-semibold text-crimson-700 dark:text-crimson-300 bg-crimson-100 dark:bg-crimson-900/60 px-2 py-0.5 rounded-full border border-crimson-200 dark:border-crimson-800">
+                +5s lectura
+              </span>
+            )}
           </div>
 
           {/* Critical countdown announcement for screen readers */}
@@ -920,7 +942,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
         {/* Linear progress bar */}
         <div
           role="progressbar"
-          aria-valuenow={Math.round((timeRemaining / timePerQuestion) * 100)}
+          aria-valuenow={Math.round((timeRemaining / currentSlideTimeLimit) * 100)}
           aria-valuemin={0}
           aria-valuemax={100}
           aria-label="Tiempo restante de la diapositiva actual"
@@ -930,7 +952,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
             className={`h-full transition-all duration-1000 ease-linear ${
               isTimeCritical ? 'bg-crimson-600' : 'bg-navy-600 dark:bg-crimson-500'
             }`}
-            style={{ width: `${(timeRemaining / timePerQuestion) * 100}%` }}
+            style={{ width: `${(timeRemaining / currentSlideTimeLimit) * 100}%` }}
           />
         </div>
       </div>
@@ -951,9 +973,9 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                {currentQuestion.options.map((opt, optIdx) => {
+                {(shuffledMCOptions.length > 0 ? shuffledMCOptions : currentQuestion.options).map((opt, optIdx) => {
                   const isOptionSelected = selectedAnswer === opt;
-                  const isCorrectOption = optIdx === currentQuestion.correctIndex;
+                  const isCorrectOption = opt === currentQuestion.options[currentQuestion.correctIndex];
 
                   let btnStyle =
                     'border-slate-300 dark:border-navy-600 bg-white dark:bg-navy-900 text-slate-800 dark:text-ice-300 hover:border-crimson-400';
@@ -1052,7 +1074,7 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
               </div>
 
               <div className="flex flex-wrap gap-3 pt-2">
-                {currentQuestion.options.map((opt) => {
+                {(shuffledQuickSlotOptions.length > 0 ? shuffledQuickSlotOptions : currentQuestion.options).map((opt) => {
                   const isCorrect = opt === currentQuestion.correctAnswer;
                   const isSelected = selectedAnswer === opt;
 
@@ -1231,7 +1253,14 @@ export const TimedQuizView: React.FC<TimedQuizViewProps> = ({ onBackToLanding })
 
           {/* TYPE 6: SENTENCE BUILDER */}
           {currentQuestion.type === 'sentence-builder' && (
-            <div className="space-y-5">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+                <span className="font-semibold uppercase tracking-wider">Ordena los bloques sintácticos:</span>
+                <span className="font-mono text-xs font-semibold px-2 py-0.5 rounded-md bg-crimson-100 dark:bg-crimson-950/60 text-crimson-700 dark:text-crimson-300 border border-crimson-200 dark:border-crimson-800">
+                  +5s lectura incluidos
+                </span>
+              </div>
+
               {/* Dropzone container */}
               <div
                 role="region"

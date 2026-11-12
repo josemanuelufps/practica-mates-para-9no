@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-10T21:03:30Z",
+  "generatedAt": "2026-11-11T19:30:00Z",
   "title": "Design System: Apoyo Académico 9°",
   "extensions": {
     "colorMeta": {
@@ -89,19 +89,19 @@
     },
     "typographyMeta": {
       "display": {
-        "displayName": "Display (Jakarta 800)",
+        "displayName": "Display (Outfit 800)",
         "purpose": "Hero headline y títulos principales de sesión con text-wrap: balance."
       },
       "headline": {
-        "displayName": "Headline (Jakarta 700)",
+        "displayName": "Headline (Outfit 700)",
         "purpose": "Títulos de tarjetas, secciones y modales."
       },
       "title": {
-        "displayName": "Title (Jakarta 600)",
+        "displayName": "Title (Outfit 600)",
         "purpose": "Enunciados de preguntas y encabezados de ejercicios."
       },
       "body": {
-        "displayName": "Body (Jakarta 400/500)",
+        "displayName": "Body (Outfit 400/500)",
         "purpose": "Párrafos de lectura y explicaciones pedagógicas limitadas a 45-75ch."
       },
       "label": {
@@ -151,7 +151,7 @@
       "refersTo": "button-primary",
       "description": "Botón principal de acción y comienzo de sesiones (área de toque >= 44px).",
       "html": "<button class=\"ds-btn-primary\"><svg class=\"ds-btn-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polygon points=\"13 2 3 14 12 14 11 22 21 10 12 10 13 2\"></polygon></svg><span>Empezar Quiz Contrarreloj</span></button>",
-      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 20px; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 14px; font-weight: 700; color: #ffffff; background-color: #EF233C; border: none; border-radius: 12px; box-shadow: 0 1px 2px rgba(43,45,66,0.1); cursor: pointer; transition: all 150ms ease; } .ds-btn-primary:hover { background-color: #D90429; } .ds-btn-primary:active { transform: scale(0.98); } .ds-btn-icon { width: 16px; height: 16px; }"
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 20px; font-family: 'Outfit', system-ui, sans-serif; font-size: 14px; font-weight: 700; color: #ffffff; background-color: #EF233C; border: none; border-radius: 12px; box-shadow: 0 1px 2px rgba(43,45,66,0.1); cursor: pointer; transition: all 150ms ease; } .ds-btn-primary:hover { background-color: #D90429; } .ds-btn-primary:active { transform: scale(0.98); } .ds-btn-icon { width: 16px; height: 16px; }"
     },
     {
       "name": "Secondary Navy Button",
@@ -159,7 +159,7 @@
       "refersTo": "button-secondary",
       "description": "Botón estructurado para acciones secundarias o módulos temáticos.",
       "html": "<button class=\"ds-btn-secondary\"><span>Abrir Módulo de Inglés</span><svg class=\"ds-btn-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"></line><polyline points=\"12 5 19 12 12 19\"></polyline></svg></button>",
-      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 18px; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 14px; font-weight: 600; color: #ffffff; background-color: #2B2D42; border: none; border-radius: 12px; cursor: pointer; transition: all 150ms ease; } .ds-btn-secondary:hover { background-color: #1C1D2C; } .ds-btn-secondary:active { transform: scale(0.98); } .ds-btn-icon { width: 14px; height: 14px; }"
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 18px; font-family: 'Outfit', system-ui, sans-serif; font-size: 14px; font-weight: 600; color: #ffffff; background-color: #2B2D42; border: none; border-radius: 12px; cursor: pointer; transition: all 150ms ease; } .ds-btn-secondary:hover { background-color: #1C1D2C; } .ds-btn-secondary:active { transform: scale(0.98); } .ds-btn-icon { width: 14px; height: 14px; }"
     },
     {
       "name": "Word Bank Tactile Chip",
@@ -189,9 +189,9 @@
       "name": "Binary Classify Box",
       "kind": "card",
       "refersTo": "card-classify",
-      "description": "Caja interactiva de clasificación binaria (Zero vs First, etc.) en quices.",
-      "html": "<button class=\"ds-classify-box\"><span class=\"ds-classify-title\">Zero Conditional</span><span class=\"ds-classify-desc\">Hecho general o científico</span></button>",
-      "css": ".ds-classify-box { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 64px; width: 100%; padding: 12px 16px; font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; border: 1px solid #DFE5E8; border-radius: 12px; cursor: pointer; transition: all 150ms ease; } .ds-classify-box:hover { border-color: #EF233C; background-color: #FDF2F4; } .ds-classify-box:active { transform: scale(0.98); } .ds-classify-title { font-size: 14px; font-weight: 700; color: #2B2D42; } .ds-classify-desc { font-size: 11px; color: #6C778B; }"
+      "description": "Caja interactiva de clasificación binaria (Box A vs Box B) en quices.",
+      "html": "<button class=\"ds-classify-box\"><span class=\"ds-classify-title\">Zero Conditional</span></button>",
+      "css": ".ds-classify-box { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 64px; width: 100%; padding: 12px 16px; font-family: 'Outfit', sans-serif; background-color: #ffffff; border: 1px solid #DFE5E8; border-radius: 12px; cursor: pointer; transition: all 150ms ease; } .ds-classify-box:hover { border-color: #EF233C; background-color: #FDF2F4; } .ds-classify-box:active { transform: scale(0.98); } .ds-classify-title { font-size: 14px; font-weight: 700; color: #2B2D42; }"
     }
   ],
   "narrative": {
@@ -199,7 +199,7 @@
     "overview": "Inspirado en la tipografía editorial contemporánea, la sobriedad académica de alto rendimiento y los cuadernos de trabajo universitario. Sustituye las paletas infantiles o genéricas por un entorno visual de serenidad, alta legibilidad y contraste nítido, diseñado para sesiones de estudio concentrado donde el estudiante razona con claridad sin fatiga visual. El sistema se estructura sobre la tensión armónica entre el azul pizarra profundo (#2B2D42), el blanco hielo sin deslumbramiento (#EDF2F4) y un acento carmesí imperial vivo (#EF233C / #D90429).",
     "keyCharacteristics": [
       "Contraste AAA Garantizado: Relaciones de contraste superiores a 11.4:1 en modo claro y 14.2:1 en modo oscuro.",
-      "Rigor Tipográfico Dual: Plus Jakarta Sans para prosa humanista y JetBrains Mono con números tabulares para estructuras gramaticales y KaTeX.",
+      "Rigor Tipográfico Dual: Outfit para prosa humanista y JetBrains Mono con números tabulares para estructuras gramaticales y KaTeX.",
       "Micro-interacción Táctil: Snap-in elástico en slots de palabras, respuesta háptica visual (active:scale-98) y temporizador pulsante.",
       "Cero Fricción Cognitiva: Longitud de línea restringida (45-75ch), títulos balanceados sin viudas y explicaciones didácticas integradas."
     ],

@@ -186,18 +186,18 @@ Todos los componentes siguen la filosofía **táctil, segura y reactiva**, garan
 - **Ficha en Banco:** Fondo blanco/navy-900, borde `border-slate-300 dark:border-navy-600`, texto semibold, cursor pointer o grab. Animación `pop-in` (220ms) al liberarse.
 - **Slot Receptor:** Fondo `bg-crimson-50/40 dark:bg-crimson-950/40`, borde discontinuo carmesí. Al depositar la palabra, se dispara animación elástica `snap-in` (180ms cubic-bezier).
 
-### Timed Quiz Slide (Contrarreloj 20s)
+### Timed Quiz Slide (Quices Contrarreloj)
 - **Barra de Tiempo:** Barra lineal continua de 8px de altura con transición linear de 1s. Fondo `ice-200 dark:navy-900`, relleno `navy-600 dark:crimson-500` que cambia a `crimson-600` parpadeante en $\le 5$s.
 - **Badge Numérico de Cuenta Regresiva:** Pastilla monoespaciada `rounded-full` con icono de temporizador que pulsa (`animate-pulse`) en rojo crítico cuando quedan 5 segundos o menos.
-- **Opciones de Respuesta Rápida:** Cajas de selección múltiple, clasificación binaria A vs B y botones de juicio correcto/incorrecto con altura mínima de 48-64px para toque ágil.
+- **Mecánicas Dinámicas:** Opciones múltiples, clasificación binaria, completado rápido, emparejamiento de cláusulas (Match Pairs), constructor sintáctico (Sentence Builder), detector de errores (Bug Hunter) y orden cronológico (Timeline Sorter).
 
 ### Feedback Banner (5 Segundos)
-- **Contenedor:** Borde de 1px con código cromático (verde acierto / rojo fallo), icono explicativo y texto didáctico estructurado.
+- **Contenedor:** Borde de 1px con código cromático (verde acierto / rojo fallo), icono explicativo y texto didáctico estructurado con roles ARIA de alerta en vivo.
 - **Control de Avance:** Muestra cuenta regresiva de 5s con botón manual de salto ("Continuar ahora") para estudiantes de lectura rápida.
 
 ### Navigation Header
 - Cabecera fija (`sticky top-0 z-50`) con efecto cristal translúcido (`bg-ice-300/90 dark:bg-navy-950/90 backdrop-blur-md`) y borde inferior de 1px.
-- Botones de navegación compactos con badge de fecha ("10 Nov") y modo contrarreloj ("20s").
+- Botones de navegación compactos hacia Temarios, Sesión Activa de Hoy ("10 Nov") y Quices Contrarreloj.
 - Interruptor de tema claro/oscuro con iconos Sun/Moon y transición fluida.
 
 ## Do's and Don'ts
